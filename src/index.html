@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="uk">
   <head>
-<head>
-  <title>Page title</title>
+    <title>Page title</title>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
-    integrity="sha512-ISS7cAi1PEhQ8jnbJpJZMd29NlhNj4AWYyLOSp2CE/CsHxTCu+r+t0D2yoJudVrd0/8fTVPUVDzY5Tvli75u/g=="
-    crossorigin="anonymous" />
-  <link rel="stylesheet" href="./sass/main.scss" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
+      integrity="sha512-ISS7cAi1PEhQ8jnbJpJZMd29NlhNj4AWYyLOSp2CE/CsHxTCu+r+t0D2yoJudVrd0/8fTVPUVDzY5Tvli75u/g=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./sass/main.scss" />
+  </head>
 
-<body>
-  <include src="./partials/pages"></include>
+  <body>
+    <include src="./partials/pages/_header.html"></include>
+    <include src="./partials/pages/_main-page.html"></include>
+    <include src="./partials/pages/_card-modal.html"></include>
+    <include src="./partials/pages/_team-modal.html"></include>
+    <include src="./partials/pages/_footer.html"></include>
 
-  <script defer src="././js/index.js"></script>
-</body>
-
+    <script defer src="././js/index.js"></script>
+  </body>
 </html>

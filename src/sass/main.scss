@@ -1,14 +1,21 @@
 /* UTILS */
-@import './utils/';
+@import './utils/mixins';
+@import './utils/placeholders';
+@import './utils/variables';
 
 /* BASE */
-@import './base/';
+@import './base/base';
+@import './base/reset';
 
 /* COMPONENTS */
-@import './vendors/hamburgers/';
+@import './components/set-card';
+@import './components/button';
 
 /* LAYOUT */
-@import './layout/';
+@import './layout/header';
+@import './layout/footer';
+@import './layout/card-modal';
+@import './layout/team-modal';
 
 /* PAGES */
-@import './pages/';
+@import './pages/main-page';
