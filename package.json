@@ -25,5 +25,11 @@
     "posthtml-include": "^1.7.2",
     "sass": "^1.43.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.24.0",
+    "basiclightbox": "^5.0.4",
+    "lodash.throttle": "^4.1.1",
+    "notiflix": "^3.2.2",
+    "tui-pagination": "^3.4.1"
+  }
 }
