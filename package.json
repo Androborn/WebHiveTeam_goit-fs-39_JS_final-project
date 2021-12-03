@@ -25,7 +25,5 @@
     "posthtml-include": "^1.7.2",
     "sass": "^1.43.4"
   },
-  "dependencies": {
-    "basiclightbox": "^5.0.4"
-  }
+  "dependencies": {}
 }
