@@ -1,0 +1,32 @@
+.common-btn {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: inline-block;
+  width: 129.53px;
+  height: 44px;
+  border: 1px solid $main-text-color;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: $main-text-color;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 13px;
+  letter-spacing: -0.1px;
+  filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+  &:hover,
+  &:focus {
+    background-color: $accent-color;
+    border-color: $accent-color;
+    transition: background, $main-duration $main-timing-function;
+  }
+  &--active {
+    background-color: $accent-color;
+    border-color: $accent-color;
+  }
+  @media screen and (min-width: 768px) {
+    width: 136px;
+    height: 44px;
+    cursor: pointer;
+  }
+}
