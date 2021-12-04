@@ -1,0 +1,25 @@
+$min-widths: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px,
+) !default;
+
+$max-widths: (
+  'small': 319px,
+  'medium': 767px,
+  'large': 1023px,
+) !default;
+
+// @media screen and (min-width: *width*)
+@mixin min-width($width) {
+  @media (min-width: map-get($min-widths, $width)) {
+    @content;
+  }
+}
+
+// @media screen and (min-width: *width*)
+@mixin max-width($width) {
+  @media (max-width: map-get($max-widths, $width)) {
+    @content;
+  }
+}
