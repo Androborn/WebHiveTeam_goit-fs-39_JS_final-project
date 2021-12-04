@@ -1,28 +1,36 @@
 <header class="header" id="header">
-  <a href="./index.html" class="header-logo link">
-    <svg class="header-logo__img" width="24" height="24">
-      <use href="./images/sprite.svg#icon-film"></use>
-    </svg>
-    <p class="header-logo__text">Filmoteka</p>
-  </a>
-  <nav class="header-nav">
-    <ul class="header-nav__list list">
-      <li class="header-nav__item">
-        <a
-          href="./index.html"
-          class="header-nav__link header-nav__link--active link"
-          >Home</a
-        >
-      </li>
-      <li class="header-nav__item">
-        <a href="#" class="header-nav__link link">my library</a>
-      </li>
-    </ul>
-  </nav>
-  <div class="header-serch">
-    <input type="text" class="header-serch__input" />
-    <svg class="header-serch__icon" width="12" height="12">
-      <use href="./images/sprite.svg#"></use>
-    </svg>
+  <div class="header-wrapper">
+    <a href="./index.html" class="header-logo link">
+      <svg class="header-logo__img" width="24" height="24">
+        <use href="./images/sprite.svg#icon-film"></use>
+      </svg>
+      <p class="header-logo__text">Filmoteka</p>
+    </a>
+    <nav class="header-nav">
+      <ul class="header-nav__list list">
+        <li class="header-nav__item header-nav__item--margin">
+          <a
+            href="./index.html"
+            class="header-nav__link header-nav__link--active link"
+            >Home</a
+          >
+        </li>
+        <li class="header-nav__item">
+          <a href="#" class="header-nav__link link">my library</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-serch header-center">
+    <div class="header-serch__wrapper">
+      <input
+        type="text"
+        class="header-serch__input"
+        placeholder="Поиск фильмов"
+      />
+      <svg class="header-serch__icon" width="12" height="12">
+        <use href="./images/sprite.svg#"></use>
+      </svg>
+    </div>
   </div>
 </header>

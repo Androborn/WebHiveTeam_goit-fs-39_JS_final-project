@@ -1,0 +1,30 @@
+$min-widths: (
+  'mobile': 320px,
+  'tablet': 768px,
+  'desktop': 1024px,
+) !default;
+
+$max-widths: (
+  'mobile': 319px,
+  'tablet': 767px,
+  'desktop': 1023px,
+) !default;
+
+// @media screen and (min-width: *width*)
+@mixin min-width($width) {
+  @media (min-width: map-get($min-widths, $width)) {
+    @content;
+  }
+}
+
+// @media screen and (min-width: *width*)
+@mixin max-width($width) {
+  @media (max-width: map-get($max-widths, $width)) {
+    @content;
+  }
+}
+@mixin font($fs: 16px, $fw: 400, $lh: 26px) {
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: decimal-round($lh/$fs, 2);
+}
