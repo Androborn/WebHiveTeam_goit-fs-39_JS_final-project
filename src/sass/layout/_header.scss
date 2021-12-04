@@ -58,6 +58,9 @@
       }
     }
     &__text {
+      @include font(30px, 500, 35px);
+
+      color: $main-text-color;
       @include max-width(tablet) {
         display: none;
       }
@@ -71,6 +74,22 @@
     }
     &__item--margin {
       margin-right: 39px;
+    }
+    &__link {
+      position: relative;
+      @include font(12px, 500, 14px);
+      color: $main-text-color;
+      text-transform: uppercase;
+    }
+    &__link--active::before {
+      content: '';
+      position: absolute;
+
+      width: 34px;
+      height: 3px;
+      background-color: $accent-color;
+      left: 1px;
+      bottom: -3px;
     }
   }
   &-serch {
