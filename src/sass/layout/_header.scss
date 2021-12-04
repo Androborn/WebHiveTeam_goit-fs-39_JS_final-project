@@ -26,7 +26,7 @@
         url(../images/home/home-bg-tablet@2x.jpg);
     }
   }
-  @include min-width(deckstope) {
+  @include min-width(desktope) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/home/home-bg-desktop.jpg);
     @media (min-device-pixel-ratio: 2),
