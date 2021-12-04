@@ -5,17 +5,17 @@
   display: grid;
   grid-template-columns: auto;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(./images/home/home-bg-mobile.jpg);
+    url(../images/home/home-bg-mobile.jpg);
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(./images/home/home-bg-mobile@2x.jpg);
+      url(../images/home/home-bg-mobile@2x.jpg);
   }
 
   @include min-width(tablet) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(./images/home/home-bg-tablet.jpg);
+      url(../images/home/home-bg-tablet.jpg);
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
@@ -23,12 +23,12 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(./images/home/home-bg-tablet@2x.jpg);
+        url(../images/home/home-bg-tablet@2x.jpg);
     }
   }
   @include min-width(deckstope) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(./images/home/home-bg-desktop.jpg);
+      url(../images/home/home-bg-desktop.jpg);
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
@@ -36,7 +36,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(./images/home/home-bg-desktop@2x.jpg);
+        url(../images/home/home-bg-desktop@2x.jpg);
     }
   }
   grid-template-rows: auto;
