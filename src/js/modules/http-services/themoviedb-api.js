@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export class themoviedbApi {
+export class ThemoviedbApi {
   constructor() {
     this.API_KEY = 'f979c5d182d240e48ce15515a9f4d973';
     this.keyword = '';
