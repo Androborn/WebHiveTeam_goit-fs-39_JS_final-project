@@ -1,6 +1,8 @@
 .header {
   padding-top: 46px;
-  padding-bottom: 97px;
+  @include min-width(tablet) {
+    padding-top: 41px;
+  }
   height: 230px;
   display: grid;
   grid-template-columns: auto;
@@ -51,7 +53,7 @@
     display: grid;
     grid-template-columns: auto auto;
     align-items: flex-end;
-    margin-bottom: 39px;
+    margin-bottom: 37px;
   }
 
   &-logo {
