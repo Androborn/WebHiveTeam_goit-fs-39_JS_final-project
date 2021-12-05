@@ -4,6 +4,10 @@
   height: 230px;
   display: grid;
   grid-template-columns: auto;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(../images/home/home-bg-mobile.jpg);
   @media (min-device-pixel-ratio: 2),
@@ -26,6 +30,7 @@
         url(../images/home/home-bg-tablet@2x.jpg);
     }
   }
+
   @include min-width(desktop) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/home/home-bg-desktop.jpg);
@@ -39,13 +44,16 @@
         url(../images/home/home-bg-desktop@2x.jpg);
     }
   }
+
   grid-template-rows: auto;
+
   &-wrapper {
     display: grid;
     grid-template-columns: auto auto;
     align-items: flex-end;
     margin-bottom: 39px;
   }
+
   &-logo {
     display: grid;
     justify-self: start;
@@ -58,6 +66,7 @@
         margin-right: 10px;
       }
     }
+
     &__text {
       @include font(30px, 500, 35px);
 
@@ -67,21 +76,26 @@
       }
     }
   }
+
   &-nav {
     justify-self: end;
+
     &__list {
       display: grid;
       grid-template-columns: auto auto;
     }
+
     &__item--margin {
       margin-right: 39px;
     }
+
     &__link {
       position: relative;
       @include font(12px, 500, 14px);
       color: $main-text-color;
       text-transform: uppercase;
     }
+
     &__link--active::before {
       content: '';
       position: absolute;
@@ -93,17 +107,20 @@
       bottom: -3px;
     }
   }
+
   &-serch {
     display: grid;
     grid-column-start: 1;
     grid-column-end: -1;
     justify-items: center;
+
     &__wrapper {
       position: relative;
       @media screen and (max-width: 336px) {
         width: 100%;
       }
     }
+
     &__input {
       width: 336px;
 
@@ -114,10 +131,16 @@
       background-color: transparent;
       color: $main-text-color;
       border-bottom: 1px solid $main-text-color;
+
+      &::placeholder {
+        color: inherit;
+        opacity: 1; /* for Firefox */
+      }
     }
+
     &__icon {
       position: absolute;
-      fill: #818181;
+      fill: $main-text-color;
       top: 2px;
       right: 0px;
     }
@@ -127,9 +150,7 @@
 .header--library {
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(../images/library/library-bg-mobile.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
@@ -150,6 +171,7 @@
         url(../images/library/library-bg-tablet@2x.jpg);
     }
   }
+
   @include min-width(desktop) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/library/library-bg-desktop.jpg);
@@ -163,10 +185,12 @@
         url(../images/library/library-bg-desktop@2x.jpg);
     }
   }
+
   .header-serch__wrapper {
     display: none;
   }
 }
+
 .header-center__wrapper {
   display: grid;
   grid-template-columns: auto auto;
