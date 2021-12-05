@@ -1,0 +1,52 @@
+.footer {
+  padding-top: 30px;
+  padding-bottom: 28px;
+  background: #f7f7f7;
+  &-wrapper {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 10px;
+    @include min-width(tablet) {
+      grid-template-columns: 212px 270px;
+      grid-template-rows: 1fr;
+      justify-content: center;
+    }
+    &__copyright,
+    &__about-developers {
+      @include font(14px, 400, 16px);
+      text-align: center;
+      color: $footer-text-color;
+      @include min-width(tablet) {
+        font-size: 16px;
+        line-height: 1.19;
+      }
+    }
+  }
+}
+.about-developers {
+  &__icon {
+    margin-right: 10px;
+    margin-left: 10px;
+    fill: $accent-color;
+  }
+  &__link {
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
+}
+
+.heart-animation {
+  animation-name: heart;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+}
+@keyframes heart {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
+}
