@@ -4,12 +4,14 @@ export class ThemoviedbApi {
   constructor() {
     this.API_KEY = 'f979c5d182d240e48ce15515a9f4d973';
     this.keyword = '';
+    this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
+
   }
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/trending/all/day?api_key=${this.API_KEY}`,
+        `/3/trending/all/day?api_key=${this.API_KEY}&page=${this.page}`,
       );
       const data = await response.data;
       return data; //{page: 1, results: Array(20), total_pages: 1000, total_results: 20000}
@@ -26,7 +28,7 @@ export class ThemoviedbApi {
   async getMoviesByKeyword() {
     try {
       const response = await axios.get(
-        `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}`,
+        `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
       );
       const data = await response.data;
       return data;
@@ -34,4 +36,22 @@ export class ThemoviedbApi {
       console.log(error);
     }
   }
+  async getMovieById(id) {
+    try {
+      const response = await axios.get(
+        `/3/movie/${id}?api_key=${this.API_KEY}`,
+      );
+      const data = await response.data;
+      return data; // Поверне об'єкт з даними про фільм
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  incrementPage() {
+      this.page += 1;
+    }
+  resetPage() {
+      this.page = 1;
+    }
 }
