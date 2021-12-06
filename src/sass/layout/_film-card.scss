@@ -33,9 +33,18 @@
 .cards-list__info {
   display: flex;
   flex-direction: column;
+  width: 280px;
   margin-top: 10px;
   font-family: Roboto;
   font-weight: 500;
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
 }
 .cards-list__info-name {
   font-size: 12px;
