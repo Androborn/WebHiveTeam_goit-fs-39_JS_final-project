@@ -16,4 +16,23 @@ movies.getMovies().then(({ results }) => {
     mainRef.insertAdjacentHTML('beforeend', moviesCards)
 }).catch(console.log)
 //========================================
-
+// Add a cards markup for searched keyword
+const inputRef = document.querySelector('.header-serch__input');
+inputRef.addEventListener('input', searchFilms);
+function searchFilms(event) {
+    const keyword = event.currentTarget.value.trim();
+    if (keyword === "") return;
+    movies.search = keyword;
+    inputRef.addEventListener('keydown', renderSearchedFilmsMarkup);
+}
+async function renderSearchedFilmsMarkup(event) {
+    if (event.key === "Enter") {
+        await movies.getMoviesByKeyword().then(({ results }) => {
+            const moviesCardMarkup = new createCardsMarkup(results, 'main');
+            const moviesCards = moviesCardMarkup.createCard();
+            mainRef.innerHTML = moviesCards;
+        }).catch(console.error);
+        inputRef.removeEventListener('keydown', renderSearchedFilmsMarkup);
+    }
+}
+//========================================
