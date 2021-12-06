@@ -36,30 +36,30 @@ export class RenderModal {
         src="https://image.tmdb.org/t/p/w500${data.poster_path}"
         alt="tags"
         loading="lazy"
-        class="modal_image"
+        class="modal__image"
       />
-      <div class="modal_info">
-      <H1 class="modal_info-title">${data.original_title.toUpperCase()}</H1>
-        <div class ="modal_info-wraper"><p class="modal_info-item">
-          Vote<span class="modal_info-value">${data.vote_average}</span>
+      <div class="modal__info">
+      <H1 class="modal__info-title">${data.original_title.toUpperCase()}</H1>
+        <div class ="modal__info-wraper"><p class="modal__info-item">
+          Vote<span class="modal__info-value">${data.vote_average}</span>
         </p>
-        <p class="modal_info-item">
-          Votes<span class="modal_info-value">${data.vote_count}</span>
+        <p class="modal__info-item">
+          Votes<span class="modal__info-value">${data.vote_count}</span>
         </p>
-        <p class="modal_info-item">
-          Popularity<span class="modal_info-value">${data.popularity.toFixed(
+        <p class="modal__info-item">
+          Popularity<span class="modal__info-value">${data.popularity.toFixed(
             1,
           )}</span>
         </p>
-        <p class="modal_info-item">
+        <p class="modal__info-item">
           Original Title
-          <span class="modal_info-value">${data.original_title.toUpperCase()}</span>
+          <span class="modal__info-value">${data.original_title.toUpperCase()}</span>
         </p>
-        <p class="modal_info-item">
-          Genre<span class="modal_info-value">${genreIds}</span>
+        <p class="modal__info-item">
+          Genre<span class="modal__info-value">${genreIds}</span>
         </p></div>
-        <p class="modal_info-about">
-          ABOUT<span class="modal_info-value">${data.overview}</span>
+        <p class="modal__info-about">
+          ABOUT<span class="modal__info-value">${data.overview}</span>
         </p>
       </div>
       <button

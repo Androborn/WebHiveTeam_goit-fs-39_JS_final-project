@@ -22,7 +22,7 @@
 }
 }
 
-    &_image{
+    &__image{
     height: 356.5px;
     width: 240px;
     border-radius: 5px;
@@ -36,34 +36,34 @@
 
     }
 
-    &_info{
+    &__info{
         @include font(12px, 500, 16px);
         @media screen and (min-width: 1024px) {
         width: 396px;
 }
     }
-    &_info-title{
+    &__info-title{
          @include font(20px, 500, 23px);
          margin-bottom: 20px;
     }
 
-    &_info-wraper{
+    &__info-wraper{
         margin-bottom: 20px; 
     }
-    &_info-item:not(:last-child){
+    &__info-item:not(:last-child){
         color: $modal-secondary-color;
         margin-bottom: 10px;
     }
 
-    &_info-value {
+    &__info-value {
        color: $secondary-text-color;
     }
 
-    &_info-about{
+    &__info-about{
         margin-bottom: 21px;
     }
 
-    &_btn-close{
+    &__btn-close{
         @include font(14px, 500, 23px);
         position: absolute;
         top: 18px;
