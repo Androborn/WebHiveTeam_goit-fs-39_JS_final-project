@@ -1,5 +1,6 @@
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import * as basicLightbox from 'basiclightbox';
+import 'basicLightbox/dist/basicLightbox.min.css';
 
 export class RenderModal {
   constructor() {

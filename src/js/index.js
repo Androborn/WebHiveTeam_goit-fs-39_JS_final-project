@@ -3,7 +3,7 @@ import { RenderModal } from './modules/components/render-one-card-modal';
 import { Header } from './modules/components/page-switch';
 import { ThemoviedbApi } from './modules/http-services/themoviedb-api';
 import { LibraryStorage } from './modules/components/library-storage';
-import 'basicLightbox/dist/basicLightbox.min.css';
+
 import Loader from './vendors/_icon8';
 
 const header = new Header();
