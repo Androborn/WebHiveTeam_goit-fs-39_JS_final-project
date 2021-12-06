@@ -48,6 +48,17 @@ export class ThemoviedbApi {
       console.log(error);
     }
   }
+  async getMoviesGenresList() {
+    try {
+      const response = await axios.get(
+        `3/genre/movie/list?api_key=${this.API_KEY}`,
+      );
+      const data = await response.data;
+      return data.genres;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   incrementPage() {
       this.page += 1;
     }
