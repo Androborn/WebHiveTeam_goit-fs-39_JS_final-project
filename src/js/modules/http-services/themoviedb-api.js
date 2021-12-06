@@ -6,7 +6,6 @@ export class ThemoviedbApi {
     this.keyword = '';
     this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
-
   }
   async getMovies() {
     try {
@@ -44,7 +43,6 @@ export class ThemoviedbApi {
       );
       const data = await response.data;
       return data; // Поверне об'єкт з даними про фільм
-      
     } catch (error) {
       console.log(error);
     }
@@ -61,9 +59,9 @@ export class ThemoviedbApi {
     }
   }
   incrementPage() {
-      this.page += 1;
-    }
+    this.page += 1;
+  }
   resetPage() {
-      this.page = 1;
-    }
+    this.page = 1;
+  }
 }

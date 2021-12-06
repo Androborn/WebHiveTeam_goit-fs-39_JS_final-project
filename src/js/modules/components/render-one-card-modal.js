@@ -86,34 +86,3 @@ data-id="${cardsListId}">
     }
   }
 }
-
-const renderModal = new RenderModal();
-
-{
-  /* <button
-  class="common-btn common-btn--active btn-watched"
-  data-action="add-to-watched"
-  data-id="617653"
->
-  ADD TO WATCHED
-</button>;
-
-<button class="common-btn btn-queue" 
-data-action="add-to-queue" 
-data-id="617653">
-  ADD TO QUEUE
-</button>; */
-}
-
-{
-  /* <button class="modal_btn-close">
-  <svg
-    class="modal_btn-icon"
-    style="fill:red; stroke:blue;"
-    width="14"
-    height="14"
-  >
-    <use href="../../../images/sprite.svg#icon-close"></use>
-  </svg>
-</button>; */
-}
