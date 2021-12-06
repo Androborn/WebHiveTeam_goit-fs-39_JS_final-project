@@ -36,7 +36,7 @@ export class RenderModal {
         src="https://image.tmdb.org/t/p/w500${data.poster_path}"
         alt="tags"
         loading="lazy"
-        class="modal_image"
+        class="modal__image"
       />
       <div class="modal_info">
       <H1 class="modal_info-title">${data.original_title.toUpperCase()}</H1>
