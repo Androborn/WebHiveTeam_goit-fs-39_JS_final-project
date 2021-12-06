@@ -2,10 +2,10 @@
 import { createCardsMarkup } from './modules/templates/render-one-card.js';
 import { RenderModal } from './modules/components/render-one-card-modal.js';
 import { Header } from './modules/components/page-switch.js';
-import { ThemoviedbApi } from '/js/modules/http-services/themoviedb-api.js';
+import { ThemoviedbApi } from './modules/http-services/themoviedb-api.js';
 import { LibraryStorage } from './modules/components/library-storage.js';
 
-import Loader from '/js/vendors/_icon8.js';
+import Loader from './vendors/_icon8.js';
 
 const header = new Header();
 // Add a cards markup to the main page
