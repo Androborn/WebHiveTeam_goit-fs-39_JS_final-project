@@ -11,9 +11,10 @@ export class ThemoviedbApi {
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/trending/all/day?api_key=${this.API_KEY}&page=${this.page}`,
+        `/3/trending/movie/day?api_key=${this.API_KEY}&page=${this.page}`,
       );
       const data = await response.data;
+      
       return data; //{page: 1, results: Array(20), total_pages: 1000, total_results: 20000}
     } catch (error) {
       console.log(error);
