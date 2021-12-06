@@ -1,0 +1,91 @@
+.modal{
+    background-color: $main-text-color;
+    border-radius: 5px;
+    padding: 48px 20px 41px;
+    width: 280px;
+    height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    @media screen and (min-width: 768px) {
+//     background: linear-gradient(
+// 90deg,var(--background-color-modal) 42%,transparent);
+    // background-color: transparent;
+    // position: absolute;
+    width: 618px;
+    height: 605px;
+    padding: 42px 29px 40px 28px;
+
+    @media screen and (min-width: 1024px){
+    max-width: 882px;
+    height: 568px;
+    padding: 50px 30px 40.2px;
+}
+}
+
+    &_image{
+    height: 356.5px;
+    width: 240px;
+    border-radius: 5px;
+    @media screen and (max-width: 767px){
+    margin-bottom: 30px;}
+
+    @media screen and (min-width: 768px){
+    height: 200px;
+    width: 156px;
+}
+
+    }
+
+    &_info{
+        @include font(12px, 500, 16px);
+        @media screen and (min-width: 1024px) {
+        width: 396px;
+}
+    }
+    &_info-title{
+         @include font(20px, 500, 23px);
+         margin-bottom: 20px;
+    }
+
+    &_info-wraper{
+        margin-bottom: 20px; 
+    }
+    &_info-item:not(:last-child){
+        color: $modal-secondary-color;
+        margin-bottom: 10px;
+    }
+
+    &_info-value {
+       color: $secondary-text-color;
+    }
+
+    &_info-about{
+        margin-bottom: 21px;
+    }
+
+    &_btn-close{
+        @include font(14px, 500, 23px);
+        position: absolute;
+        top: 18px;
+        right: 18px;
+    }
+
+    
+}
+
+.btn-queue,.btn-watched{
+    color: $secondary-text-color;
+    border: 1px solid $secondary-text-color;
+
+    &:active{
+      color:  $main-text-color;
+      border-color: $accent-color;
+    border: 1px solid  $accent-color;
+
+    }
+
+    &:hover,&:focus{
+        color: $main-text-color;
+        transition: background, $main-duration $main-timing-function;
+    }
+}
