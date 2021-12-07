@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class ThemoviedbApi {
   constructor() {
@@ -13,7 +14,7 @@ export class ThemoviedbApi {
         `/3/trending/movie/day?api_key=${this.API_KEY}&page=${this.page}`,
       );
       const data = await response.data;
-      
+
       return data; //{page: 1, results: Array(20), total_pages: 1000, total_results: 20000}
     } catch (error) {
       console.log(error);
@@ -31,7 +32,16 @@ export class ThemoviedbApi {
         `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
       );
       const data = await response.data;
-      return data;
+      if (data.total_pages !== 0) {
+        return data;
+      }
+      return Notify.failure('Search result not successful. Enter the correct movie name', {
+        width: 'auto',
+        position: 'center-center',
+        failure: {
+          background: '#FF6B08',
+        }
+      });
     } catch (error) {
       console.log(error);
     }
