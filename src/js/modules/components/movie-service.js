@@ -2,7 +2,8 @@ import { createCardsMarkup } from '../templates/render-one-card';
 import { RenderModal } from './render-one-card-modal';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { LibraryStorage } from './library-storage';
-
+import Loader from '../../vendors/_icon8';
+const spiner = new Loader();
 export class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
@@ -11,7 +12,9 @@ export class MovieService {
     this.watchedStorage = new LibraryStorage('watched');
     this.queueStorage = new LibraryStorage('queue');
     const inputRef = document.querySelector('.header-serch__input');
-    inputRef.addEventListener('keydown', event => this.onInputKeydown(event));
+    inputRef.addEventListener('keydown', event => {
+      this.onInputKeydown(event);
+    });
   }
 
   renderPage(page, libraryTab) {
@@ -24,27 +27,33 @@ export class MovieService {
     }
   }
 
-  renderMarkupAtHomePage() {
+  async renderMarkupAtHomePage() {
     this.mainRef.innerHTML = '';
-    this.movies.getMovies().then(({ results }) => {
+    await this.movies.getMovies().then(({ results }) => {
       this.renderMovies(results, 'main');
     });
   }
 
-  searchFilmByInputValue(searchQuery) {
+  async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
-    this.movies.getMoviesByKeyword().then(({ results }) => {
+    await this.movies.getMoviesByKeyword().then(({ results }) => {
       this.renderMovies(results, 'main');
     });
   }
 
-  onInputKeydown(event) {
+  async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
+    spiner.hideSearch();
+    spiner.renderHeaderLoader();
     const searchQuery = event.target.value.trim();
     if (searchQuery) {
-      this.searchFilmByInputValue(searchQuery);
+      await this.searchFilmByInputValue(searchQuery);
+      spiner.deleteHeaderSpiner();
+      spiner.showSearch();
     } else {
-      this.renderMarkupAtHomePage();
+      await this.renderMarkupAtHomePage();
+      spiner.deleteHeaderSpiner();
+      spiner.showSearch();
     }
   }
 
@@ -70,9 +79,9 @@ export class MovieService {
     this.renderMovies(movies, 'library');
   }
 
-  renderMovies(movies, page, libraryTab) {
+  async renderMovies(movies, page, libraryTab) {
     const watchedMarkup = new createCardsMarkup(movies, page, libraryTab);
-    const moviesCards = watchedMarkup.createCard();
+    const moviesCards = await watchedMarkup.createCard();
     this.mainRef.innerHTML = moviesCards;
   }
 }
