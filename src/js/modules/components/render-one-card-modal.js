@@ -124,16 +124,14 @@ export class RenderModal {
 
   onBtnWatchedClick() {
     this.watchedStorage.addToStorage(this.cardsListId);
-    this.btnWatched.textContent = 'Added to Watched';
+    this.btnWatched.textContent = 'Remove from Watched';
     this.btnWatched.disabled = true;
-    this.btnWatched.classList.add('modal__btn--active');
   }
 
   onBtnQueueClick() {
     this.queueStorage.addToStorage(this.cardsListId);
-    this.btnQueue.textContent = 'Added to Queue';
+    this.btnQueue.textContent = 'Remove from Queue';
     this.btnQueue.disabled = true;
-    this.btnQueue.classList.add('modal__btn--active');
   }
 }
 
