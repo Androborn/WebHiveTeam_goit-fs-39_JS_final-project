@@ -1,4 +1,5 @@
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
+import { LibraryStorage } from './library-storage';
 
 export class RenderModal {
   constructor() {
@@ -8,6 +9,8 @@ export class RenderModal {
     this.cardContainerRef.addEventListener('click', evt =>
       this.onModalOpenClick(evt),
     );
+    this.watchedStorage = new LibraryStorage('watched');
+    this.queueStorage = new LibraryStorage('queue');
   }
 
   async onModalOpenClick(evt) {
@@ -15,16 +18,16 @@ export class RenderModal {
 
     this.instance = basicLightbox.create(`<div></div>`);
     const cardsList = evt.target.parentNode;
-    const cardsListId = cardsList.id;
+    this.cardsListId = cardsList.id;
     const iscardsList = cardsList.classList.contains('cards-list__item');
 
     if (!iscardsList) {
       return;
     }
     console.log(cardsList);
-    console.log(cardsListId);
+    console.log(this.cardsListId);
 
-    const data = await this.themoviedbApi.getMovieById(cardsListId);
+    const data = await this.themoviedbApi.getMovieById(this.cardsListId);
     const genre = data.genres.map(id => id.name);
     const genreIds = Object.values(genre).join(', ');
 
@@ -79,19 +82,33 @@ export class RenderModal {
           <button
             class="common-btn common-btn--active modal__btn-watched"
             data-action="add-to-watched"
-            data-id="${cardsListId}"
+            data-id="${this.cardsListId}"
           >
             ADD TO WATCHED</button
           ><button
             class="common-btn modal__btn-queue"
             data-action="add-to-queue"
-            data-id="${cardsListId}"
+            data-id="${this.cardsListId}"
           >
             ADD TO QUEUE
           </button>
         </div></div>
     </div>
     `;
+
+    this.btnWatched = this.instance
+      .element()
+      .querySelector('[data-action="add-to-watched"]');
+    this.btnWatched.addEventListener('click', event =>
+      this.onBtnWatchedClick(event),
+    );
+
+    this.btnQueue = this.instance
+      .element()
+      .querySelector('[data-action="add-to-queue"]');
+    this.btnQueue.addEventListener('click', event =>
+      this.onBtnQueueClick(event),
+    );
 
     this.instance.show();
     document.addEventListener('keydown', evt => this.onEscModalClose(evt), {
@@ -103,6 +120,18 @@ export class RenderModal {
     if (evt.code === 'Escape') {
       this.instance.close();
     }
+  }
+
+  onBtnWatchedClick() {
+    this.watchedStorage.addToStorage(this.cardsListId);
+    this.btnWatched.textContent = 'Remove from Watched';
+    this.btnWatched.disabled = true;
+  }
+
+  onBtnQueueClick() {
+    this.queueStorage.addToStorage(this.cardsListId);
+    this.btnQueue.textContent = 'Remove from Queue';
+    this.btnQueue.disabled = true;
   }
 }
 
