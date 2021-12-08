@@ -50,14 +50,14 @@
   font-size: 12px;
   line-height: 1.16em;
   text-transform: uppercase;
-  color: #000;
+  color: $secondary-text-color;
 }
 
 .card-list__description {
   display: flex;
   font-size: 12px;
   line-height: 1.33em;
-  color: #ff6b08;
+  color: $accent-color;
 }
 .cards-list__genre {
   margin-right: 4px;
@@ -70,6 +70,6 @@
   height: 16px;
   border-radius: 5px;
   text-align: center;
-  color: #fff;
-  background-color: #ff6b01;
+  color: $main-text-color;
+  background-color: $accent-color;
 }
