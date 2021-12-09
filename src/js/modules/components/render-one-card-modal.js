@@ -23,7 +23,11 @@ class RenderModal {
   async onModalOpenClick(evt) {
     evt.preventDefault();
 
-    this.instance = basicLightbox.create(`<div></div>`);
+    this.instance = basicLightbox.create(`<div></div>`, {
+      onShow: instance => {
+        instance.element().querySelector('.close').onclick = instance.close;
+      },
+    });
     const cardsList = evt.target.parentNode;
     this.cardsListId = cardsList.id;
     const iscardsList = cardsList.classList.contains('cards-list__item');
