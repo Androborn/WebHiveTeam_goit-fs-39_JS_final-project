@@ -1,15 +1,18 @@
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { modalMarkup } from '../templates/modal-markup';
 import { LibraryStorage } from './library-storage';
-
+import Loader from '../../vendors/_icon8';
+let spiner = new Loader();
 export class RenderModal {
   constructor() {
     this.instance = null;
     this.cardContainerRef = document.querySelector('.cards-list');
     this.themoviedbApi = new ThemoviedbApi();
-    this.cardContainerRef.addEventListener('click', evt =>
-      this.onModalOpenClick(evt),
-    );
+    this.cardContainerRef.addEventListener('click', async evt => {
+      spiner.renderModalLoader();
+      await this.onModalOpenClick(evt);
+      spiner.deleteModalSpiner();
+    });
     this.watchedStorage = new LibraryStorage('watched');
     this.queueStorage = new LibraryStorage('queue');
   }
