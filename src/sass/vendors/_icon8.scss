@@ -1,3 +1,89 @@
+.backdrop {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+  will-change: opacity;
+  overflow: hidden;
+}
+#floatingCirclesModal {
+  position: relative;
+  width: 256px;
+  height: 256px;
+  margin: auto;
+  transform: scale(0.6);
+}
+
+.f_circleModal {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  height: 46px;
+  width: 46px;
+  border-radius: 24px;
+  animation-name: f_fadeG;
+  animation-duration: 1.04s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+#frotateModal_01 {
+  left: 0;
+  top: 104px;
+  animation-delay: 0.39s;
+}
+
+#frotateModal_02 {
+  left: 30px;
+  top: 30px;
+  animation-delay: 0.52s;
+}
+
+#frotateModal_03 {
+  left: 104px;
+  top: 0;
+  animation-delay: 0.65s;
+}
+
+#frotateModal_04 {
+  right: 30px;
+  top: 30px;
+  animation-delay: 0.78s;
+}
+
+#frotateModal_05 {
+  right: 0;
+  top: 104px;
+  animation-delay: 0.91s;
+}
+
+#frotateModal_06 {
+  right: 30px;
+  bottom: 30px;
+  animation-delay: 1.04s;
+}
+
+#frotateModal_07 {
+  left: 104px;
+  bottom: 0;
+  animation-delay: 1.17s;
+}
+
+#frotateModal_08 {
+  left: 30px;
+  bottom: 30px;
+  animation-delay: 1.3s;
+}
+
+
+
+// ===========MODAL============//
 @keyframes f_fadeG {
   0% {
     background-color: rgb(0, 0, 0);
@@ -6,7 +92,7 @@
     background-color: rgb(255, 255, 255);
   }
 }
-.G {
+.header__spiner {
   position: absolute;
   width: 22px;
   height: 22px;

@@ -3,6 +3,8 @@ import { modalMarkup } from '../templates/modal-markup';
 import { LibraryStorage } from './library-storage';
 import { movieService } from './movie-service';
 import { header } from './page-switch';
+import Loader from '../../vendors/_icon8';
+let spiner = new Loader();
 
 class RenderModal {
   constructor() {
@@ -11,9 +13,11 @@ class RenderModal {
     this.themoviedbApi = new ThemoviedbApi();
     this.watchedStorage = new LibraryStorage('watched');
     this.queueStorage = new LibraryStorage('queue');
-    this.cardContainerRef.addEventListener('click', evt =>
-      this.onModalOpenClick(evt),
-    );
+    this.cardContainerRef.addEventListener('click', async evt => {
+      spiner.renderModalLoader();
+      await this.onModalOpenClick(evt);
+      spiner.deleteModalSpiner();
+    });
   }
 
   async onModalOpenClick(evt) {
