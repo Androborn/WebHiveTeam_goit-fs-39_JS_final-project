@@ -15,7 +15,7 @@ export function modalMarkup(
           class="modal__image"
         />
       </div>
-      <div class="modal__info">
+      <div class="modal__info-container"><div class="modal__info">
         <h1 class="modal__info-title">${data.original_title.toUpperCase()}</h1>
         <div class="modal__info-wraper">
           <div class="modal__info-item-wraper">
@@ -27,7 +27,9 @@ export function modalMarkup(
               <span class="modal__info-value  modal__info-value--border">${
                 data.vote_average
               }</span>
-              <span class="modal__info-slash"> / </span>${data.vote_count}</span
+              <span class="modal__info-slash"> / </span><span class="modal__info-value--transparent">${
+                data.vote_count
+              }</span></span
             >
           </div>
           <div class="modal__info-item-wraper">
@@ -47,11 +49,11 @@ export function modalMarkup(
         </div>
         <div class="modal__info-about-wraper">
           <p class="modal__info-about">
-            ABOUT<span class="modal__info-value modal__info-value--hight">${
+            ABOUT<span class="modal__info-value modal__info-value--descrip">${
               data.overview
             }</span>
           </p>
-        </div>
+        </div><span class="close"></span>
       </div><div class="modal__btn-wraper">
           <button
             class="common-btn  modal__btn-watched"
@@ -70,7 +72,7 @@ export function modalMarkup(
           >
           ${movieAddedtoQueue === true ? 'Remove from queue' : 'Add to queue'}
           </button>
-        </div></div>
+        </div></div></div>
     </div>
     `;
 }
