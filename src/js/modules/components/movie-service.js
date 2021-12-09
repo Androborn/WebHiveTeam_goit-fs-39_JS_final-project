@@ -1,14 +1,14 @@
 import { createCardsMarkup } from '../templates/render-one-card';
-import { RenderModal } from './render-one-card-modal';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { LibraryStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
+
 const spiner = new Loader();
-export class MovieService {
+
+class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
-    this.modalWindow = new RenderModal();
     this.watchedStorage = new LibraryStorage('watched');
     this.queueStorage = new LibraryStorage('queue');
     const inputRef = document.querySelector('.header-serch__input');
@@ -85,3 +85,5 @@ export class MovieService {
     this.mainRef.innerHTML = moviesCards;
   }
 }
+
+export const movieService = new MovieService();

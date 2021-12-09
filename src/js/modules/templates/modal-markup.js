@@ -1,4 +1,10 @@
-export function modalMarkup(data, genreIds, cardsListId) {
+export function modalMarkup(
+  data,
+  genreIds,
+  cardsListId,
+  movieAddedtoWatched,
+  movieAddedtoQueue,
+) {
   return `
     <div class="modal">
       <div class="modal__wraper"><div class="modal__image-wraper">
@@ -48,17 +54,21 @@ export function modalMarkup(data, genreIds, cardsListId) {
         </div>
       </div><div class="modal__btn-wraper">
           <button
-            class="common-btn common-btn--active modal__btn-watched"
+            class="common-btn  modal__btn-watched"
             data-action="add-to-watched"
             data-id="${cardsListId}"
           >
-            ADD TO WATCHED</button
+           ${
+             movieAddedtoWatched === true
+               ? 'Remove from watched'
+               : 'Add to watched'
+           }</button
           ><button
             class="common-btn modal__btn-queue"
             data-action="add-to-queue"
             data-id="${cardsListId}"
           >
-            ADD TO QUEUE
+          ${movieAddedtoQueue === true ? 'Remove from queue' : 'Add to queue'}
           </button>
         </div></div>
     </div>

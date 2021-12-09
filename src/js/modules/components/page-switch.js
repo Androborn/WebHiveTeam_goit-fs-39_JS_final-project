@@ -1,4 +1,6 @@
-export class Header {
+import { movieService } from './movie-service';
+
+class Header {
   constructor() {
     this.headerRef = document.querySelector('.header');
     this.centerDivRef = this.headerRef.querySelector('.header-center');
@@ -9,7 +11,6 @@ export class Header {
     );
     this.currentPage = 'home';
     this.currentLibraryTab = 'watched';
-    this.onPageChange = undefined;
   }
   onPageBtnClick(event) {
     event.preventDefault();
@@ -30,9 +31,7 @@ export class Header {
       this.renderBtns();
     }
 
-    if (this.onPageChange != undefined) {
-      this.onPageChange(this.currentPage, this.currentLibraryTab);
-    }
+    movieService.renderPage(this.currentPage, this.currentLibraryTab);
   }
 
   renderBtns() {
@@ -69,3 +68,4 @@ export class Header {
     }
   }
 }
+export const header = new Header();
