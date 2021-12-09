@@ -5,15 +5,19 @@ export class Notification {
         this.optionsLib = {
             width: '40%',
             position: 'center-center',
-            failure: {
-                background: '#FF6B08',
-            }
+
         };
     }
 
     callNotiflix(data) {
-        if (data === undefined) {
+        if (data === 0) {
             return Notify.failure('Search result not successful. Enter the correct movie name', this.optionsLib)
+        } return Notify.success(`We found ${data} results`, this.optionsLib);
+    }
+
+    errorNotification(err, messege) {
+        if (err.toString()[0] === '4') {
+            return Notify.failure(`${messege}`, this.optionsLib)
         }
     }
 }
