@@ -14,8 +14,6 @@ class MovieService {
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
     this.modalWindow = modal;
-    this.watchedStorage = watchedStorage; // наново створюэ бібліотеку при кожній перезагрузці сторінки.
-    this.queueStorage = queueStorage;
     this.iconSearchRef = document.querySelector('.header-serch__icon');
     this.iconSearchRef = document.addEventListener('click', event =>
       this.onSearchIconClick(event),
