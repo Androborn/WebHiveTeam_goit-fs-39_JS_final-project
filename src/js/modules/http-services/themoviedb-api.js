@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notification } from '../../vendors/notification'
 
 export class ThemoviedbApi {
   constructor() {
@@ -6,6 +7,7 @@ export class ThemoviedbApi {
     this.keyword = '';
     this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
+    this.callSearchNotiflix = new Notification()
   }
   async getMovies() {
     try {
@@ -13,7 +15,7 @@ export class ThemoviedbApi {
         `/3/trending/movie/day?api_key=${this.API_KEY}&page=${this.page}`,
       );
       const data = await response.data;
-      
+
       return data; //{page: 1, results: Array(20), total_pages: 1000, total_results: 20000}
     } catch (error) {
       console.log(error);
@@ -31,9 +33,13 @@ export class ThemoviedbApi {
         `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
       );
       const data = await response.data;
+      this.callSearchNotiflix.searchResult(data.total_pages)
       return data;
     } catch (error) {
       console.log(error);
+      const err = await error.response.status
+      const message = await error.response.data.status_message
+      this.callSearchNotiflix.errorNotification(err, message)
     }
   }
   async getMovieById(id) {
