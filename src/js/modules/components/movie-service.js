@@ -2,6 +2,8 @@ import { createCardsMarkup } from '../templates/render-one-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { LibraryStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
+import Pagination from 'tui-pagination';
+import 'tui-pagination/dist/tui-pagination.css';
 
 const spiner = new Loader();
 
@@ -9,8 +11,38 @@ class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
-    this.watchedStorage = new LibraryStorage('watched');
+    this.modalWindow = new RenderModal();
+    this.watchedStorage = new LibraryStorage('watched'); // наново створюэ бібліотеку при кожній перезагрузці сторінки. 
     this.queueStorage = new LibraryStorage('queue');
+
+    this.container = document.getElementById('pagination'); 
+    this.options = {
+       totalItems: 20000, 
+       itemsPerPage: 20,
+       visiblePages: 5,
+       page: this.movies.currentPage,
+       centerAlign: true,
+       firstItemClassName: 'tui-first-child',
+       lastItemClassName: 'tui-last-child',
+       template: {
+       page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+       currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+       moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+       disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+       moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+      },
+    };
+
     const inputRef = document.querySelector('.header-serch__input');
     inputRef.addEventListener('keydown', event => {
       this.onInputKeydown(event);
@@ -28,16 +60,38 @@ class MovieService {
   }
 
   async renderMarkupAtHomePage() {
-    this.mainRef.innerHTML = '';
+    this.mainRef.innerHTML = ''; // можливо не потрібно
+    if (this.container.classList.contains('visually-hidden')) {
+      this.container.classList.remove('visually-hidden');
+    }
     await this.movies.getMovies().then(({ results }) => {
+      const pagin = new Pagination(this.container, this.options);
       this.renderMovies(results, 'main');
+      pagin.on('afterMove', async (event) => {
+        this.movies.currentPage = event.page;
+        await this.movies.getMovies().then(({ results }) => {
+          this.renderMovies(results, 'main');
+        })
+        this.movies.resetPage();
+      }) 
     });
+
   }
 
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
-    await this.movies.getMoviesByKeyword().then(({ results }) => {
+    await this.movies.getMoviesByKeyword().then(({ results, total_results}) => {
+      this.options.totalItems = total_results;
       this.renderMovies(results, 'main');
+      if (total_results < 20) return;
+      const pagin = new Pagination(this.container, this.options);
+      pagin.on('afterMove', async (event) => {
+        this.movies.currentPage = event.page;
+        await this.movies.getMoviesByKeyword().then(({ results }) => {
+          this.renderMovies(results, 'main');
+        })
+        this.movies.resetPage();
+      }) 
     });
   }
 
@@ -66,6 +120,14 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
+    if (ids < 20) {
+      this.container.classList.add('visually-hidden')
+    } 
+    else {
+      this.options.totalItems = ids.length;
+      const pagin = new Pagination(this.container, this.options);
+      
+      }
   }
 
   async renderMarkupAtLibraryQueuePage() {
@@ -77,6 +139,14 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
+    if (ids < 20) {
+      this.container.classList.add('visually-hidden');
+    } 
+    else {
+      this.options.totalItems = ids.length;
+      const pagin = new Pagination(this.container, this.options);
+      
+      }
   }
 
   async renderMovies(movies, page, libraryTab) {
