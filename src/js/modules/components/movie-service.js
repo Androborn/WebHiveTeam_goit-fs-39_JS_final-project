@@ -1,5 +1,4 @@
 import { createCardsMarkup } from '../templates/render-one-card';
-import { RenderModal } from './render-one-card-modal';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { LibraryStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
@@ -7,7 +6,8 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
 const spiner = new Loader();
-export class MovieService {
+
+class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
@@ -155,3 +155,5 @@ export class MovieService {
     this.mainRef.innerHTML = moviesCards;
   }
 }
+
+export const movieService = new MovieService();

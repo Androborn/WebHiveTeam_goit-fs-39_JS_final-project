@@ -1,8 +1,9 @@
 .footer {
+  margin-top: auto;
   padding-top: 30px;
   padding-bottom: 28px;
   background: #f7f7f7;
-  
+
   &-wrapper {
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -12,7 +13,7 @@
       grid-template-rows: 1fr;
       justify-content: center;
     }
-    
+
     &__copyright,
     &__about-developers {
       @include font(14px, 400, 16px);
@@ -32,7 +33,7 @@
     margin-left: 10px;
     fill: $accent-color;
   }
-  
+
   &__link {
     text-decoration-line: underline;
     cursor: pointer;

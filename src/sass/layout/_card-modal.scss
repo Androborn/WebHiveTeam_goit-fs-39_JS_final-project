@@ -1,191 +1,208 @@
-.modal{
-    background-color: $main-text-color;
-    border-radius: 5px;
-    padding: 48px 20px 41px;
-    width: 280px;
-    height: 90vh;
+.modal {
+  background-color: $main-text-color;
+  border-radius: 5px;
+  padding: 48px 20px 41px;
+  width: 280px;
+  height: 90vh;
+  position: relative;
+  @include font(12px, 500, 16px);
+  color: $secondary-text-color;
+  
+  @include max-width(tablet){ 
     overflow-y: auto;
-    position: relative;
-
-    @media screen and (min-width: 768px) {
-//     background: linear-gradient(
-// 90deg,var(--background-color-modal) 42%,transparent);
-    // background-color: transparent;
-    // position: absolute;
+    }
+ 
+  @include min-width(tablet) {
     width: 618px;
     height: 562px;
     padding: 42px 30px 40px 28px;
-}
+  }
 
-
-    @media screen and (min-width: 1024px){
-    width: 882px;
+  @include min-width(desktop) {
+    width: 806px;
     height: 568px;
     padding: 50px 30px 40px 30px;
-   }
-
-
-&__wraper{
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(1, 240px);
-  @media screen and (min-width: 768px){
-  & > div:nth-child(3){
-      grid-column: 2/ 2;
   }
-  }
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 264px);
-    grid-gap: 32px;
 
-}
+  &__wraper {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(1, 240px);
 
-@media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(2, 396px);
-    grid-gap: 30px;
+    @include min-width(tablet) {
+      grid-template-columns: repeat(2, 264px);
+      grid-gap: 32px;
+    }
+
+    @include min-width(desktop) {
+      grid-template-columns: 318px 396px;
+      grid-gap: 30px;
+    }
   }
-}
-    &__image-wraper{
+  
+  &__image-wraper {
     height: 356px;
     width: 240px;
     border-radius: 5px;
     margin-bottom: 30px;
     overflow: hidden;
 
-    @media screen and (min-width: 768px){
-    width: 264px;
-    height: 373px;
-}
-    @media screen and (min-width: 1024px){
-    width: 396px;
-    height: 477px;
-}
+    @include min-width(tablet) {
+      width: 264px;
+      height: 373px;
     }
-
-    &__image{
-    @media screen and (min-width: 1024px){
-     height: 100%;
-    //  width: auto;   
-}
-
+    @include min-width(desktop) {
+      width: 318px;
+      height: 477px;
     }
+  }
 
-    &__info{
-        @include font(12px, 500, 16px);
-        @media screen and (min-width: 1024px) {
-        }
+  &__image {
+    @include min-width(desktop) {
+      height: 100%;
+       width: auto;
     }
+  }
 
-    &__info-title{
-         @include font(20px, 500, 23px);
-         margin-bottom: 20px;
-    }
+  &__info {
+    @include font(12px, 500, 16px);
+    margin-bottom: 21px;
+  }
 
-    &__info-wraper{
-        display: grid;
-        // grid-template-columns: repeat(1, 240px);
-        grid-gap: 10px;
-        margin-bottom: 20px; 
-    }
+  &__info-title {
+    @include font(20px, 500, 23px);
+    margin-bottom: 20px;
+  }
 
-    &__info-item-wraper{
-        display: grid;
-        grid-template-columns: 108px 1fr;
-    //     @media screen and (min-width: 768px) {
-    // grid-template-columns: repeat(2, 264px);
-    // grid-gap: 32px;
+  &__info-wraper {
+    display: grid;
+    grid-gap: 10px;
+    margin-bottom: 20px;
+  }
 
-}
-   
-    
+  &__info-item-wraper {
+    display: grid;
+    grid-template-columns: 108px 1fr;
+  }
 
-    &__info-item:not(:last-child){
-        color: $modal-secondary-color;
-    }
+  &__info-item:not(:last-child) {
+    color: $modal-secondary-color;
+  }
 
-    &__info-value {
-       color: $secondary-text-color;
-    }
-    
-    &__info-value--hight, &__info-value--border{
-     @include font(12px, 500, 14px);
-    }
+  &__info-value--descrip {
+    @include font(12px, 500, 20px);
+  }
 
-    &__info-value--border{
-        text-align: center;
-        display: inline-block;
-        Width:36px;
-        Height :16px;
-        border-radius:5px;
-        background-color: $accent-color;
-        color: $main-text-color;
-    }
+  &__info-value--hight{
+    @include font(12px, 500, 14px);
+  }
 
-    &__info-slash{
-        color: $modal-secondary-color;
-    }
+  &__info-value--border, &__info-value--transparent {
+    text-align: center;
+    display: inline-block;
+    width: 36px;
+    height: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    background-color: #92929229;
+  }
 
-    &__info-about{
-        display: grid;
-        grid-gap: 10px;
-    }
-
-    &__info-about-wraper{
-        margin-bottom: 20px;
-    }
-
-    &__info-value--hight{
-       @include font(12px, 500, 20px); 
-    }
-    
-
-    &__btn-close{
-        @include font(14px, 500, 23px);
-        position: absolute;
-        top: 18px;
-        right: 18px;
-    }
+  &__info-value--border{
+     background-color: $accent-color;
+     color: $main-text-color;
+  }
 
 
-    &__btn-wraper{
+  &__info-slash {
+    color: $modal-secondary-color;
+  }
+
+  &__info-about {
+    display: grid;
+    grid-gap: 10px;
+  }
+
+  &__info-about-wraper {
+    margin-bottom: 20px;
+    max-height: 216px;
+    overflow-y: auto;
+  }
+
+  &__btn-wraper {
     display: flex;
-    @media screen and (min-width: 1024px){
-    position: absolute;
-    bottom: 30px;
-    right: 110px;
-   }
-    }
-    
+  }
 }
 
-.modal__btn-watched{
-    margin-right: 15px;
+.modal__btn-watched {
+  margin-right: 15px;
 }
-.modal__btn-queue,.modal__btn-watched{
-    color: $secondary-text-color;
-    border: 1px solid $secondary-text-color;
-    width: 112.53px;
-    padding: 5px;
+.modal__btn-queue,
+.modal__btn-watched {
+  color: $secondary-text-color;
+  border: 1px solid $secondary-text-color;
+  width: 112.53px;
+  padding: 5px;
+  transition: background, $main-duration $main-timing-function;
 
-    @media screen and (min-width: 768px){
+
+  @include min-width(tablet) {
     width: 125px;
-}
-     @media screen and (min-width: 1024px){
+  }
+  @include min-width(desktop) {
     width: 136px;
+  }
+
+  &--active {
+    color: $main-text-color;
+    border-color: $accent-color;
+    border: 1px solid $accent-color;
+    background-color: $accent-color;
+  }
+
+  &:hover,
+  &:focus {
+    color: $secondary-text-color;
+    border: 1px solid $accent-color;
+    background-color: $main-text-color;
+    filter: drop-shadow(0px 4px 10px rgba(255, 151, 1, 1.6));
+  }
 }
 
-    &:active{
-      color:  $main-text-color;
-      border-color: $accent-color;
-    border: 1px solid  $accent-color;
+.close {
+  position: absolute;
+  right: -13px;
+  top: -33px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.4;
+  transition: transform, $main-duration $main-timing-function;
 
-    }
-
-    &:hover,&:focus{
-        color: $main-text-color;
-        transition: background, $main-duration $main-timing-function;
-    }
+      @include min-width(tablet){
+       right: -20px;
+       top: -27px;
+}
+     @include min-width(desktop){
+       right: -18px;
+       top: -34px;
 }
 
+}
+.close:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 21px;
+  width: 2px;
+  background-color: $accent-color;
+}
 
-
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}

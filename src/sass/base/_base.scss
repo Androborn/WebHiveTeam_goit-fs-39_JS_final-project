@@ -29,14 +29,21 @@ img {
 }
 
 .container {
-    padding-left: 20px;
-    padding-right: 20px;
-    @media screen and (min-width: 768px){
-        padding-left: 75px;
-        padding-right: 75px;
-    }
-    @media screen and (min-width: 1024px){
-        padding-left: 71px;
-        padding-right: 71px;    }
-
+  padding-left: 20px;
+  padding-right: 20px;
+  @media screen and (min-width: 768px) {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding-left: 71px;
+    padding-right: 71px;
+  }
+}
+.page {
+  display: grid;
+  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  overflow: hidden;
 }
