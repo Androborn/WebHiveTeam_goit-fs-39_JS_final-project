@@ -83,6 +83,12 @@ class MovieService {
       .getMoviesByKeyword()
       .then(({ results, total_results }) => {
         this.options.totalItems = total_results;
+        if (total_results === 0) {
+         this.container.classList.add('visually-hidden');
+        }
+        else if (this.container.classList.contains('visually-hidden')) {
+        this.container.classList.remove('visually-hidden');
+        }
         this.renderMovies(results, 'main');
         if (total_results < this.options.itemsPerPage) return;
         const pagin = new Pagination(this.container, this.options);
