@@ -1,6 +1,6 @@
 import { createCardsMarkup } from '../templates/render-one-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
-import { LibraryStorage } from './library-storage';
+import { queueStorage, watchedStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
@@ -11,6 +11,7 @@ class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
+    this.container = document.getElementById('pagination'); 
     this.modalWindow = new RenderModal();
     this.watchedStorage = new LibraryStorage('watched'); // наново створюэ бібліотеку при кожній перезагрузці сторінки.
     this.queueStorage = new LibraryStorage('queue');
@@ -18,8 +19,6 @@ class MovieService {
     this.iconSearchRef = document.addEventListener('click', event =>
       this.onSearchIconClick(event),
     );
-
-    this.container = document.getElementById('pagination');
     this.options = {
       totalItems: 20000,
       itemsPerPage: 20,
@@ -52,7 +51,6 @@ class MovieService {
       this.onInputKeydown(event);
     });
   }
-
   renderPage(page, libraryTab) {
     if (page === 'home') {
       this.renderMarkupAtHomePage();
@@ -62,9 +60,9 @@ class MovieService {
       this.renderMarkupAtLibraryQueuePage();
     }
   }
-
   async renderMarkupAtHomePage() {
-    this.mainRef.innerHTML = ''; // можливо не потрібно
+    // this.mainRef.innerHTML = ''; // можливо не потрібно
+    
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
@@ -80,31 +78,31 @@ class MovieService {
       });
     });
   }
-
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
     await this.movies
       .getMoviesByKeyword()
-      .then(({ results, total_results }) => {
-        this.options.totalItems = total_results;
-        this.renderMovies(results, 'main');
-        if (total_results < 20) return;
-        const pagin = new Pagination(this.container, this.options);
-        pagin.on('afterMove', async event => {
-          this.movies.currentPage = event.page;
-          await this.movies.getMoviesByKeyword().then(({ results }) => {
-            this.renderMovies(results, 'main');
-          });
-          this.movies.resetPage();
-        });
-      });
-  }
+      .then(({ results, total_results}) => {
+      this.options.totalItems = total_results;
+      this.renderMovies(results, 'main');
+      if (total_results < this.options.itemsPerPage) return;
+      const pagin = new Pagination(this.container, this.options);
+      pagin.on('afterMove', async (event) => {
+        this.movies.currentPage = event.page;
+        await this.movies.getMoviesByKeyword().then(({ results }) => {
+          this.renderMovies(results, 'main');
+        })
+        this.movies.resetPage();
+      }) 
+    });
 
+  }
   async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
     spiner.hideSearch();
     spiner.renderHeaderLoader();
     const searchQuery = event.target.value.trim();
+    
     if (searchQuery) {
       await this.searchFilmByInputValue(searchQuery);
       spiner.deleteHeaderSpiner();
@@ -121,6 +119,7 @@ class MovieService {
       return;
     }
     const searchQuery = event.target.previousElementSibling.value;
+    
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
@@ -128,7 +127,8 @@ class MovieService {
   }
 
   async renderMarkupAtLibraryWatchedPage() {
-    let ids = this.watchedStorage.getStorageList();
+    watchedStorage.createStorage()
+    let ids = watchedStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),
     );
@@ -136,16 +136,19 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
-    if (ids < 20) {
-      this.container.classList.add('visually-hidden');
-    } else {
+    
+    if (ids.length < this.options.itemsPerPage) {
+      this.container.classList.add('visually-hidden')
+    } 
+    else {
       this.options.totalItems = ids.length;
       const pagin = new Pagination(this.container, this.options);
     }
   }
-
+  
   async renderMarkupAtLibraryQueuePage() {
-    let ids = this.queueStorage.getStorageList();
+    queueStorage.createStorage()
+    let ids = queueStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),
     );
@@ -153,7 +156,8 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
-    if (ids < 20) {
+    
+    if (ids.length < this.options.itemsPerPage) {
       this.container.classList.add('visually-hidden');
     } else {
       this.options.totalItems = ids.length;
