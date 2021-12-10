@@ -15,8 +15,7 @@
   padding: 13px;
   letter-spacing: -0.1px;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $accent-color;
     border-color: $accent-color;
     transition: background, $main-duration $main-timing-function;
