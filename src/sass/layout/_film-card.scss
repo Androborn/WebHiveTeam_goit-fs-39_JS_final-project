@@ -18,7 +18,7 @@
 
 .cards-list__item {
   transition: $film-card-transition;
-  grid-column: span 2;
+  
  
   &:hover,
   &:focus {
@@ -42,10 +42,16 @@
       }
     }
   }
+    @media screen and (min-width: 1024px) {
+    grid-column: span 2;
+    
+    }
 }
 
 .cards-list__item:nth-last-child(-n+2):nth-child(odd) {
-	grid-column: 2 / span 2;
+  @media screen and (min-width: 1024px){
+grid-column: 2 / span 2;
+  }
 }
 
 .cards-list__img {
