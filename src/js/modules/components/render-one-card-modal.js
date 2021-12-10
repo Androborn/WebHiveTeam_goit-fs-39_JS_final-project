@@ -75,10 +75,12 @@ class RenderModal {
     if (this.movieAddedtoWatched !== true) {
       watchedStorage.addToStorage(this.cardsListId);
       this.btnWatched.textContent = 'Remove from watched';
+      this.btnWatched.blur();
     } else {
       watchedStorage.removeFromStorage(this.cardsListId);
       this.btnWatched.classList.remove('modal__btn-watched--active');
       this.btnWatched.textContent = 'Add to watched';
+      this.btnWatched.blur();
     }
     this.movieAddedtoWatched = watchedStorage.hasId(this.cardsListId);
     if (
@@ -94,10 +96,12 @@ class RenderModal {
     if (this.movieAddedtoQueue !== true) {
       queueStorage.addToStorage(this.cardsListId);
       this.btnQueue.textContent = 'Remove from queue';
+      this.btnQueue.blur();
     } else {
       queueStorage.removeFromStorage(this.cardsListId);
       this.btnQueue.classList.remove('modal__btn-queue--active');
       this.btnQueue.textContent = 'Add to queue';
+      this.btnQueue.blur();
     }
     this.movieAddedtoQueue = queueStorage.hasId(this.cardsListId);
     if (
