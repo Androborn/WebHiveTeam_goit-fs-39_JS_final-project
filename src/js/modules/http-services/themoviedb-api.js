@@ -33,10 +33,9 @@ export class ThemoviedbApi {
         `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
       );
       const data = await response.data;
-      this.callSearchNotiflix.callNotiflix(data.total_pages)
+      this.callSearchNotiflix.callNotiflix(data.total_results)
       return data;
     } catch (error) {
-      console.log(error);
       const err = await error.response.status
       const message = await error.response.data.status_message
       this.callSearchNotiflix.errorNotification(err, message)
