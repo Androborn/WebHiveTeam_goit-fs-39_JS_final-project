@@ -143,9 +143,12 @@
     &__icon {
       position: absolute;
       fill: $main-text-color;
-      top: 6px;
-      right: 0px;
+      top: -2px;
+      right: -9px;
       cursor: pointer;
+      width: 31px;
+    height: 31px;
+    padding: 9px;
     }
   }
 }
