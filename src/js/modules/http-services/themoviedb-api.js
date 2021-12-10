@@ -64,4 +64,10 @@ export class ThemoviedbApi {
   resetPage() {
     this.page = 1;
   }
+  get currentPage() {
+    return this.page;
+  }
+  set currentPage(newPage) {
+    this.page = newPage;
+  }
 }
