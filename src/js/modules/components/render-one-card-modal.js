@@ -1,6 +1,6 @@
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { modalMarkup } from '../templates/modal-markup';
-import { LibraryStorage } from './library-storage';
+import { queueStorage, watchedStorage } from './library-storage';
 import { movieService } from './movie-service';
 import { header } from './page-switch';
 import Loader from '../../vendors/_icon8';
@@ -11,8 +11,6 @@ class RenderModal {
     this.instance = null;
     this.cardContainerRef = document.querySelector('.cards-list');
     this.themoviedbApi = new ThemoviedbApi();
-    this.watchedStorage = new LibraryStorage('watched');
-    this.queueStorage = new LibraryStorage('queue');
     this.cardContainerRef.addEventListener('click', async evt => {
       spiner.renderModalLoader();
       await this.onModalOpenClick(evt);
@@ -31,8 +29,8 @@ class RenderModal {
     const cardsList = evt.target.parentNode;
     this.cardsListId = cardsList.id;
     const iscardsList = cardsList.classList.contains('cards-list__item');
-    this.movieAddedtoWatched = this.watchedStorage.hasId(this.cardsListId);
-    this.movieAddedtoQueue = this.queueStorage.hasId(this.cardsListId);
+    this.movieAddedtoWatched = watchedStorage.hasId(this.cardsListId);
+    this.movieAddedtoQueue = queueStorage.hasId(this.cardsListId);
 
     if (!iscardsList) {
       return;
@@ -75,14 +73,14 @@ class RenderModal {
   onBtnWatchedClick() {
     this.btnWatched.classList.add('modal__btn-watched--active');
     if (this.movieAddedtoWatched !== true) {
-      this.watchedStorage.addToStorage(this.cardsListId);
+      watchedStorage.addToStorage(this.cardsListId);
       this.btnWatched.textContent = 'Remove from watched';
     } else {
-      this.watchedStorage.removeFromStorage(this.cardsListId);
+      watchedStorage.removeFromStorage(this.cardsListId);
       this.btnWatched.classList.remove('modal__btn-watched--active');
       this.btnWatched.textContent = 'Add to watched';
     }
-    this.movieAddedtoWatched = this.watchedStorage.hasId(this.cardsListId);
+    this.movieAddedtoWatched = watchedStorage.hasId(this.cardsListId);
     if (
       header.currentPage === 'library' &&
       header.currentLibraryTab === 'watched'
@@ -94,14 +92,14 @@ class RenderModal {
   onBtnQueueClick() {
     this.btnQueue.classList.add('modal__btn-queue--active');
     if (this.movieAddedtoQueue !== true) {
-      this.queueStorage.addToStorage(this.cardsListId);
+      queueStorage.addToStorage(this.cardsListId);
       this.btnQueue.textContent = 'Remove from queue';
     } else {
-      this.queueStorage.removeFromStorage(this.cardsListId);
+      queueStorage.removeFromStorage(this.cardsListId);
       this.btnQueue.classList.remove('modal__btn-queue--active');
       this.btnQueue.textContent = 'Add to queue';
     }
-    this.movieAddedtoQueue = this.queueStorage.hasId(this.cardsListId);
+    this.movieAddedtoQueue = queueStorage.hasId(this.cardsListId);
     if (
       header.currentPage === 'library' &&
       header.currentLibraryTab === 'queue'
