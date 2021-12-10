@@ -159,8 +159,7 @@
     background-color: $accent-color;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: $secondary-text-color;
     border: 1px solid $accent-color;
     background-color: $main-text-color;
