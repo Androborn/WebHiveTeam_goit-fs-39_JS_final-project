@@ -33,7 +33,7 @@ export class ThemoviedbApi {
         `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
       );
       const data = await response.data;
-      this.callSearchNotiflix.callNotiflix(data.total_results)
+      this.callSearchNotiflix.searchResult(data.total_pages)
       return data;
     } catch (error) {
       const err = await error.response.status
@@ -68,5 +68,11 @@ export class ThemoviedbApi {
   }
   resetPage() {
     this.page = 1;
+  }
+  get currentPage() {
+    return this.page;
+  }
+  set currentPage(newPage) {
+    this.page = newPage;
   }
 }

@@ -5,11 +5,10 @@ export class Notification {
         this.optionsLib = {
             width: '40%',
             position: 'center-center',
-
         };
     }
 
-    callNotiflix(data) {
+    searchResult(data) {
         if (data === 0) {
             return Notify.failure('Search result not successful. Enter the correct movie name', this.optionsLib)
         } return Notify.success(`We found ${data} results`, this.optionsLib);
@@ -21,4 +20,3 @@ export class Notification {
         }
     }
 }
-

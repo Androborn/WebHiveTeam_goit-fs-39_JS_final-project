@@ -1,4 +1,10 @@
-export function modalMarkup(data, genreIds, cardsListId) {
+export function modalMarkup(
+  data,
+  genreIds,
+  cardsListId,
+  movieAddedtoWatched,
+  movieAddedtoQueue,
+) {
   return `
     <div class="modal">
       <div class="modal__wraper"><div class="modal__image-wraper">
@@ -9,7 +15,7 @@ export function modalMarkup(data, genreIds, cardsListId) {
           class="modal__image"
         />
       </div>
-      <div class="modal__info">
+      <div class="modal__info-container"><div class="modal__info">
         <h1 class="modal__info-title">${data.original_title.toUpperCase()}</h1>
         <div class="modal__info-wraper">
           <div class="modal__info-item-wraper">
@@ -21,7 +27,9 @@ export function modalMarkup(data, genreIds, cardsListId) {
               <span class="modal__info-value  modal__info-value--border">${
                 data.vote_average
               }</span>
-              <span class="modal__info-slash"> / </span>${data.vote_count}</span
+              <span class="modal__info-slash"> / </span><span class="modal__info-value--transparent">${
+                data.vote_count
+              }</span></span
             >
           </div>
           <div class="modal__info-item-wraper">
@@ -41,26 +49,30 @@ export function modalMarkup(data, genreIds, cardsListId) {
         </div>
         <div class="modal__info-about-wraper">
           <p class="modal__info-about">
-            ABOUT<span class="modal__info-value modal__info-value--hight">${
+            ABOUT<span class="modal__info-value modal__info-value--descrip">${
               data.overview
             }</span>
           </p>
-        </div>
+        </div><span class="close"></span>
       </div><div class="modal__btn-wraper">
           <button
-            class="common-btn common-btn--active modal__btn-watched"
+            class="common-btn  modal__btn-watched"
             data-action="add-to-watched"
             data-id="${cardsListId}"
           >
-            ADD TO WATCHED</button
+           ${
+             movieAddedtoWatched === true
+               ? 'Remove from watched'
+               : 'Add to watched'
+           }</button
           ><button
             class="common-btn modal__btn-queue"
             data-action="add-to-queue"
             data-id="${cardsListId}"
           >
-            ADD TO QUEUE
+          ${movieAddedtoQueue === true ? 'Remove from queue' : 'Add to queue'}
           </button>
-        </div></div>
+        </div></div></div>
     </div>
     `;
 }
