@@ -1,6 +1,7 @@
 import { createCardsMarkup } from '../templates/render-one-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { queueStorage, watchedStorage } from './library-storage';
+import { modal } from './render-one-card-modal';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
@@ -11,10 +12,10 @@ class MovieService {
   constructor() {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
-    this.container = document.getElementById('pagination'); 
-    this.modalWindow = new RenderModal();
-    this.watchedStorage = new LibraryStorage('watched'); // наново створюэ бібліотеку при кожній перезагрузці сторінки.
-    this.queueStorage = new LibraryStorage('queue');
+    this.container = document.getElementById('pagination');
+    this.modalWindow = modal;
+    this.watchedStorage = watchedStorage; // наново створюэ бібліотеку при кожній перезагрузці сторінки.
+    this.queueStorage = queueStorage;
     this.iconSearchRef = document.querySelector('.header-serch__icon');
     this.iconSearchRef = document.addEventListener('click', event =>
       this.onSearchIconClick(event),
@@ -62,7 +63,7 @@ class MovieService {
   }
   async renderMarkupAtHomePage() {
     // this.mainRef.innerHTML = ''; // можливо не потрібно
-    
+
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
@@ -82,27 +83,26 @@ class MovieService {
     this.movies.search = searchQuery;
     await this.movies
       .getMoviesByKeyword()
-      .then(({ results, total_results}) => {
-      this.options.totalItems = total_results;
-      this.renderMovies(results, 'main');
-      if (total_results < this.options.itemsPerPage) return;
-      const pagin = new Pagination(this.container, this.options);
-      pagin.on('afterMove', async (event) => {
-        this.movies.currentPage = event.page;
-        await this.movies.getMoviesByKeyword().then(({ results }) => {
-          this.renderMovies(results, 'main');
-        })
-        this.movies.resetPage();
-      }) 
-    });
-
+      .then(({ results, total_results }) => {
+        this.options.totalItems = total_results;
+        this.renderMovies(results, 'main');
+        if (total_results < this.options.itemsPerPage) return;
+        const pagin = new Pagination(this.container, this.options);
+        pagin.on('afterMove', async event => {
+          this.movies.currentPage = event.page;
+          await this.movies.getMoviesByKeyword().then(({ results }) => {
+            this.renderMovies(results, 'main');
+          });
+          this.movies.resetPage();
+        });
+      });
   }
   async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
     spiner.hideSearch();
     spiner.renderHeaderLoader();
     const searchQuery = event.target.value.trim();
-    
+
     if (searchQuery) {
       await this.searchFilmByInputValue(searchQuery);
       spiner.deleteHeaderSpiner();
@@ -119,7 +119,7 @@ class MovieService {
       return;
     }
     const searchQuery = event.target.previousElementSibling.value;
-    
+
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
@@ -127,7 +127,7 @@ class MovieService {
   }
 
   async renderMarkupAtLibraryWatchedPage() {
-    watchedStorage.createStorage()
+    watchedStorage.createStorage();
     let ids = watchedStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),
@@ -136,18 +136,17 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
-    
+
     if (ids.length < this.options.itemsPerPage) {
-      this.container.classList.add('visually-hidden')
-    } 
-    else {
+      this.container.classList.add('visually-hidden');
+    } else {
       this.options.totalItems = ids.length;
       const pagin = new Pagination(this.container, this.options);
     }
   }
-  
+
   async renderMarkupAtLibraryQueuePage() {
-    queueStorage.createStorage()
+    queueStorage.createStorage();
     let ids = queueStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),
@@ -156,7 +155,7 @@ class MovieService {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
-    
+
     if (ids.length < this.options.itemsPerPage) {
       this.container.classList.add('visually-hidden');
     } else {
