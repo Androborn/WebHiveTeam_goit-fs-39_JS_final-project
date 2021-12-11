@@ -4,7 +4,7 @@ import { queueStorage, watchedStorage } from './library-storage';
 import { modal } from './render-one-card-modal';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
+import 'tui-pagination/dist/tui-pagination.css';
 
 const spiner = new Loader();
 
