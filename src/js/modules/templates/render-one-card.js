@@ -1,3 +1,4 @@
+import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 
 const moviesApi = new ThemoviedbApi();
@@ -23,7 +24,9 @@ export class createCardsMarkup {
   }
   createGenresList(genresId) {
     const genresNames = genresId.map(id => this.getMovieGenresName(id));
-
+    if (genresNames === []) {
+      ('Жанр отсутствует');
+    }
     if (genresNames.length >= 4) {
       const CorrecТame = genresNames.slice(0, 2);
       CorrecТame.push('Other...');
@@ -33,6 +36,9 @@ export class createCardsMarkup {
   }
 
   correctedDate(release_date) {
+    if (!release_date) {
+      return 'Дата отсутствует';
+    }
     return release_date.slice(0, 4);
   }
 
@@ -50,15 +56,21 @@ export class createCardsMarkup {
         .map(
           ({ id, poster_path, original_title, genre_ids, release_date }) =>
             `<li class="cards-list__item" id="${id}">
-        <img class="cards-list__img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" />
+        <img class="cards-list__img" src=${
+          poster_path === null
+            ? sorryPosterImage
+            : `https://image.tmdb.org/t/p/w500${poster_path}`
+        } alt="${original_title}" />
         <div class="cards-list__info">
           <h2 class="cards-list__info-name">${this.slicedOriginalTitle(
             original_title,
           )}</h2>
           <div class="card-list__description">
-             <p class="cards-list__genre">${this.createGenresList(
-               genre_ids,
-             )}</p>
+             <p class="cards-list__genre">${
+               this.createGenresList(genre_ids)
+                 ? this.createGenresList(genre_ids)
+                 : 'Жанр отсутствует'
+             }</p>
             <p class="cards-list__date">| ${this.correctedDate(
               release_date,
             )}</p>
@@ -79,15 +91,21 @@ export class createCardsMarkup {
           vote_average,
         }) =>
           `<li class="cards-list__item" id="${id}">
-        <img class="cards-list__img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" />
+        <img class="cards-list__img" src=${
+          poster_path === null
+            ? sorryPosterImage
+            : `https://image.tmdb.org/t/p/w500${poster_path}`
+        } alt="${original_title}" />
         <div class="cards-list__info">
           <h2 class="cards-list__info-name">${this.slicedOriginalTitle(
             original_title,
           )}</h2>
           <div class="card-list__description">
-             <p class="cards-list__genre">${this.createGenresList(
-               genre_ids,
-             )}</p>
+             <p class="cards-list__genre">${
+               this.createGenresList(genre_ids)
+                 ? this.createGenresList(genre_ids)
+                 : 'Жанр отсутствует'
+             }</p>
             <p class="cards-list__date">| ${this.correctedDate(
               release_date,
             )}</p>

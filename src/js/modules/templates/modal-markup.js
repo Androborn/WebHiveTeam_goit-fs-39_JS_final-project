@@ -1,3 +1,4 @@
+import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
 export function modalMarkup(
   data,
   genreIds,
@@ -9,10 +10,11 @@ export function modalMarkup(
     <div class="modal">
       <div class="modal__wraper"><div class="modal__image-wraper">
         <img
-          src="https://image.tmdb.org/t/p/w500${data.poster_path}"
-          alt="tags"
-          loading="lazy"
-          class="modal__image"
+        src=${
+          data.poster_path === null
+            ? sorryPosterImage
+            : `https://image.tmdb.org/t/p/w500${data.poster_path}`
+        }
         />
       </div>
       <div class="modal__info-container"><div class="modal__info">
@@ -44,13 +46,15 @@ export function modalMarkup(
               ${data.original_title.toUpperCase()}</span></div>
           <div class="modal__info-item-wraper">
             <span class="modal__info-item"> Genre </span
-            ><span class="modal__info-value">${genreIds}</span>
+            ><span class="modal__info-value">${
+              genreIds ? genreIds : 'Жанр отсутствует'
+            }</span>
           </div>
         </div>
         <div class="modal__info-about-wraper">
           <p class="modal__info-about">
             ABOUT<span class="modal__info-value modal__info-value--descrip">${
-              data.overview
+              data.overview ? data.overview : 'Нет информации по данному фильму'
             }</span>
           </p>
         </div><span class="close"></span>
