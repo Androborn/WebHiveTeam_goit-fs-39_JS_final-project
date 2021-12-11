@@ -1,0 +1,99 @@
+.anchor-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 0;
+  z-index: 99;
+  width: 20px;
+  height: 20px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 1px;
+  box-shadow: 0px 0px 8px 2px $accent-color inset;
+  border-radius: 15px;
+
+  transform: translateY(120%);
+  opacity: 0;
+  transition: all 0.5s;
+
+  @media screen and (min-width: 375px) {
+    bottom: 10px;
+    right: 7px;
+    width: 27px;
+    height: 27px;
+    box-shadow: 0px 0px 4px 2px $accent-color inset;
+  }
+
+  @media screen and (min-width: 393px) {
+    right: 13px;
+    width: 30px;
+    height: 30px;
+  }
+
+  @media screen and (min-width: 425px) {
+    bottom: 13px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 3px $accent-color inset;
+  }
+
+  @media screen and (min-width: 768px) {
+    right: 17px;
+    width: 40px;
+    height: 40px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    bottom: 15px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+  }
+
+  &:hover,
+  :focus {
+    box-shadow: 0px 0px 8px 2px $accent-color,
+      0px 0px 4px 2px $accent-color inset;
+    .anchor-btn__icon {
+      fill: $accent-color;
+    }
+  }
+
+  &.anch-btn-active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.anchor-btn__svg {
+  width: 18px;
+  height: 18px;
+
+  @media screen and (min-width: 375px) {
+    width: 25px;
+    height: 25px;
+  }
+
+  @media screen and (min-width: 393px) {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media screen and (min-width: 425px) {
+    width: 33px;
+    height: 33px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 38px;
+    height: 38px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 43px;
+    height: 43px;
+  }
+}
