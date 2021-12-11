@@ -16,4 +16,6 @@ export const refs = {
      queueBtn: document.querySelector('[data-tab="queue"]'),
      pagination: document.querySelector('#pagination'),
      aboutDev: document.querySelector('.about-developers__link'),
+     teamModalBtnClose: document.querySelector('[data-team-modal-close]'),
+     backdrop: document.querySelector('.backdrop'),
 }
