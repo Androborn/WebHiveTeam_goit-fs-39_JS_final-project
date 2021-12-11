@@ -73,8 +73,8 @@ class MovieService {
         await this.movies.getMovies().then(({ results }) => {
           this.renderMovies(results, 'main');
         });
-        this.movies.resetPage();
       });
+      pagin.movePageTo(this.movies.currentPage)
     });
   }
   async searchFilmByInputValue(searchQuery) {
@@ -83,7 +83,7 @@ class MovieService {
       .getMoviesByKeyword()
       .then(({ results, total_results }) => {
         this.options.totalItems = total_results;
-        if (total_results === 0) {
+        if (total_results <= this.options.itemsPerPage) {
          this.container.classList.add('visually-hidden');
         }
         else if (this.container.classList.contains('visually-hidden')) {
@@ -141,7 +141,7 @@ class MovieService {
     }
     this.renderMovies(movies, 'library');
 
-    if (ids.length < this.options.itemsPerPage) {
+    if (ids.length <= this.options.itemsPerPage) {
       this.container.classList.add('visually-hidden');
     } else {
       this.options.totalItems = ids.length;
