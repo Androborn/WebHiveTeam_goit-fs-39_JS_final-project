@@ -147,8 +147,8 @@
       right: -9px;
       cursor: pointer;
       width: 31px;
-    height: 31px;
-    padding: 9px;
+      height: 31px;
+      padding: 9px;
     }
   }
 }
@@ -200,6 +200,6 @@
 .header-center__wrapper {
   display: grid;
   grid-template-columns: auto auto;
-  padding: 0px 20px 65px 20px;
+
   grid-gap: 15px;
 }
