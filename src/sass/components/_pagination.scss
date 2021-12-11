@@ -1,0 +1,28 @@
+.tui-pagination .tui-page-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: $smooth-border;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: $accent-color;
+  }
+}
+
+.tui-pagination .tui-is-selected,
+.tui-pagination strong {
+  background-color: $accent-color;
+  border: 1px solid;
+  border-radius: $smooth-border;
+}
+
+.tui-pagination .tui-first-child.tui-is-selected {
+  border-left: $accent-color;
+}
+
+.tui-pagination .tui-last-child.tui-is-selected {
+  border-right: 1px $accent-color;
+}
