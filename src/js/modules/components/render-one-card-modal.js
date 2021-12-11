@@ -87,7 +87,7 @@ class RenderModal {
       header.currentPage === 'library' &&
       header.currentLibraryTab === 'watched'
     ) {
-      movieService.renderMarkupAtLibraryWatchedPage();
+      movieService.renderMarkupAtLibraryPage('watched');
     }
   }
 
@@ -108,7 +108,7 @@ class RenderModal {
       header.currentPage === 'library' &&
       header.currentLibraryTab === 'queue'
     ) {
-      movieService.renderMarkupAtLibraryQueuePage();
+      movieService.renderMarkupAtLibraryPage('queue');
     }
   }
 

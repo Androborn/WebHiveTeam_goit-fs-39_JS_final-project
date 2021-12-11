@@ -17,7 +17,6 @@ class MovieService {
       this.onSearchIconClick(event),
     );
     this.options = {
-      totalItems: 20000,
       itemsPerPage: 20,
       visiblePages: 5,
       page: this.movies.currentPage,
@@ -51,18 +50,24 @@ class MovieService {
   renderPage(page, libraryTab) {
     if (page === 'home') {
       this.renderMarkupAtHomePage();
-    } else if (page === 'library' && libraryTab === 'watched') {
-      this.renderMarkupAtLibraryWatchedPage();
-    } else if (page === 'library' && libraryTab === 'queue') {
-      this.renderMarkupAtLibraryQueuePage();
+    } else if (page === 'library') {
+      this.renderMarkupAtLibraryPage(libraryTab);
     }
   }
   async renderMarkupAtHomePage() {
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
-    await this.movies.getMovies().then(({ results }) => {
-      const pagin = new Pagination(this.container, this.options);
+    await this.movies.getMovies().then(({ results, total_results }) => {
+      if (total_results <= this.options.itemsPerPage) {
+        this.container.classList.add('visually-hidden');
+      } else if (this.container.classList.contains('visually-hidden')) {
+        this.container.classList.remove('visually-hidden');
+      }
+      const pagin = new Pagination(this.container, {
+        ...this.options,
+        totalItems: total_results,
+      });
       this.renderMovies(results, 'main');
       pagin.on('afterMove', async event => {
         this.movies.currentPage = event.page;
@@ -78,7 +83,6 @@ class MovieService {
     await this.movies
       .getMoviesByKeyword()
       .then(({ results, total_results }) => {
-        this.options.totalItems = total_results;
         if (total_results <= this.options.itemsPerPage) {
           this.container.classList.add('visually-hidden');
         } else if (this.container.classList.contains('visually-hidden')) {
@@ -86,7 +90,10 @@ class MovieService {
         }
         this.renderMovies(results, 'main');
         if (total_results < this.options.itemsPerPage) return;
-        const pagin = new Pagination(this.container, this.options);
+        const pagin = new Pagination(this.container, {
+          ...this.options,
+          totalItems: total_results,
+        });
         pagin.on('afterMove', async event => {
           this.movies.currentPage = event.page;
           await this.movies.getMoviesByKeyword().then(({ results }) => {
@@ -125,40 +132,38 @@ class MovieService {
     await this.searchFilmByInputValue(searchQuery);
   }
 
-  async renderMarkupAtLibraryWatchedPage() {
-    let ids = watchedStorage.getStorageList();
-    const movies = await Promise.all(
-      ids.map(id => this.movies.getMovieById(id)),
-    );
-    for (let movie of movies) {
-      movie.genre_ids = movie.genres.map(x => x.id);
-    }
-    this.renderMovies(movies, 'library');
-
+  async renderMarkupAtLibraryPage(tab) {
+    let ids =
+      tab === 'watched'
+        ? watchedStorage.getStorageList()
+        : queueStorage.getStorageList();
     if (ids.length <= this.options.itemsPerPage) {
       this.container.classList.add('visually-hidden');
-    } else {
-      this.options.totalItems = ids.length;
-      const pagin = new Pagination(this.container, this.options);
+    } else if (this.container.classList.contains('visually-hidden')) {
+      this.container.classList.remove('visually-hidden');
     }
+    const pagin = new Pagination(this.container, {
+      ...this.options,
+      totalItems: ids.length,
+    });
+    pagin.on('afterMove', async event => {
+      const page = event.page;
+      await this.renderPageMarkupAtLibraryPage(ids, page);
+    });
+    await this.renderPageMarkupAtLibraryPage(ids, 1);
   }
 
-  async renderMarkupAtLibraryQueuePage() {
-    let ids = queueStorage.getStorageList();
+  async renderPageMarkupAtLibraryPage(ids, page) {
+    const from = (page - 1) * this.options.itemsPerPage;
+    const to = page * this.options.itemsPerPage;
+    const pageIds = ids.slice(from, to);
     const movies = await Promise.all(
-      ids.map(id => this.movies.getMovieById(id)),
+      pageIds.map(id => this.movies.getMovieById(id)),
     );
     for (let movie of movies) {
       movie.genre_ids = movie.genres.map(x => x.id);
     }
     this.renderMovies(movies, 'library');
-
-    if (ids.length < this.options.itemsPerPage) {
-      this.container.classList.add('visually-hidden');
-    } else {
-      this.options.totalItems = ids.length;
-      const pagin = new Pagination(this.container, this.options);
-    }
   }
 
   async renderMovies(movies, page, libraryTab) {
