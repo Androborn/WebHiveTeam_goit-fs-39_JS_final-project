@@ -29,19 +29,19 @@ class MovieService {
       firstItemClassName: 'tui-first-child',
       lastItemClassName: 'tui-last-child',
       template: {
-        page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+        page: '<a href="#" class="tui-page-btn" style="width:30px; height:30px; border:1px solid transparent;border-radius: 5px;">{{page}}</a>',
         currentPage:
-          '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+          '<strong class="tui-page-btn tui-is-selected" style="width:30px; height:30px; background-color:#ff6b08; border:1px solid; border-radius: 5px;">{{page}}</strong>',
         moveButton:
-          '<a href="#" class="tui-page-btn tui-{{type}}">' +
+          '<a href="#" class="tui-page-btn tui-{{type}}"style="width:30px; height:30px; border-radius:5px; border:none;">' +
           '<span class="tui-ico-{{type}}">{{type}}</span>' +
           '</a>',
         disabledMoveButton:
-          '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+          '<span class="tui-page-btn tui-is-disabled tui-{{type}}" style="border:none;">' +
           '<span class="tui-ico-{{type}}">{{type}}</span>' +
           '</span>',
         moreButton:
-          '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+          '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip" style="border-radius:5px; border:none;">' +
           '<span class="tui-ico-ellip">...</span>' +
           '</a>',
       },
