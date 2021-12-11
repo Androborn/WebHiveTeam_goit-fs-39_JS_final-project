@@ -1,7 +1,6 @@
 import { createCardsMarkup } from '../templates/render-one-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
-import { queueStorage, watchedStorage } from './library-storage';
-import { modal } from './render-one-card-modal';
+import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
@@ -13,7 +12,6 @@ class MovieService {
     this.mainRef = document.querySelector('.cards-list');
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
-    this.modalWindow = modal;
     this.iconSearchRef = document.querySelector('.header-serch__icon');
     this.iconSearchRef = document.addEventListener('click', event =>
       this.onSearchIconClick(event),
@@ -60,8 +58,6 @@ class MovieService {
     }
   }
   async renderMarkupAtHomePage() {
-    // this.mainRef.innerHTML = ''; // можливо не потрібно
-
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
@@ -74,7 +70,7 @@ class MovieService {
           this.renderMovies(results, 'main');
         });
       });
-      pagin.movePageTo(this.movies.currentPage)
+      pagin.movePageTo(this.movies.currentPage);
     });
   }
   async searchFilmByInputValue(searchQuery) {
@@ -84,10 +80,9 @@ class MovieService {
       .then(({ results, total_results }) => {
         this.options.totalItems = total_results;
         if (total_results <= this.options.itemsPerPage) {
-         this.container.classList.add('visually-hidden');
-        }
-        else if (this.container.classList.contains('visually-hidden')) {
-        this.container.classList.remove('visually-hidden');
+          this.container.classList.add('visually-hidden');
+        } else if (this.container.classList.contains('visually-hidden')) {
+          this.container.classList.remove('visually-hidden');
         }
         this.renderMovies(results, 'main');
         if (total_results < this.options.itemsPerPage) return;
@@ -131,7 +126,6 @@ class MovieService {
   }
 
   async renderMarkupAtLibraryWatchedPage() {
-    watchedStorage.createStorage();
     let ids = watchedStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),
@@ -150,7 +144,6 @@ class MovieService {
   }
 
   async renderMarkupAtLibraryQueuePage() {
-    queueStorage.createStorage();
     let ids = queueStorage.getStorageList();
     const movies = await Promise.all(
       ids.map(id => this.movies.getMovieById(id)),

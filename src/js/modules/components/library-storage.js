@@ -1,7 +1,6 @@
 export class LibraryStorage {
   constructor(key) {
     this.key = key;
-    this.storage = [];
   }
   get libraryKey() {
     return this.key;
@@ -9,30 +8,30 @@ export class LibraryStorage {
   set libraryKey(newKey) {
     this.key = newKey;
   }
-  createStorage() {
-    if (localStorage.getItem(this.key)) return;
-    localStorage.setItem(this.key, JSON.stringify(this.storage));
-  }
+
   getStorageList() {
     const storageItem = localStorage.getItem(this.key);
+    if (!storageItem) {
+      return [];
+    }
     return JSON.parse(storageItem);
   }
   addToStorage(id) {
-    if (localStorage.getItem(this.key)) {
-      this.storage = JSON.parse(localStorage.getItem(this.key));
-    }
-    this.storage.unshift(id);
-    localStorage.setItem(this.key, JSON.stringify(this.storage));
+    const storage = this.getStorageList();
+    storage.unshift(id);
+    localStorage.setItem(this.key, JSON.stringify(storage));
   }
   removeFromStorage(id) {
-    if (this.storage.includes(id) === false) return;
-    const findId = this.storage.indexOf(id);
-    this.storage.splice(findId, 1);
-    localStorage.setItem(this.key, JSON.stringify(this.storage));
+    const storage = this.getStorageList();
+    const indexOfId = storage.indexOf(id);
+    if (indexOfId === -1) return;
+    storage.splice(indexOfId, 1);
+    localStorage.setItem(this.key, JSON.stringify(storage));
   }
 
   hasId(id) {
-    return this.storage.includes(id);
+    const storage = this.getStorageList();
+    return storage.includes(id);
   }
 }
 export const watchedStorage = new LibraryStorage('watched');
