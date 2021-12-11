@@ -11,23 +11,33 @@
   min-width: 240px;
   max-width: 300px;
   height: 90vh;
-  padding: 48px 20px 41px;
+  padding: 40px 20px 41px;
   margin-right: auto;
   margin-left: auto;
   overflow-y: auto;
-  background: linear-gradient(229.99deg, #b5adfa -26%, #8ddaa6 145%);
+  background: white;
   border-radius: 5px;
   outline: 1px solid rgb(14, 10, 10);
 
   @include min-width(tablet) {
     max-width: 618px;
     height: 562px;
-    padding: 42px 30px 40px 28px;
+    padding: 35px 30px 40px 28px;
   }
   @include min-width(desktop) {
     max-width: 882px;
     height: 550px;
-    padding: 50px 30px 40px 30px;
+    padding: 40px 30px 40px 30px;
+  }
+}
+.team-name {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  @include min-width(tablet) {
+    font-size: 28px;
+    margin-bottom: 30px;
   }
 }
 
@@ -50,16 +60,18 @@
   display: grid;
   grid-template-rows: 110px 230px 50px;
   padding: 10px;
-  background-color: azure;
+  outline: 1px solid black;
   border-radius: 5px;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.15);
+  outline: none;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  transition-property: transform;
+  transition-property: transform, box-shadow;
 
   &:hover {
     cursor: pointer;
     transform: scale(1.04);
+    box-shadow: 0px 0px 4px 2px $accent-color;
   }
 }
 
@@ -112,21 +124,33 @@
 }
 .close-btn {
   position: absolute;
+  width: 30px;
+  height: 30px;
   top: 10px;
-  right: 30px;
-  width: 60px;
-  height: 22px;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgb(233, 25, 25);
+  right: 20px;
   background: transparent;
-  border: 1px solid rgb(240, 139, 243);
-  border-radius: 15px;
-  box-shadow: 0px 6px 6px rgba(15, 53, 1, 0.15);
+  cursor: pointer;
+  opacity: 0.4;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  transition-property: background;
+  transition-property: transform, opacity;
   &:hover {
-    background: rgb(94, 236, 236);
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    left: 15px;
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: $accent-color;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
   }
 }
