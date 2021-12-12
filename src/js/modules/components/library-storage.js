@@ -16,14 +16,17 @@ export class LibraryStorage {
     }
     return JSON.parse(storageItem);
   }
-  addToStorage(id) {
+  addToStorage(movie) {
     const storage = this.getStorageList();
-    storage.unshift(id);
+    if (storage.some(x => x.id == movie.id)) {
+      return;
+    }
+    storage.unshift(movie);
     localStorage.setItem(this.key, JSON.stringify(storage));
   }
-  removeFromStorage(id) {
+  removeFromStorageById(id) {
     const storage = this.getStorageList();
-    const indexOfId = storage.indexOf(id);
+    const indexOfId = storage.findIndex(x => x.id == id);
     if (indexOfId === -1) return;
     storage.splice(indexOfId, 1);
     localStorage.setItem(this.key, JSON.stringify(storage));
@@ -31,8 +34,8 @@ export class LibraryStorage {
 
   hasId(id) {
     const storage = this.getStorageList();
-    return storage.includes(id);
+    return storage.some(x => x.id == id);
   }
 }
-export const watchedStorage = new LibraryStorage('watched');
-export const queueStorage = new LibraryStorage('queue');
+export const watchedStorage = new LibraryStorage('watchedMovies');
+export const queueStorage = new LibraryStorage('queueMovies');
