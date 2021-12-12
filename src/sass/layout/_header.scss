@@ -149,6 +149,7 @@
       width: 31px;
       height: 31px;
       padding: 9px;
+      padding-left: 0px;
     }
   }
 }
@@ -207,6 +208,7 @@
 .header-serch__input {
   padding: 5px;
 
+  &:hover,
   &:focus {
     border: none;
     border-radius: 7px;
