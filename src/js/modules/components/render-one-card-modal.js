@@ -21,6 +21,9 @@ class RenderModal {
   async onModalOpenClick(evt) {
     evt.preventDefault();
 
+    document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = '17px';
+
     this.instance = basicLightbox.create(`<div></div>`, {
       onShow: instance => {
         instance
@@ -28,7 +31,12 @@ class RenderModal {
           .querySelector('.close-btn--movie-card-modal').onclick =
           instance.close;
       },
+      onClose: () => {
+        document.body.style.overflow = '';
+        document.body.style.marginRight = '';
+      },
     });
+
     const cardsList = evt.target.parentNode;
     this.cardsListId = cardsList.id;
     const iscardsList = cardsList.classList.contains('card-list__item');
