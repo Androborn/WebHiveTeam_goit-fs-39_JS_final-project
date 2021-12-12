@@ -16,4 +16,5 @@ class Notification {
             return Notify.failure(`${messege}`, this.optionsLib)
     }
 }
+
 export const notiflix = new Notification()
