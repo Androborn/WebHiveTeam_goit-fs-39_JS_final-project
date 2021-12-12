@@ -150,6 +150,9 @@
       height: 31px;
       padding: 10px;
       padding-left: 0px;
+      &--disabled {
+        pointer-events: none;
+      }
     }
   }
 }
