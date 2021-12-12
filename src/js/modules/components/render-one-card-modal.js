@@ -21,9 +21,6 @@ class RenderModal {
   async onModalOpenClick(evt) {
     evt.preventDefault();
 
-    document.body.style.overflow = 'hidden';
-    document.body.style.marginRight = '17px';
-
     this.instance = basicLightbox.create(`<div></div>`, {
       onShow: instance => {
         instance
