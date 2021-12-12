@@ -143,16 +143,12 @@
     &__icon {
       position: absolute;
       fill: $main-text-color;
-      // top: -4px;
-      right: 3px;
+      top: -2px;
+      right: -9px;
       cursor: pointer;
-      width: 28px;
-      height: 28px;
-      padding: 5px 1px 5px 1px;
-
-      &--disabled {
-        pointer-events: none;
-      }
+      width: 31px;
+      height: 31px;
+      padding: 9px;
     }
   }
 }
@@ -206,16 +202,4 @@
   grid-template-columns: auto auto;
 
   grid-gap: 15px;
-}
-
-.header-serch__input {
-  padding: 5px;
-
-  &:hover,
-  &:focus {
-    border: none;
-    border-radius: 7px;
-    box-shadow: 0 0 10px 5px rgba(170, 138, 138, 0.829);
-    transition: all 250ms;
-  }
 }

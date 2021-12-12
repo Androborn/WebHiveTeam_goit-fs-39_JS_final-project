@@ -4,12 +4,12 @@ export default class Loader {
     this.input = document.querySelector(`.header-serch__input`);
     this.wrapper = document.querySelector(`.header-serch__wrapper`);
     this.body = document.querySelector('body');
-    this.spiner = '';
+    this.spinner = '';
   }
   renderHeaderLoader() {
     this.wrapper.insertAdjacentHTML(
       'beforeend',
-      `      <div id="floatingCirclesG" class="header__spiner">
+      `      <div id="floatingCirclesG" class="header__spinner">
   <div class="f_circleG" id="frotateG_01"></div>
   <div class="f_circleG" id="frotateG_02"></div>
   <div class="f_circleG" id="frotateG_03"></div>
@@ -20,7 +20,7 @@ export default class Loader {
   <div class="f_circleG" id="frotateG_08"></div>
 </div>`,
     );
-    this.spiner = document.querySelector('.header__spiner');
+    this.spinner = document.querySelector('.header__spinner');
   }
   renderModalLoader() {
     this.body.insertAdjacentHTML(
@@ -37,13 +37,13 @@ export default class Loader {
 	<div class="f_circleModal" id="frotateModal_08"></div>
 </div></div>`,
     );
-    this.spiner = document.querySelector('.backdrop');
+    this.spinner = document.querySelector('.backdrop');
   }
-  deleteModalSpiner() {
+  deleteModalspinner() {
     document.querySelector('.backdrop').remove();
   }
-  deleteHeaderSpiner() {
-    document.querySelector('.header__spiner').remove();
+  deleteHeaderspinner() {
+    document.querySelector('.header__spinner').remove();
   }
   showSearch() {
     this.search.classList.remove('visually-hidden');
