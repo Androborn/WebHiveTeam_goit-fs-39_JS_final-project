@@ -3,6 +3,7 @@ import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
+import {notiflix} from '../../vendors/notification'
 // import 'tui-pagination/dist/tui-pagination.css';
 
 const spiner = new Loader();
@@ -88,6 +89,7 @@ class MovieService {
         } else if (this.container.classList.contains('visually-hidden')) {
           this.container.classList.remove('visually-hidden');
         }
+        notiflix.searchResult(total_results)
         this.renderMovies(results, 'main');
         if (total_results < this.options.itemsPerPage) return;
         const pagin = new Pagination(this.container, {
