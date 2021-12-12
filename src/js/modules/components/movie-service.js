@@ -3,6 +3,7 @@ import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
+import { notiflix } from '../../vendors/notification';
 // import 'tui-pagination/dist/tui-pagination.css';
 
 const spiner = new Loader();
@@ -88,6 +89,7 @@ class MovieService {
         } else if (this.container.classList.contains('visually-hidden')) {
           this.container.classList.remove('visually-hidden');
         }
+        notiflix.searchResult(total_results);
         this.renderMovies(results, 'main');
         if (total_results < this.options.itemsPerPage) return;
         const pagin = new Pagination(this.container, {
@@ -129,46 +131,44 @@ class MovieService {
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
+    spiner.hideSearch();
+    spiner.renderHeaderLoader();
     await this.searchFilmByInputValue(searchQuery);
+    spiner.deleteHeaderSpiner();
+    spiner.showSearch();
   }
 
   async renderMarkupAtLibraryPage(tab) {
-    let ids =
+    let movies =
       tab === 'watched'
         ? watchedStorage.getStorageList()
         : queueStorage.getStorageList();
-    if (ids.length <= this.options.itemsPerPage) {
+    if (movies.length <= this.options.itemsPerPage) {
       this.container.classList.add('visually-hidden');
     } else if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
     const pagin = new Pagination(this.container, {
       ...this.options,
-      totalItems: ids.length,
+      totalItems: movies.length,
     });
     pagin.on('afterMove', async event => {
       const page = event.page;
-      await this.renderPageMarkupAtLibraryPage(ids, page);
+      await this.renderPageMarkupAtLibraryPage(movies, page);
     });
-    await this.renderPageMarkupAtLibraryPage(ids, 1);
+    await this.renderPageMarkupAtLibraryPage(movies, 1);
   }
 
-  async renderPageMarkupAtLibraryPage(ids, page) {
+  async renderPageMarkupAtLibraryPage(movies, page) {
     const from = (page - 1) * this.options.itemsPerPage;
     const to = page * this.options.itemsPerPage;
-    const pageIds = ids.slice(from, to);
-    const movies = await Promise.all(
-      pageIds.map(id => this.movies.getMovieById(id)),
-    );
-    for (let movie of movies) {
-      movie.genre_ids = movie.genres.map(x => x.id);
-    }
-    this.renderMovies(movies, 'library');
+    const pageMovies = movies.slice(from, to);
+    this.renderMovies(pageMovies, 'library');
   }
 
-  async renderMovies(movies, page, libraryTab) {
-    const watchedMarkup = new createCardsMarkup(movies, page, libraryTab);
-    const moviesCards = await watchedMarkup.createCard();
+  renderMovies(movies, page, libraryTab) {
+    const cardsMarkup = new createCardsMarkup(movies, page, libraryTab);
+    const moviesCards = cardsMarkup.createCard(page);
     this.mainRef.innerHTML = moviesCards;
   }
 }

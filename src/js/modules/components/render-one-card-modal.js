@@ -21,9 +21,6 @@ class RenderModal {
   async onModalOpenClick(evt) {
     evt.preventDefault();
 
-    document.body.style.overflow = 'hidden';
-    document.body.style.marginRight = '17px';
-
     this.instance = basicLightbox.create(`<div></div>`, {
       onShow: instance => {
         instance
@@ -32,8 +29,10 @@ class RenderModal {
           instance.close;
       },
       onClose: () => {
-        document.body.style.overflow = '';
-        document.body.style.marginRight = '';
+        setTimeout(() => {
+          document.body.style.overflow = '';
+          document.body.style.marginRight = '';
+        }, 300);
       },
     });
 
@@ -47,13 +46,13 @@ class RenderModal {
       return;
     }
 
-    const data = await this.themoviedbApi.getMovieById(this.cardsListId);
-    const genre = data.genres.map(id => id.name);
+    this.currentMovie = await this.themoviedbApi.getMovieById(this.cardsListId);
+    const genre = this.currentMovie.genres.map(id => id.name);
     const genreIds = Object.values(genre).join(', ');
     console.log(this.movieAdded);
 
     this.instance.element().innerHTML = modalMarkup(
-      data,
+      this.currentMovie,
       genreIds,
       this.cardsListId,
       this.movieAddedtoWatched,
@@ -77,6 +76,10 @@ class RenderModal {
     );
 
     this.instance.show();
+    const scrollBarWidth = window.innerWidth - document.body.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = `${scrollBarWidth}px`;
+
     document.addEventListener('keydown', evt => this.onEscModalClose(evt), {
       once: true,
     });
@@ -84,11 +87,14 @@ class RenderModal {
   onBtnWatchedClick() {
     this.btnWatched.classList.add('modal__btn-watched--active');
     if (this.movieAddedtoWatched !== true) {
-      watchedStorage.addToStorage(this.cardsListId);
+      watchedStorage.addToStorage({
+        ...this.currentMovie,
+        genre_ids: this.currentMovie.genres.map(x => x.id),
+      });
       this.btnWatched.textContent = 'Remove from watched';
       this.btnWatched.blur();
     } else {
-      watchedStorage.removeFromStorage(this.cardsListId);
+      watchedStorage.removeFromStorageById(this.cardsListId);
       this.btnWatched.classList.remove('modal__btn-watched--active');
       this.btnWatched.textContent = 'Add to watched';
       this.btnWatched.blur();
@@ -105,11 +111,14 @@ class RenderModal {
   onBtnQueueClick() {
     this.btnQueue.classList.add('modal__btn-queue--active');
     if (this.movieAddedtoQueue !== true) {
-      queueStorage.addToStorage(this.cardsListId);
+      queueStorage.addToStorage({
+        ...this.currentMovie,
+        genre_ids: this.currentMovie.genres.map(x => x.id),
+      });
       this.btnQueue.textContent = 'Remove from queue';
       this.btnQueue.blur();
     } else {
-      queueStorage.removeFromStorage(this.cardsListId);
+      queueStorage.removeFromStorageById(this.cardsListId);
       this.btnQueue.classList.remove('modal__btn-queue--active');
       this.btnQueue.textContent = 'Add to queue';
       this.btnQueue.blur();
