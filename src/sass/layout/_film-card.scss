@@ -15,6 +15,7 @@
 
   &__item {
     transition: $film-card-transition;
+    width: 280px;
 
     &:hover,
     &:focus {
@@ -38,8 +39,12 @@
         }
       }
     }
+    @media screen and (min-width: 768px) {
+      width: 294px;
+    }
     @media screen and (min-width: 1024px) {
       grid-column: span 2;
+      width: 274px;
     }
 
     &:nth-last-child(-n + 2):nth-child(odd) {
@@ -50,32 +55,16 @@
   }
 
   &__img {
-    width: 280px;
-    height: 398px;
     border-radius: $smooth-border;
-
-    @media screen and (min-width: 768px) {
-      width: 294px;
-    }
-
-    @media screen and (min-width: 1024px) {
-      width: 274px;
-    }
+    height: 398px;
+    object-fit: cover;
   }
   &__info {
     display: flex;
     flex-direction: column;
-    width: 280px;
+
     margin-top: 10px;
     transition: $film-card-transition;
-
-    @media screen and (min-width: 768px) {
-      width: 294px;
-    }
-
-    @media screen and (min-width: 1024px) {
-      width: 274px;
-    }
   }
 
   &__info-name {
@@ -106,5 +95,8 @@
     text-align: center;
     color: $main-text-color;
     background-color: $accent-color;
+    &--hidden {
+      display: none;
+    }
   }
 }
