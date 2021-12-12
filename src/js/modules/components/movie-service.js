@@ -85,6 +85,10 @@ class MovieService {
   }
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
+    if (searchQuery === this.prevSearchQuery) return;
+    this.prevSearchQuery = searchQuery;
+    spiner.hideSearch();
+    spiner.renderHeaderLoader();
     await this.movies
       .getMoviesByKeyword()
       .then(({ results, total_results }) => {
@@ -94,7 +98,7 @@ class MovieService {
           this.container.classList.remove('visually-hidden');
         }
         notiflix.searchResult(total_results);
-        spiner.showSearch();
+
         this.renderMovies(results, 'main');
         this.iconSearchRef.classList.add('header-serch__icon--disabled');
         if (total_results < this.options.itemsPerPage) return;
@@ -111,11 +115,10 @@ class MovieService {
         });
       });
     spiner.deleteHeaderSpiner();
+    spiner.showSearch();
   }
   async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
-    spiner.hideSearch();
-    spiner.renderHeaderLoader();
     const searchQuery = event.target.value.trim();
     if (searchQuery) {
       await this.searchFilmByInputValue(searchQuery);
