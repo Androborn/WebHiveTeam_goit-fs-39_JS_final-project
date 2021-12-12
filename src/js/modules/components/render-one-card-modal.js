@@ -4,7 +4,7 @@ import { queueStorage, watchedStorage } from './library-storage';
 import { movieService } from './movie-service';
 import { header } from './page-switch';
 import Loader from '../../vendors/_icon8';
-let spiner = new Loader();
+let spinner = new Loader();
 
 class RenderModal {
   constructor() {
@@ -12,9 +12,9 @@ class RenderModal {
     this.cardContainerRef = document.querySelector('.card-list');
     this.themoviedbApi = new ThemoviedbApi();
     this.cardContainerRef.addEventListener('click', async evt => {
-      spiner.renderModalLoader();
+      spinner.renderModalLoader();
       await this.onModalOpenClick(evt);
-      spiner.deleteModalSpiner();
+      spinner.deleteModalspinner();
     });
   }
 
@@ -49,7 +49,6 @@ class RenderModal {
     this.currentMovie = await this.themoviedbApi.getMovieById(this.cardsListId);
     const genre = this.currentMovie.genres.map(id => id.name);
     const genreIds = Object.values(genre).join(', ');
-    console.log(this.movieAdded);
 
     this.instance.element().innerHTML = modalMarkup(
       this.currentMovie,

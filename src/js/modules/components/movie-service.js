@@ -6,7 +6,7 @@ import Pagination from 'tui-pagination';
 import { notiflix } from '../../vendors/notification';
 // import 'tui-pagination/dist/tui-pagination.css';
 
-const spiner = new Loader();
+const spinner = new Loader();
 
 class MovieService {
   constructor() {
@@ -44,14 +44,15 @@ class MovieService {
       },
     };
 
-    const inputRef = document.querySelector('.header-serch__input');
-    inputRef.addEventListener('keydown', event => {
+    this.inputRef = document.querySelector('.header-serch__input');
+    this.inputRef.addEventListener('keydown', event => {
       this.onInputKeydown(event);
     });
-    inputRef.addEventListener('input', event => {
+    this.inputRef.addEventListener('input', event => {
       this.onInputChange(event);
     });
   }
+
   renderPage(page, libraryTab) {
     if (page === 'home') {
       this.renderMarkupAtHomePage();
@@ -59,6 +60,7 @@ class MovieService {
       this.renderMarkupAtLibraryPage(libraryTab);
     }
   }
+
   async renderMarkupAtHomePage() {
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
@@ -83,12 +85,13 @@ class MovieService {
       pagin.movePageTo(this.movies.currentPage);
     });
   }
+
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
     if (searchQuery === this.prevSearchQuery) return;
     this.prevSearchQuery = searchQuery;
-    spiner.hideSearch();
-    spiner.renderHeaderLoader();
+    spinner.hideSearch();
+    spinner.renderHeaderLoader();
     await this.movies
       .getMoviesByKeyword()
       .then(({ results, total_results }) => {
@@ -114,9 +117,11 @@ class MovieService {
           this.movies.resetPage();
         });
       });
-    spiner.deleteHeaderSpiner();
-    spiner.showSearch();
+    spinner.deleteHeaderspinner();
+    spinner.showSearch();
+    this.inputRef.blur();
   }
+
   async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
     const searchQuery = event.target.value.trim();
@@ -135,11 +140,12 @@ class MovieService {
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
-    spiner.hideSearch();
-    spiner.renderHeaderLoader();
+    spinner.hideSearch();
+    spinner.renderHeaderLoader();
     await this.searchFilmByInputValue(searchQuery);
-    spiner.deleteHeaderSpiner();
-    spiner.showSearch();
+    spinner.deleteHeaderspinner();
+    spinner.showSearch();
+    this.inputRef.blur();
   }
 
   onInputChange(event) {
@@ -147,6 +153,7 @@ class MovieService {
       this.iconSearchRef.classList.remove('header-serch__icon--disabled');
     }
   }
+
   async renderMarkupAtLibraryPage(tab) {
     let movies =
       tab === 'watched'
