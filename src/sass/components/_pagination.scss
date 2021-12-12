@@ -7,15 +7,21 @@
   align-items: center;
   justify-content: center;
 
+  transition: transform 250ms;
+  transition-timing-function: $main-timing-function;
+
   &:hover {
     background-color: $accent-color;
+
+    transform: scale(1.2);
+    box-shadow: rgba(226, 115, 64, 0.8) 1px 3px 5px;
   }
 }
 
 .tui-pagination .tui-is-selected,
 .tui-pagination strong {
   background-color: $accent-color;
-  border: 1px solid;
+  // border: 1px solid;
   border-radius: $smooth-border;
 }
 
