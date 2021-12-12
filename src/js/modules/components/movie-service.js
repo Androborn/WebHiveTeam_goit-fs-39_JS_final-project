@@ -131,7 +131,11 @@ class MovieService {
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
+    spiner.hideSearch();
+    spiner.renderHeaderLoader();
     await this.searchFilmByInputValue(searchQuery);
+    spiner.deleteHeaderSpiner();
+    spiner.showSearch();
   }
 
   async renderMarkupAtLibraryPage(tab) {
