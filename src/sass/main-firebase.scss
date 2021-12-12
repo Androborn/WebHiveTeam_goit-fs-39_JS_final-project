@@ -1,0 +1,26 @@
+/* UTILS */
+@import './utils/mixins';
+@import './utils/variables';
+
+/* BASE */
+@import './base/reset';
+@import './base/fonts';
+@import './base/base';
+
+/* COMPONENTS */
+@import './components/button';
+@import './components/close-button';
+@import './components/anchor-button';
+@import './components/pagination';
+@import './components/backdrop';
+
+/* LAYOUT */
+@import './layout/header-firebase';
+@import './layout/footer';
+@import './layout/card-modal';
+@import './layout/team-modal';
+@import './layout/film-card';
+@import './layout/main';
+
+/* VENDORS */
+@import './vendors/icon8';
