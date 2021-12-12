@@ -32,8 +32,10 @@ class RenderModal {
           instance.close;
       },
       onClose: () => {
-        document.body.style.overflow = '';
-        document.body.style.marginRight = '';
+        setTimeout(() => {
+          document.body.style.overflow = '';
+          document.body.style.marginRight = '';
+        }, 300);
       },
     });
 
@@ -77,6 +79,10 @@ class RenderModal {
     );
 
     this.instance.show();
+    const scrollBarWidth = window.innerWidth - document.body.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = `${scrollBarWidth}px`;
+
     document.addEventListener('keydown', evt => this.onEscModalClose(evt), {
       once: true,
     });
