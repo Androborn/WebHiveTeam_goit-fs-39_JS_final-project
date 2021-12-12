@@ -10,7 +10,11 @@ function openTeamModal() {
 }
 
 function closeTeamModal(ev) {
-  if (ev.target === backdrop || ev.keyCode === 27 || ev.target === teamModalBtnClose) {
+  if (
+    ev.target === backdrop ||
+    ev.keyCode === 27 ||
+    ev.target === teamModalBtnClose
+  ) {
     backdrop.classList.add('is-hidden');
   }
 }

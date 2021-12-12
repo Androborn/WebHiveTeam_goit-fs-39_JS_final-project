@@ -7,11 +7,11 @@
   position: relative;
   @include font(12px, 500, 16px);
   color: $secondary-text-color;
-  
-  @include max-width(tablet){ 
+
+  @include max-width(tablet) {
     overflow-y: auto;
-    }
- 
+  }
+
   @include min-width(tablet) {
     width: 618px;
     height: 562px;
@@ -39,7 +39,7 @@
       grid-gap: 30px;
     }
   }
-  
+
   &__image-wraper {
     height: 356px;
     width: 240px;
@@ -60,7 +60,7 @@
   &__image {
     @include min-width(desktop) {
       height: 100%;
-       width: auto;
+      width: auto;
     }
   }
 
@@ -89,29 +89,31 @@
     color: $modal-secondary-color;
   }
 
-  &__info-value--descrip {
-    @include font(12px, 500, 20px);
-  }
+  &__info-value {
+    &--descrip {
+      @include font(12px, 500, 20px);
+    }
 
-  &__info-value--hight{
-    @include font(12px, 500, 14px);
-  }
+    &--hight {
+      @include font(12px, 500, 14px);
+    }
 
-  &__info-value--border, &__info-value--transparent {
-    text-align: center;
-    display: inline-block;
-    width: 36px;
-    height: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    background-color: #92929229;
-  }
+    &--border,
+    &--transparent {
+      text-align: center;
+      display: inline-block;
+      width: 36px;
+      height: 16px;
+      padding: 1px;
+      border-radius: 5px;
+      background-color: #92929229;
+    }
 
-  &__info-value--border{
-     background-color: $accent-color;
-     color: $main-text-color;
+    &--border {
+      background-color: $accent-color;
+      color: $main-text-color;
+    }
   }
-
 
   &__info-slash {
     color: $modal-secondary-color;
@@ -144,7 +146,6 @@
   padding: 5px;
   transition: background, $main-duration $main-timing-function;
 
-
   @include min-width(tablet) {
     width: 125px;
   }
@@ -159,49 +160,11 @@
     background-color: $accent-color;
   }
 
-  &:hover,&:focus {
+  &:hover,
+  &:focus {
     color: $secondary-text-color;
     border: 1px solid $accent-color;
     background-color: $main-text-color;
     filter: drop-shadow(0px 4px 10px rgba(255, 151, 1, 1.6));
   }
-}
-
-.close {
-  position: absolute;
-  right: -13px;
-  top: -33px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.4;
-  transition: transform, $main-duration $main-timing-function;
-
-      @include min-width(tablet){
-       right: -20px;
-       top: -27px;
-}
-     @include min-width(desktop){
-       right: -18px;
-       top: -34px;
-}
-
-}
-.close:hover {
-  opacity: 1;
-  transform: scale(1.2);
-}
-.close:before, .close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 21px;
-  width: 2px;
-  background-color: $accent-color;
-}
-
-.close:before {
-  transform: rotate(45deg);
-}
-.close:after {
-  transform: rotate(-45deg);
 }

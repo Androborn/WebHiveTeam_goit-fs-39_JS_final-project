@@ -1,18 +1,18 @@
 /* UTILS */
 @import './utils/mixins';
-@import './utils/placeholders';
 @import './utils/variables';
 
 /* BASE */
+@import './base/reset';
 @import './base/fonts';
 @import './base/base';
-@import './base/reset';
 
 /* COMPONENTS */
-@import './components/set-card';
 @import './components/button';
+@import './components/close-button';
 @import './components/anchor-button.scss';
 @import './components/pagination';
+@import './components/backdrop';
 
 /* LAYOUT */
 @import './layout/header';
@@ -20,9 +20,7 @@
 @import './layout/card-modal';
 @import './layout/team-modal';
 @import './layout/film-card';
-
-/* PAGES */
-@import './pages/main-page';
+@import './layout/main';
 
 /* VENDORS */
 @import './vendors/icon8';

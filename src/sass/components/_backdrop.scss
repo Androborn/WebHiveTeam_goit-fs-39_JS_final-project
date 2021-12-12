@@ -1,0 +1,17 @@
+.backdrop {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+  will-change: opacity;
+  overflow: hidden;
+
+  transition: all, $main-duration $main-timing-function;
+}

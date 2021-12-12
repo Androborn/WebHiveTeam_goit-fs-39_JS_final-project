@@ -3,11 +3,14 @@ $main-text-color: #ffffff;
 $secondary-text-color: #000000;
 $modal-secondary-color: #8c8c8c;
 $footer-text-color: #545454;
+
 $text-font-size: 12px;
 $film-title-modal-size: 20px;
 $logo-font-size: 30px;
 $footer-font-size: 16px;
+
+$smooth-border: 5px;
+
 $main-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 $main-duration: 500ms;
 $film-card-transition: all 275ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
-$smooth-border: 5px;

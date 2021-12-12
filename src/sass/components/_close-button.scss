@@ -1,0 +1,47 @@
+.close-btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.4;
+  background: transparent;
+  cursor: pointer;
+  transition: transform, $main-duration $main-timing-function;
+  &:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    left: 15px;
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: $accent-color;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &--movie-card-modal {
+    right: -13px;
+    top: -33px;
+
+    @include min-width(tablet) {
+      right: -20px;
+      top: -27px;
+    }
+    @include min-width(desktop) {
+      right: -18px;
+      top: -34px;
+    }
+  }
+
+  &--team-modal {
+    right: 20px;
+    top: 20px;
+  }
+}

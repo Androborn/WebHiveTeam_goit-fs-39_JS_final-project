@@ -57,7 +57,7 @@ export function modalMarkup(
               data.overview ? data.overview : 'Нет информации по данному фильму'
             }</span>
           </p>
-        </div><span class="close"></span>
+        </div><span class="close-btn close-btn--movie-card-modal"></span>
       </div><div class="modal__btn-wraper">
           <button
             class="common-btn  modal__btn-watched"

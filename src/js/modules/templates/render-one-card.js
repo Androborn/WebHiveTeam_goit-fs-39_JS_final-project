@@ -55,25 +55,23 @@ export class createCardsMarkup {
       return await this.cards
         .map(
           ({ id, poster_path, original_title, genre_ids, release_date }) =>
-            `<li class="cards-list__item" id="${id}">
-        <img class="cards-list__img" src=${
+            `<li class="card-list__item" id="${id}">
+        <img class="card-list__img" src=${
           poster_path === null
             ? sorryPosterImage
             : `https://image.tmdb.org/t/p/w500${poster_path}`
         } alt="${original_title}" />
-        <div class="cards-list__info">
-          <h2 class="cards-list__info-name">${this.slicedOriginalTitle(
+        <div class="card-list__info">
+          <h2 class="card-list__info-name">${this.slicedOriginalTitle(
             original_title,
           )}</h2>
           <div class="card-list__description">
-             <p class="cards-list__genre">${
+             <p class="card-list__genre">${
                this.createGenresList(genre_ids)
                  ? this.createGenresList(genre_ids)
                  : 'Жанр отсутствует'
              }</p>
-            <p class="cards-list__date">| ${this.correctedDate(
-              release_date,
-            )}</p>
+            <p class="card-list__date">| ${this.correctedDate(release_date)}</p>
           </div>
         </div>
       </li>`,
@@ -90,26 +88,24 @@ export class createCardsMarkup {
           release_date,
           vote_average,
         }) =>
-          `<li class="cards-list__item" id="${id}">
-        <img class="cards-list__img" src=${
+          `<li class="card-list__item" id="${id}">
+        <img class="card-list__img" src=${
           poster_path === null
             ? sorryPosterImage
             : `https://image.tmdb.org/t/p/w500${poster_path}`
         } alt="${original_title}" />
-        <div class="cards-list__info">
-          <h2 class="cards-list__info-name">${this.slicedOriginalTitle(
+        <div class="card-list__info">
+          <h2 class="card-list__info-name">${this.slicedOriginalTitle(
             original_title,
           )}</h2>
           <div class="card-list__description">
-             <p class="cards-list__genre">${
+             <p class="card-list__genre">${
                this.createGenresList(genre_ids)
                  ? this.createGenresList(genre_ids)
                  : 'Жанр отсутствует'
              }</p>
-            <p class="cards-list__date">| ${this.correctedDate(
-              release_date,
-            )}</p>
-            <span class="cards-list__rating">${vote_average}</span>
+            <p class="card-list__date">| ${this.correctedDate(release_date)}</p>
+            <span class="card-list__rating">${vote_average}</span>
           </div>
         </div>
       </li>`,

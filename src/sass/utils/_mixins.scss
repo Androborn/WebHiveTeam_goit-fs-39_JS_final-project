@@ -17,12 +17,13 @@ $max-widths: (
   }
 }
 
-// @media screen and (min-width: *width*)
+// @media screen and (max-width: *width*)
 @mixin max-width($width) {
   @media (max-width: map-get($max-widths, $width)) {
     @content;
   }
 }
+
 @mixin font($fs: 16px, $fw: 400, $lh: 26px) {
   font-size: $fs;
   font-weight: $fw;

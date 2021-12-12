@@ -9,7 +9,7 @@ const spiner = new Loader();
 
 class MovieService {
   constructor() {
-    this.mainRef = document.querySelector('.cards-list');
+    this.mainRef = document.querySelector('.card-list');
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
     this.iconSearchRef = document.querySelector('.header-serch__icon');

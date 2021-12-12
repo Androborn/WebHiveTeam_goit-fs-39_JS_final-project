@@ -9,7 +9,7 @@ let spiner = new Loader();
 class RenderModal {
   constructor() {
     this.instance = null;
-    this.cardContainerRef = document.querySelector('.cards-list');
+    this.cardContainerRef = document.querySelector('.card-list');
     this.themoviedbApi = new ThemoviedbApi();
     this.cardContainerRef.addEventListener('click', async evt => {
       spiner.renderModalLoader();
@@ -23,12 +23,15 @@ class RenderModal {
 
     this.instance = basicLightbox.create(`<div></div>`, {
       onShow: instance => {
-        instance.element().querySelector('.close').onclick = instance.close;
+        instance
+          .element()
+          .querySelector('.close-btn--movie-card-modal').onclick =
+          instance.close;
       },
     });
     const cardsList = evt.target.parentNode;
     this.cardsListId = cardsList.id;
-    const iscardsList = cardsList.classList.contains('cards-list__item');
+    const iscardsList = cardsList.classList.contains('card-list__item');
     this.movieAddedtoWatched = watchedStorage.hasId(this.cardsListId);
     this.movieAddedtoQueue = queueStorage.hasId(this.cardsListId);
 
