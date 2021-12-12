@@ -14,9 +14,10 @@ class MovieService {
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
     this.iconSearchRef = document.querySelector('.header-serch__icon');
-    this.iconSearchRef = document.addEventListener('click', event =>
+    this.iconSearchRef.addEventListener('click', event =>
       this.onSearchIconClick(event),
     );
+
     this.options = {
       itemsPerPage: 20,
       visiblePages: 5,
@@ -46,6 +47,9 @@ class MovieService {
     const inputRef = document.querySelector('.header-serch__input');
     inputRef.addEventListener('keydown', event => {
       this.onInputKeydown(event);
+    });
+    inputRef.addEventListener('input', event => {
+      this.onInputChange(event);
     });
   }
   renderPage(page, libraryTab) {
@@ -90,7 +94,9 @@ class MovieService {
           this.container.classList.remove('visually-hidden');
         }
         notiflix.searchResult(total_results);
+        spiner.showSearch();
         this.renderMovies(results, 'main');
+        this.iconSearchRef.classList.add('header-serch__icon--disabled');
         if (total_results < this.options.itemsPerPage) return;
         const pagin = new Pagination(this.container, {
           ...this.options,
@@ -104,21 +110,17 @@ class MovieService {
           this.movies.resetPage();
         });
       });
+    spiner.deleteHeaderSpiner();
   }
   async onInputKeydown(event) {
     if (event.key !== 'Enter') return;
     spiner.hideSearch();
     spiner.renderHeaderLoader();
     const searchQuery = event.target.value.trim();
-
     if (searchQuery) {
       await this.searchFilmByInputValue(searchQuery);
-      spiner.deleteHeaderSpiner();
-      spiner.showSearch();
     } else {
       await this.renderMarkupAtHomePage();
-      spiner.deleteHeaderSpiner();
-      spiner.showSearch();
     }
   }
 
@@ -127,13 +129,17 @@ class MovieService {
       return;
     }
     const searchQuery = event.target.previousElementSibling.value;
-
     if (searchQuery === '' || searchQuery === undefined) {
       return;
     }
     await this.searchFilmByInputValue(searchQuery);
   }
 
+  onInputChange(event) {
+    if (event) {
+      this.iconSearchRef.classList.remove('header-serch__icon--disabled');
+    }
+  }
   async renderMarkupAtLibraryPage(tab) {
     let movies =
       tab === 'watched'
@@ -162,7 +168,7 @@ class MovieService {
     this.renderMovies(pageMovies, 'library');
   }
 
-  renderMovies(movies, page, libraryTab) {
+  async renderMovies(movies, page, libraryTab) {
     const cardsMarkup = new createCardsMarkup(movies, page, libraryTab);
     const moviesCards = cardsMarkup.createCard(page);
     this.mainRef.innerHTML = moviesCards;
