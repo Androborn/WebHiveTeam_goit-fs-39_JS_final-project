@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { notiflix } from '../../vendors/notification';
 
 export class ThemoviedbApi {
   constructor() {
@@ -32,7 +33,9 @@ export class ThemoviedbApi {
       const data = await response.data;
       return data;
     } catch (error) {
-      console.error(error)
+      const errorStatus = error.response.status;
+      const message = error.response.data.status_message;
+      notiflix.errorNotification(errorStatus, message);
     }
   }
   async getMovieById(id) {
