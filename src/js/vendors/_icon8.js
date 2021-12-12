@@ -1,12 +1,10 @@
 export default class Loader {
   constructor() {
-    this.serch = document.querySelector(`.header-serch__icon`);
+    this.search = document.querySelector(`.header-serch__icon`);
     this.input = document.querySelector(`.header-serch__input`);
     this.wrapper = document.querySelector(`.header-serch__wrapper`);
     this.body = document.querySelector('body');
     this.spiner = '';
-    // hidden && this.hideBtn();
-    // loading && this.disableLoadState();
   }
   renderHeaderLoader() {
     this.wrapper.insertAdjacentHTML(
@@ -48,9 +46,9 @@ export default class Loader {
     document.querySelector('.header__spiner').remove();
   }
   showSearch() {
-    this.serch.classList.remove('visually-hidden');
+    this.search.classList.remove('visually-hidden');
   }
   hideSearch() {
-    this.serch.classList.add('visually-hidden');
+    this.search.classList.add('visually-hidden');
   }
 }

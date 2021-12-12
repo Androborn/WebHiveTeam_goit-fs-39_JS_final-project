@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Notification } from '../../vendors/notification'
 
 export class ThemoviedbApi {
   constructor() {
@@ -7,16 +6,14 @@ export class ThemoviedbApi {
     this.keyword = '';
     this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
-    this.callSearchNotiflix = new Notification()
   }
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/trending/movie/day?api_key=${this.API_KEY}&page=${this.page}`,
+        `/3/trending/movie/day?api_key=${this.API_KEY}&language=en-US&page=${this.page}`,
       );
       const data = await response.data;
-
-      return data; //{page: 1, results: Array(20), total_pages: 1000, total_results: 20000}
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -30,15 +27,12 @@ export class ThemoviedbApi {
   async getMoviesByKeyword() {
     try {
       const response = await axios.get(
-        `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&page=${this.page}`,
+        `/3/search/movie?api_key=${this.API_KEY}&query=${this.keyword}&language=en-US&page=${this.page}`,
       );
       const data = await response.data;
-      this.callSearchNotiflix.searchResult(data.total_results)
       return data;
     } catch (error) {
-      const err = await error.response.status
-      const message = await error.response.data.status_message
-      this.callSearchNotiflix.errorNotification(err, message)
+      console.error(error)
     }
   }
   async getMovieById(id) {
@@ -47,9 +41,9 @@ export class ThemoviedbApi {
         `/3/movie/${id}?api_key=${this.API_KEY}`,
       );
       const data = await response.data;
-      return data; // Поверне об'єкт з даними про фільм
+      return data; 
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
   async getMoviesGenresList() {
