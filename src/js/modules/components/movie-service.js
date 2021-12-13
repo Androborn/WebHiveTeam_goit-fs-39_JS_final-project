@@ -71,27 +71,24 @@ class MovieService {
       this.container.classList.remove('visually-hidden');
     }
     await this.movies.getMovies().then(({ results, total_results }) => {
+      this.options.totalItems = total_results;
       if (total_results <= this.options.itemsPerPage) {
         this.container.classList.add('visually-hidden');
       } else if (this.container.classList.contains('visually-hidden')) {
         this.container.classList.remove('visually-hidden');
       }
-      const pagin = new Pagination(this.container, {
-        ...this.options,
-        totalItems: total_results,
-      });
       this.renderMovies(results, 'main');
+    }).catch(console.log);
+      const pagin = new Pagination(this.container, this.options);
       pagin.on('afterMove', async event => {
+        if (this.movies.currentPage === event.page) return
         this.movies.currentPage = event.page;
-        if (this.movies.currentPage === 1) return;
         await this.movies.getMovies().then(({ results }) => {
           this.renderMovies(results, 'main');
-        });
+        }).catch(console.log);
       });
       pagin.movePageTo(this.movies.currentPage);
-    });
   }
-
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
     if (searchQuery === this.prevSearchQuery) return;
@@ -106,23 +103,21 @@ class MovieService {
         } else if (this.container.classList.contains('visually-hidden')) {
           this.container.classList.remove('visually-hidden');
         }
+        this.options.totalItems = total_results;
         notiflix.searchResult(total_results);
-
         this.renderMovies(results, 'main');
         this.iconSearchRef.classList.add('header-serch__icon--disabled');
         if (total_results < this.options.itemsPerPage) return;
-        const pagin = new Pagination(this.container, {
-          ...this.options,
-          totalItems: total_results,
-        });
+      }).catch(console.log);
+      const pagin = new Pagination(this.container, this.options);
         pagin.on('afterMove', async event => {
+          if (this.movies.currentPage === event.page) return
           this.movies.currentPage = event.page;
           await this.movies.getMoviesByKeyword().then(({ results }) => {
             this.renderMovies(results, 'main');
-          });
+          }).catch(console.log);
           this.movies.resetPage();
         });
-      });
     spinner.deleteHeaderspinner();
     spinner.showSearch();
     this.inputRef.blur();
@@ -199,7 +194,9 @@ class MovieService {
     if (currentActiveBtn) {
       currentActiveBtn.classList.remove('common-btn__request--active');
     }
-    
+    if (this.inputRef.value) {
+      this.inputRef.value = '';
+    }
     event.target.classList.add('common-btn__request--active');
     
     const requestName = event.target.getAttribute('id');
