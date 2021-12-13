@@ -134,3 +134,28 @@
     display: flex;
   }
 }
+
+.modal__background-img {
+  position:fixed;
+  z-index: -1;
+  top:0;
+  left:0; 
+  pointer-events: none;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+.trailer{
+  display: flex;
+  text-decoration:none;
+  color: inherit;
+  
+  &__img{
+    width: 25px;
+  }
+
+  &__YouTube{
+    margin-right: 5px;
+  }
+}

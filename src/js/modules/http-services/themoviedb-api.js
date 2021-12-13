@@ -49,10 +49,10 @@ export class ThemoviedbApi {
   async getMovieById(id) {
     try {
       const response = await axios.get(
-        `/3/movie/${id}?api_key=${this.API_KEY}`,
+        `/3/movie/${id}?api_key=${this.API_KEY}&append_to_response=videos`,
       );
       const data = await response.data;
-      return data; 
+      return data;
     } catch (error) {
       console.error(error);
     }
