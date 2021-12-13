@@ -134,37 +134,3 @@
     display: flex;
   }
 }
-
-.modal__btn-watched {
-  margin-right: 15px;
-}
-.modal__btn-queue,
-.modal__btn-watched {
-  color: $secondary-text-color;
-  border: 1px solid $secondary-text-color;
-  width: 112.53px;
-  padding: 5px;
-  transition: background, $main-duration $main-timing-function;
-
-  @include min-width(tablet) {
-    width: 125px;
-  }
-  @include min-width(desktop) {
-    width: 136px;
-  }
-
-  &--active {
-    color: $main-text-color;
-    border-color: $accent-color;
-    border: 1px solid $accent-color;
-    background-color: $accent-color;
-  }
-
-  &:hover,
-  &:focus {
-    color: $secondary-text-color;
-    border: 1px solid $accent-color;
-    background-color: $main-text-color;
-    filter: drop-shadow(0px 4px 10px rgba(255, 151, 1, 1.6));
-  }
-}

@@ -3,6 +3,7 @@ import { ThemoviedbApi } from '../http-services/themoviedb-api';
 
 const moviesApi = new ThemoviedbApi();
 const GENRES_LIST_KEY = 'Genres list';
+
 moviesApi
   .getMoviesGenresList()
   .then(list => {
@@ -14,7 +15,7 @@ export class createCardsMarkup {
   constructor(cards, page) {
     this.cards = cards;
     this.page = page;
-    this.moviesApi = new ThemoviedbApi();
+    // this.moviesApi = new ThemoviedbApi();
     this.genres = JSON.parse(localStorage.getItem(GENRES_LIST_KEY));
   }
 

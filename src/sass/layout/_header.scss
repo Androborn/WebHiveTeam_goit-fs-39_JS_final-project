@@ -211,11 +211,12 @@
 .header-serch__input {
   padding: 5px;
 
+  transition: all, $main-duration $main-timing-function;
+
   &:hover,
   &:focus {
     border: none;
     border-radius: 7px;
     box-shadow: 0 0 10px 5px rgba(170, 138, 138, 0.829);
-    transition: all 250ms;
   }
 }

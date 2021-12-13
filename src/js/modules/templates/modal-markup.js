@@ -1,4 +1,5 @@
 import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
+
 export function modalMarkup(
   data,
   genreIds,
@@ -60,9 +61,11 @@ export function modalMarkup(
         </div><span class="close-btn close-btn--movie-card-modal"></span>
       </div><div class="modal__btn-wraper">
           <button
-            class="common-btn ${
-              movieAddedtoWatched === true ? 'modal__btn-watched--active' : ''
-            } modal__btn-watched"
+            class="common-btn common-btn__movie-modal ${
+              movieAddedtoWatched === true
+                ? 'common-btn__movie-modal--active'
+                : ''
+            }"
             data-action="add-to-watched"
             data-id="${cardsListId}"
           >
@@ -72,9 +75,11 @@ export function modalMarkup(
                : 'Add to watched'
            }</button
           ><button
-            class="common-btn ${
-              movieAddedtoQueue === true ? 'modal__btn-watched--active' : ''
-            } modal__btn-queue"
+            class="common-btn common-btn__movie-modal ${
+              movieAddedtoQueue === true
+                ? 'common-btn__movie-modal--active'
+                : ''
+            }"
             data-action="add-to-queue"
             data-id="${cardsListId}"
           >

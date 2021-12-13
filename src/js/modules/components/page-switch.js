@@ -38,14 +38,14 @@ class Header {
     this.centerDivRef.insertAdjacentHTML(
       'beforeend',
       ` <div class="header-center__wrapper">
-            <button data-tab="watched" class="common-btn ${
+            <button data-tab="watched" class="common-btn common-btn__header ${
               this.currentLibraryTab === 'watched'
-                ? 'common-btn--active-header'
+                ? 'common-btn__header--active'
                 : ''
             }">Watched</button>
-            <button data-tab="queue" class="common-btn ${
+            <button data-tab="queue" class="common-btn common-btn__header ${
               this.currentLibraryTab === 'queue'
-                ? 'common-btn--active-header'
+                ? 'common-btn__header--active'
                 : ''
             }">Queue</button>
         </div>`,

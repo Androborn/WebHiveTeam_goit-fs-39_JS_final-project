@@ -1,10 +1,9 @@
-import { createCardsMarkup } from '../templates/render-one-card';
+import { createCardsMarkup } from './render-movie-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 import { notiflix } from '../../vendors/notification';
-// import 'tui-pagination/dist/tui-pagination.css';
 
 const spinner = new Loader();
 

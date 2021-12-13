@@ -31,7 +31,6 @@ class RenderModal {
       onClose: () => {
         setTimeout(() => {
           document.body.style.overflow = '';
-          // document.body.style.marginRight = '';
         }, 300);
       },
     });
@@ -75,16 +74,14 @@ class RenderModal {
     );
 
     this.instance.show();
-    // const scrollBarWidth = window.innerWidth - document.body.clientWidth;
     document.body.style.overflow = 'hidden';
-    // document.body.style.marginRight = `${scrollBarWidth}px`;
 
     document.addEventListener('keydown', evt => this.onEscModalClose(evt), {
       once: true,
     });
   }
   onBtnWatchedClick() {
-    this.btnWatched.classList.add('modal__btn-watched--active');
+    this.btnWatched.classList.add('common-btn__movie-modal--active');
     if (this.movieAddedtoWatched !== true) {
       watchedStorage.addToStorage({
         ...this.currentMovie,
@@ -94,7 +91,7 @@ class RenderModal {
       this.btnWatched.blur();
     } else {
       watchedStorage.removeFromStorageById(this.cardsListId);
-      this.btnWatched.classList.remove('modal__btn-watched--active');
+      this.btnWatched.classList.remove('common-btn__movie-modal--active');
       this.btnWatched.textContent = 'Add to watched';
       this.btnWatched.blur();
     }
@@ -108,7 +105,7 @@ class RenderModal {
   }
 
   onBtnQueueClick() {
-    this.btnQueue.classList.add('modal__btn-queue--active');
+    this.btnQueue.classList.add('common-btn__movie-modal--active');
     if (this.movieAddedtoQueue !== true) {
       queueStorage.addToStorage({
         ...this.currentMovie,
@@ -118,7 +115,7 @@ class RenderModal {
       this.btnQueue.blur();
     } else {
       queueStorage.removeFromStorageById(this.cardsListId);
-      this.btnQueue.classList.remove('modal__btn-queue--active');
+      this.btnQueue.classList.remove('common-btn__movie-modal--active');
       this.btnQueue.textContent = 'Add to queue';
       this.btnQueue.blur();
     }

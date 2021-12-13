@@ -1,4 +1,5 @@
 import { refs } from './refs';
+
 const { aboutDev, teamModalBtnClose, backdrop } = refs;
 aboutDev.addEventListener('click', openTeamModal);
 teamModalBtnClose.addEventListener('click', closeTeamModal);

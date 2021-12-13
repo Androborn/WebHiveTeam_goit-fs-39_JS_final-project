@@ -15,25 +15,57 @@
   padding: 13px;
   letter-spacing: -0.1px;
 
+  transition: background, $main-duration $main-timing-function;
+
   &:hover,
   &:focus {
     background-color: $accent-color;
     border-color: $accent-color;
-    transition: background, $main-duration $main-timing-function;
   }
-  &--active-header {
-    background-color: $accent-color;
-    border-color: $accent-color;
-    filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+
+  &__header {
+    @media screen and (min-width: 768px) {
+      width: 136px;
+      height: 44px;
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: $accent-color;
+      border-color: $accent-color;
+      filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+    }
   }
-  // unused
-  // &--active {
-  //   background-color: $accent-color;
-  //   border-color: $accent-color;
-  // }
-  @media screen and (min-width: 768px) {
-    width: 136px;
-    height: 44px;
-    cursor: pointer;
+
+  &__movie-modal {
+    color: $secondary-text-color;
+    border: 1px solid $secondary-text-color;
+    width: 112.53px;
+    padding: 5px;
+
+    @include min-width(tablet) {
+      width: 125px;
+    }
+    @include min-width(desktop) {
+      width: 136px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $main-text-color;
+      color: $secondary-text-color;
+      filter: drop-shadow(0px 4px 10px rgba(255, 151, 1, 1.6));
+    }
+
+    &:first-child {
+      margin-right: 15px;
+    }
+
+    &--active {
+      background-color: $accent-color;
+      border-color: $accent-color;
+      color: $main-text-color;
+      border: 1px solid $accent-color;
+    }
   }
 }
