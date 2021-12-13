@@ -23,7 +23,7 @@ export class ThemoviedbApi {
   get filmsOn() {
     return this.trends;
   }
-  set filmsOn(newTrends) { 
+  set filmsOn(newTrends) {
     this.trends = newTrends;
   }
 

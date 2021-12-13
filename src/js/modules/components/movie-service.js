@@ -12,9 +12,20 @@ class MovieService {
     this.mainRef = document.querySelector('.card-list');
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
+    this.inputRef = document.querySelector('.header-serch__wrapper');
+    this.inputRef.addEventListener('submit', event => {
+      this.onInputSubmit(event);
+    });
+    this.inputRef.addEventListener('input', event => {
+      this.onInputChange(event);
+    });
+    this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
+    this.btnWrapperRef.addEventListener('click', event => {
+      this.getFilmsForRequestId(event);
+    });
     this.iconSearchRef = document.querySelector('.header-serch__icon');
-    this.iconSearchRef.addEventListener('click', event =>
-      this.onSearchIconClick(event),
+    this.iconSearchRef.addEventListener('click', () =>
+      this.inputRef.requestSubmit(),
     );
 
     this.options = {
@@ -42,18 +53,6 @@ class MovieService {
           '</a>',
       },
     };
-
-    this.inputRef = document.querySelector('.header-serch__input');
-    this.inputRef.addEventListener('keydown', event => {
-      this.onInputKeydown(event);
-    });
-    this.inputRef.addEventListener('input', event => {
-      this.onInputChange(event);
-    });
-    this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
-    this.btnWrapperRef.addEventListener('click', event => {
-      this.getFilmsForRequestId(event);
-    });
   }
 
   renderPage(page, libraryTab) {
@@ -135,30 +134,16 @@ class MovieService {
     this.inputRef.blur();
   }
 
-  async onInputKeydown(event) {
-    if (event.key !== 'Enter') return;
-    const searchQuery = event.target.value.trim();
+  async onInputSubmit(event) {
+    event.preventDefault();
+
+    const searchQuery = event.currentTarget.elements.searchQuery.value.trim();
+
     if (searchQuery) {
       await this.searchFilmByInputValue(searchQuery);
     } else {
       await this.renderMarkupAtHomePage();
     }
-  }
-
-  async onSearchIconClick(event) {
-    if (event.target.nodeName != 'svg') {
-      return;
-    }
-    const searchQuery = event.target.previousElementSibling.value;
-    if (searchQuery === '' || searchQuery === undefined) {
-      return;
-    }
-    spinner.hideSearch();
-    spinner.renderHeaderLoader();
-    await this.searchFilmByInputValue(searchQuery);
-    spinner.deleteHeaderspinner();
-    spinner.showSearch();
-    this.inputRef.blur();
   }
 
   onInputChange(event) {
