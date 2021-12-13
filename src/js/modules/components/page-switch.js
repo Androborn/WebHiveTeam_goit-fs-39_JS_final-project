@@ -12,9 +12,12 @@ class Header {
     this.currentPage = 'home';
     this.currentLibraryTab = 'watched';
   }
+
   onPageBtnClick(event) {
     event.preventDefault();
+
     const page = event.target.getAttribute('data-page');
+
     if (page && this.currentPage != page) {
       const activePage = this.navRef.querySelector('.header-nav__link--active');
       activePage.classList.remove('header-nav__link--active');
@@ -23,6 +26,7 @@ class Header {
       this.updateHeader();
     }
   }
+
   updateHeader() {
     this.headerRef.classList.remove('header--library');
     this.removeBtns();
@@ -51,6 +55,7 @@ class Header {
         </div>`,
     );
   }
+
   removeBtns() {
     const btnWrapper = this.centerDivRef.querySelector(
       '.header-center__wrapper',
@@ -59,6 +64,7 @@ class Header {
       btnWrapper.remove();
     }
   }
+
   onLibraryTabClick(event) {
     event.preventDefault();
     const tab = event.target.getAttribute('data-tab');
@@ -68,4 +74,5 @@ class Header {
     }
   }
 }
+
 export const header = new Header();
