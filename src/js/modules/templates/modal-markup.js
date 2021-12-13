@@ -51,14 +51,13 @@ export function modalMarkup(
               genreIds ? genreIds : 'Жанр отсутствует'
             }</span>
           </div><div class="modal__info-item-wraper">
-            <span class="modal__info-item"> Trailer </span
-            ><span class="modal__info-value"><a class="trailer" href="https://www.youtube.com/embed/${
-              data.videos.results[0].key
-            }" target="_blank" frameborder="0" >
-            <p class="trailer__YouTube">Watch on YouTube</p>
-            <img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
-          </a></span>
-          </div>
+  <span class="modal__info-item"> Trailer </span>
+  ${
+    data.videos.results.length === 0
+      ? `<span class="modal__info-value">Трейлер отсутствует</span>`
+      : `<span class="modal__info-value"><a class="trailer" href="https://www.youtube.com/embed/${data.videos.results[0].key}" target="_blank" frameborder="0" ><p class="trailer__YouTube">Watch on YouTube</p><img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a></span>`
+  }
+</div>
         </div>
         <div class="modal__info-about-wraper">
           <p class="modal__info-about">
