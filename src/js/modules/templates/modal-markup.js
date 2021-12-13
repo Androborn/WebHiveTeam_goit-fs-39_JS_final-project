@@ -50,6 +50,14 @@ export function modalMarkup(
             ><span class="modal__info-value">${
               genreIds ? genreIds : 'Жанр отсутствует'
             }</span>
+          </div><div class="modal__info-item-wraper">
+            <span class="modal__info-item"> Trailer </span
+            ><span class="modal__info-value"><a class="trailer" href="https://www.youtube.com/embed/${
+              data.videos.results[0].key
+            }" target="_blank" frameborder="0" >
+            <p class="trailer__YouTube">Watch on YouTube</p>
+            <img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
+          </a></span>
           </div>
         </div>
         <div class="modal__info-about-wraper">
@@ -85,7 +93,17 @@ export function modalMarkup(
           >
           ${movieAddedtoQueue === true ? 'Remove from queue' : 'Add to queue'}
           </button>
-        </div></div></div>
+        </div>
+    <div class="modal__background">
+        <img class="modal__background-img"
+            src=${
+              data.backdrop_path === null
+                ? ''
+                : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+            }
+            alt="${data.original_title}" />
+            </div>
+    </div></div>
     </div>
     `;
 }
