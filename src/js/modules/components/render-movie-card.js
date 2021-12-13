@@ -15,7 +15,6 @@ export class createCardsMarkup {
   constructor(cards, page) {
     this.cards = cards;
     this.page = page;
-    // this.moviesApi = new ThemoviedbApi();
     this.genres = JSON.parse(localStorage.getItem(GENRES_LIST_KEY));
   }
 
@@ -51,7 +50,7 @@ export class createCardsMarkup {
     return original_title;
   }
 
-  createCard(page) {
+  createCard() {
     return this.cards
       .map(
         ({
@@ -79,11 +78,7 @@ export class createCardsMarkup {
                  : 'Жанр отсутствует'
              }</p>
             <p class="card-list__date">| ${this.correctedDate(release_date)}</p>
-            <span class='${
-              page === 'library'
-                ? 'card-list__rating'
-                : 'card-list__rating--hidden'
-            }'  ">${vote_average}</span>
+            <span class="card-list__rating">${vote_average}</span>
           </div>
         </div>
       </li>`,

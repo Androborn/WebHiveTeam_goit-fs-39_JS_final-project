@@ -51,7 +51,9 @@ class MovieService {
       this.onInputChange(event);
     });
     this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
-    this.btnWrapperRef.addEventListener('click', event => { this.getFilmsForRequestId(event)})
+    this.btnWrapperRef.addEventListener('click', event => {
+      this.getFilmsForRequestId(event);
+    });
   }
 
   renderPage(page, libraryTab) {
@@ -61,7 +63,7 @@ class MovieService {
       }
       this.renderMarkupAtHomePage();
     } else if (page === 'library') {
-      this.btnWrapperRef.classList.add('visually-hidden')
+      this.btnWrapperRef.classList.add('visually-hidden');
       this.renderMarkupAtLibraryPage(libraryTab);
     }
   }
@@ -70,24 +72,30 @@ class MovieService {
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
-    await this.movies.getMovies().then(({ results, total_results }) => {
-      this.options.totalItems = total_results;
-      if (total_results <= this.options.itemsPerPage) {
-        this.container.classList.add('visually-hidden');
-      } else if (this.container.classList.contains('visually-hidden')) {
-        this.container.classList.remove('visually-hidden');
-      }
-      this.renderMovies(results, 'main');
-    }).catch(console.log);
-      const pagin = new Pagination(this.container, this.options);
-      pagin.on('afterMove', async event => {
-        if (this.movies.currentPage === event.page) return
-        this.movies.currentPage = event.page;
-        await this.movies.getMovies().then(({ results }) => {
+    await this.movies
+      .getMovies()
+      .then(({ results, total_results }) => {
+        this.options.totalItems = total_results;
+        if (total_results <= this.options.itemsPerPage) {
+          this.container.classList.add('visually-hidden');
+        } else if (this.container.classList.contains('visually-hidden')) {
+          this.container.classList.remove('visually-hidden');
+        }
+        this.renderMovies(results, 'main');
+      })
+      .catch(console.log);
+    const pagin = new Pagination(this.container, this.options);
+    pagin.on('afterMove', async event => {
+      if (this.movies.currentPage === event.page) return;
+      this.movies.currentPage = event.page;
+      await this.movies
+        .getMovies()
+        .then(({ results }) => {
           this.renderMovies(results, 'main');
-        }).catch(console.log);
-      });
-      pagin.movePageTo(this.movies.currentPage);
+        })
+        .catch(console.log);
+    });
+    pagin.movePageTo(this.movies.currentPage);
   }
   async searchFilmByInputValue(searchQuery) {
     this.movies.search = searchQuery;
@@ -108,16 +116,20 @@ class MovieService {
         this.renderMovies(results, 'main');
         this.iconSearchRef.classList.add('header-serch__icon--disabled');
         if (total_results < this.options.itemsPerPage) return;
-      }).catch(console.log);
-      const pagin = new Pagination(this.container, this.options);
-        pagin.on('afterMove', async event => {
-          if (this.movies.currentPage === event.page) return
-          this.movies.currentPage = event.page;
-          await this.movies.getMoviesByKeyword().then(({ results }) => {
-            this.renderMovies(results, 'main');
-          }).catch(console.log);
-          this.movies.resetPage();
-        });
+      })
+      .catch(console.log);
+    const pagin = new Pagination(this.container, this.options);
+    pagin.on('afterMove', async event => {
+      if (this.movies.currentPage === event.page) return;
+      this.movies.currentPage = event.page;
+      await this.movies
+        .getMoviesByKeyword()
+        .then(({ results }) => {
+          this.renderMovies(results, 'main');
+        })
+        .catch(console.log);
+      this.movies.resetPage();
+    });
     spinner.deleteHeaderspinner();
     spinner.showSearch();
     this.inputRef.blur();
@@ -185,12 +197,14 @@ class MovieService {
 
   async renderMovies(movies, page, libraryTab) {
     const cardsMarkup = new createCardsMarkup(movies, page, libraryTab);
-    const moviesCards = cardsMarkup.createCard(page);
+    const moviesCards = cardsMarkup.createCard();
     this.mainRef.innerHTML = moviesCards;
   }
   getFilmsForRequestId(event) {
-    const currentActiveBtn = document.querySelector('.common-btn__request--active');
-    if (event.target === currentActiveBtn) return
+    const currentActiveBtn = document.querySelector(
+      '.common-btn__request--active',
+    );
+    if (event.target === currentActiveBtn) return;
     if (currentActiveBtn) {
       currentActiveBtn.classList.remove('common-btn__request--active');
     }
@@ -198,13 +212,13 @@ class MovieService {
       this.inputRef.value = '';
     }
     event.target.classList.add('common-btn__request--active');
-    
+
     const requestName = event.target.getAttribute('id');
-    this.renderMoviesForRequest(requestName)
+    this.renderMoviesForRequest(requestName);
   }
   renderMoviesForRequest(request) {
     this.movies.filmsOn = request;
-      this.renderMarkupAtHomePage();
+    this.renderMarkupAtHomePage();
   }
 }
 
