@@ -27,6 +27,7 @@
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
     "parcel-plugin-nuke-dist": "^1.0.1",
+    "plyr": "^3.6.9",
     "posthtml-include": "^1.7.2",
     "sass": "^1.45.0",
     "tui-pagination": "^3.4.1"
