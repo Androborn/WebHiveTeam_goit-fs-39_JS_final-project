@@ -68,4 +68,32 @@
       border: 1px solid $accent-color;
     }
   }
+  &__request {
+    width: 100px;
+    height: 30px;
+    font-weight: 500;
+    font-size: 12px;
+
+    text-transform: uppercase;
+    color: $main-text-color;
+
+    background-color: $accent-color;
+    border-color: $accent-color;
+    border: 1px solid $accent-color;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    transition: all 300ms $main-timing-function;
+    &:hover,
+    &:focus {
+      background-color: $main-text-color;
+      color: $secondary-text-color;
+      filter: drop-shadow(0px 4px 10px rgba(255, 151, 1, 1.6));
+    }
+    &--active {
+      color: $secondary-text-color;
+      background-color: $main-text-color;
+    }
+  }
 }

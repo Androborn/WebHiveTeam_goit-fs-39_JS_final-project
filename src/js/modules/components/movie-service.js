@@ -50,12 +50,18 @@ class MovieService {
     this.inputRef.addEventListener('input', event => {
       this.onInputChange(event);
     });
+    this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
+    this.btnWrapperRef.addEventListener('click', event => { this.getFilmsForRequestId(event)})
   }
 
   renderPage(page, libraryTab) {
     if (page === 'home') {
+      if (this.btnWrapperRef.classList.contains('visually-hidden')) {
+        this.btnWrapperRef.classList.remove('visually-hidden');
+      }
       this.renderMarkupAtHomePage();
     } else if (page === 'library') {
+      this.btnWrapperRef.classList.add('visually-hidden')
       this.renderMarkupAtLibraryPage(libraryTab);
     }
   }
@@ -77,6 +83,7 @@ class MovieService {
       this.renderMovies(results, 'main');
       pagin.on('afterMove', async event => {
         this.movies.currentPage = event.page;
+        if (this.movies.currentPage === 1) return;
         await this.movies.getMovies().then(({ results }) => {
           this.renderMovies(results, 'main');
         });
@@ -185,6 +192,22 @@ class MovieService {
     const cardsMarkup = new createCardsMarkup(movies, page, libraryTab);
     const moviesCards = cardsMarkup.createCard(page);
     this.mainRef.innerHTML = moviesCards;
+  }
+  getFilmsForRequestId(event) {
+    const currentActiveBtn = document.querySelector('.common-btn__request--active');
+    if (event.target === currentActiveBtn) return
+    if (currentActiveBtn) {
+      currentActiveBtn.classList.remove('common-btn__request--active');
+    }
+    
+    event.target.classList.add('common-btn__request--active');
+    
+    const requestName = event.target.getAttribute('id');
+    this.renderMoviesForRequest(requestName)
+  }
+  renderMoviesForRequest(request) {
+    this.movies.filmsOn = request;
+      this.renderMarkupAtHomePage();
   }
 }
 

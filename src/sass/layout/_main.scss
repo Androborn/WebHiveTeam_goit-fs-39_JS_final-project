@@ -28,3 +28,14 @@
     margin-bottom: 46px;
   }
 }
+.main-section__btn-wrapper {
+  margin-bottom: 30px;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-gap: 30px 20px;
+  justify-items: center;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    grid-template: 1fr / 1fr 1fr 1fr 1fr;
+  }
+}
