@@ -1,22 +1,7 @@
 .card-list {
-  display: grid;
-  grid-template-columns: repeat(1, 280px);
-  justify-content: center;
-  grid-gap: 20px;
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 294px);
-    grid-gap: 30px;
-  }
-
-  @media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(3, 274px);
-  }
-
   &__item {
     transition: $film-card-transition;
     width: 280px;
-
     &:hover,
     &:focus {
       border-radius: $smooth-border;
@@ -43,14 +28,7 @@
       width: 294px;
     }
     @media screen and (min-width: 1024px) {
-      grid-column: span 2;
       width: 274px;
-    }
-
-    &:nth-last-child(-n + 2):nth-child(odd) {
-      @media screen and (min-width: 1024px) {
-        grid-column: 2 / span 2;
-      }
     }
   }
 
@@ -95,8 +73,5 @@
     text-align: center;
     color: $main-text-color;
     background-color: $accent-color;
-    &--hidden {
-      display: none;
-    }
   }
 }
