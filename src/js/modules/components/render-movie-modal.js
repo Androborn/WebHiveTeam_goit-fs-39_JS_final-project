@@ -1,3 +1,4 @@
+import * as basicLightbox from 'basiclightbox';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { modalMarkup } from '../templates/modal-markup';
 import { queueStorage, watchedStorage } from './library-storage';
