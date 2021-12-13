@@ -7,11 +7,12 @@ export class ThemoviedbApi {
     this.keyword = '';
     this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
+    this.trends = 'popular';
   }
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/trending/movie/day?api_key=${this.API_KEY}&language=en-US&page=${this.page}`,
+        `/3/movie/${this.trends}?api_key=${this.API_KEY}&language=en-US&page=${this.page}&region=UA`,
       );
       const data = await response.data;
       return data;
@@ -19,6 +20,13 @@ export class ThemoviedbApi {
       console.log(error);
     }
   }
+  get filmsOn() {
+    return this.trends;
+  }
+  set filmsOn(newTrends) { 
+    this.trends = newTrends;
+  }
+
   get search() {
     return this.keyword;
   }
