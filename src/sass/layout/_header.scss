@@ -143,7 +143,7 @@
     &__icon {
       position: absolute;
       fill: $main-text-color;
-      // top: -4px;
+      top: 1px;
       right: 3px;
       cursor: pointer;
       width: 28px;
@@ -220,10 +220,57 @@
     box-shadow: 0 0 10px 5px rgba(170, 138, 138, 0.829);
   }
 }
-.change-lang {
+
+.header-lang {
   position: absolute;
-  top: 55px;
-  right: 340px;
-  width: 46px;
-  height: 23px;
+  top: 190px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 1024px) {
+    right: 65px;
+  }
+
+  &__option {
+    @include font(12px, 500, 16px);
+    background: $secondary-text-color !important;
+
+    &:checked {
+      color: $accent-color !important;
+    }
+  }
+
+  &__icon {
+    width: 10px;
+    visibility: 10px;
+    margin-right: 3px;
+    fill: $main-text-color;
+
+    @media screen and (min-width: 1024px) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.change-lang {
+  padding: 1px 1px;
+  @include font(10px, 500, 16px);
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  color: $main-text-color;
+  background-color: $secondary-text-color;
+  transition: all 300ms;
+  cursor: pointer;
+
+  @media screen and (min-width: 1024px) {
+    padding: 2px 3px;
+    @include font(12px, 500, 16px);
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(170, 138, 138, 0.829);
+  }
 }
