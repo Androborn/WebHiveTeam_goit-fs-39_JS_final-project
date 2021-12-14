@@ -7,7 +7,6 @@ export function modalMarkup(
   movieAddedtoWatched,
   movieAddedtoQueue,
 ) {
-  console.log(data)
   return `
     <div class="modal">
       <div class="modal__wraper"><div class="modal__image-wraper">
@@ -56,7 +55,7 @@ export function modalMarkup(
   ${
     data.videos.results.length === 0
       ? `<span class="modal__info-value">Трейлер отсутствует</span>`
-      : `<span class="modal__info-value"><a class="trailer" href="https://www.youtube.com/embed/${data.videos.results[0].key}" target="_blank" frameborder="0" ><p class="trailer__YouTube">Watch on YouTube</p><img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a></span>`
+      : `<span class="modal__info-value"><span class="trailer">Watch trailer</span><img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></span>`
   }
 </div>
         </div>
