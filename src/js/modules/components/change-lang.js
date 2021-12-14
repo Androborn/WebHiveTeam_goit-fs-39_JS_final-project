@@ -1,19 +1,14 @@
 import { langObj } from "./list-lang";
 const select = document.querySelector('select');
-const allLang = ['ua', 'ru', 'en'];
-select.addEventListener('change', changeURLLanguage);
-function changeURLLanguage() {
+select.addEventListener('change', setLngToLocalStor);
+function setLngToLocalStor() {
     let lang = select.value;
-    location.href = `window.location.pathname${'#'}${lang}`;
+    localStorage.setItem("currentLng", lang);
     location.reload();
 }
 
 export function changeLanguage() {
-    let hash = window.location.hash;
-    hash = hash.substring(1)
-    if (!allLang.includes(hash)) {
-        location.href = `window.location.pathname${'#en'}`
-    }
+    let hash = localStorage.getItem("currentLng");
     select.value = hash;
     let lang;
     switch (select.value) {
