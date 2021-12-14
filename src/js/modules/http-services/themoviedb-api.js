@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { notiflix } from '../../vendors/notification';
+import { changeLanguage } from "../components/change-lang"; 
 
 export class ThemoviedbApi {
   constructor() {
@@ -8,11 +9,12 @@ export class ThemoviedbApi {
     this.page = 1;
     axios.defaults.baseURL = 'https://api.themoviedb.org/';
     this.trends = 'popular';
+    this.lang = `${this.getCurrentClientLang()}`;
   }
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/movie/${this.trends}?api_key=${this.API_KEY}&language=en-US&page=${this.page}&region=UA`,
+        `/3/movie/${this.trends}?api_key=${this.API_KEY}&language=${this.lang}&page=${this.page}&region=UA`,
       );
       const data = await response.data;
       return data;
@@ -49,7 +51,7 @@ export class ThemoviedbApi {
   async getMovieById(id) {
     try {
       const response = await axios.get(
-        `/3/movie/${id}?api_key=${this.API_KEY}&append_to_response=videos`,
+        `/3/movie/${id}?api_key=${this.API_KEY}&append_to_response=videos&language=${this.lang}`,
       );
       const data = await response.data;
       return data;
@@ -60,7 +62,7 @@ export class ThemoviedbApi {
   async getMoviesGenresList() {
     try {
       const response = await axios.get(
-        `3/genre/movie/list?api_key=${this.API_KEY}`,
+        `3/genre/movie/list?api_key=${this.API_KEY}&language=${this.lang}`,
       );
       const data = await response.data;
       return data.genres;
@@ -79,5 +81,16 @@ export class ThemoviedbApi {
   }
   set currentPage(newPage) {
     this.page = newPage;
+  }
+
+  getCurrentClientLang() {
+    const localLang = changeLanguage();
+
+    if (localLang === null) {
+      this.lang = 'en-EN';
+    } else {
+      this.lang = localLang;
+    }
+    return this.lang;
   }
 }

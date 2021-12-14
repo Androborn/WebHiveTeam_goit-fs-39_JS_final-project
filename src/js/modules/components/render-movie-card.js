@@ -42,12 +42,12 @@ export class createCardsMarkup {
     return release_date.slice(0, 4);
   }
 
-  slicedOriginalTitle(original_title) {
-    if (original_title.length >= 35) {
-      const slisedTitle = original_title.slice(0, 35);
+  slicedOriginalTitle(title) {
+    if (title.length >= 35) {
+      const slisedTitle = title.slice(0, 35);
       return slisedTitle + ' ...';
     }
-    return original_title;
+    return title;
   }
 
   createCard() {
@@ -56,7 +56,7 @@ export class createCardsMarkup {
         ({
           id,
           poster_path,
-          original_title,
+          title,
           genre_ids,
           release_date,
           vote_average,
@@ -66,10 +66,10 @@ export class createCardsMarkup {
           poster_path === null
             ? sorryPosterImage
             : `https://image.tmdb.org/t/p/w500${poster_path}`
-        } alt="${original_title}" />
+        } alt="${title}" />
         <div class="card-list__info">
           <h2 class="card-list__info-name">${this.slicedOriginalTitle(
-            original_title,
+            title,
           )}</h2>
           <div class="card-list__description">
              <p class="card-list__genre">${

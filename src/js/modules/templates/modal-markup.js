@@ -7,6 +7,7 @@ export function modalMarkup(
   movieAddedtoWatched,
   movieAddedtoQueue,
 ) {
+  console.log(data)
   return `
     <div class="modal">
       <div class="modal__wraper"><div class="modal__image-wraper">
@@ -19,7 +20,7 @@ export function modalMarkup(
         />
       </div>
       <div class="modal__info-container"><div class="modal__info">
-        <h1 class="modal__info-title">${data.original_title.toUpperCase()}</h1>
+        <h1 class="modal__info-title">${data.title.toUpperCase()}</h1>
         <div class="modal__info-wraper">
           <div class="modal__info-item-wraper">
             <span class="modal__info-item">
@@ -44,7 +45,7 @@ export function modalMarkup(
           <div class="modal__info-item-wraper">
             <span class="modal__info-item"> Original Title </span>
             <span class="modal__info-value">
-              ${data.original_title.toUpperCase()}</span></div>
+              ${data.title.toUpperCase()}</span></div>
           <div class="modal__info-item-wraper">
             <span class="modal__info-item"> Genre </span
             ><span class="modal__info-value">${
@@ -100,7 +101,7 @@ export function modalMarkup(
                 ? ''
                 : `https://image.tmdb.org/t/p/original${data.backdrop_path}`
             }
-            alt="${data.original_title}" />
+            alt="${data.title}" />
             </div>
     </div></div>
     </div>
