@@ -1,4 +1,4 @@
-import { createCardsMarkup } from './render-movie-card';
+import { CreateCardsMarkup } from './render-movie-card';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
@@ -181,7 +181,7 @@ class MovieService {
   }
 
   async renderMovies(movies, page, libraryTab) {
-    const cardsMarkup = new createCardsMarkup(movies, page, libraryTab);
+    const cardsMarkup = new CreateCardsMarkup(movies, page, libraryTab);
     const moviesCards = cardsMarkup.createCard();
     this.mainRef.innerHTML = moviesCards;
   }

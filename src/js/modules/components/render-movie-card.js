@@ -11,7 +11,7 @@ moviesApi
   })
   .catch(console.log);
 
-export class createCardsMarkup {
+export class CreateCardsMarkup {
   constructor(cards, page) {
     this.cards = cards;
     this.page = page;
@@ -53,14 +53,7 @@ export class createCardsMarkup {
   createCard() {
     return this.cards
       .map(
-        ({
-          id,
-          poster_path,
-          title,
-          genre_ids,
-          release_date,
-          vote_average,
-        }) =>
+        ({ id, poster_path, title, genre_ids, release_date, vote_average }) =>
           `<li class="card-list__item" id="${id}">
         <img class="card-list__img" src=${
           poster_path === null
