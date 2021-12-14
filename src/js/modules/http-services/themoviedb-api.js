@@ -14,7 +14,7 @@ export class ThemoviedbApi {
   async getMovies() {
     try {
       const response = await axios.get(
-        `/3/trending/movie/day?api_key=${this.API_KEY}&language=${this.lang}&page=${this.page}`,
+        `/3/movie/${this.trends}?api_key=${this.API_KEY}&language=${this.lang}&page=${this.page}&region=UA`,
       );
       const data = await response.data;
       return data;
