@@ -27,7 +27,7 @@ export class createCardsMarkup {
     if (genresNames === []) {
       ('Жанр отсутствует');
     }
-    if (genresNames.length >= 4) {
+    if (genresNames.length >= 3) {
       const CorrecТame = genresNames.slice(0, 2);
       CorrecТame.push('Other...');
       return CorrecТame.join(', ');
