@@ -193,11 +193,10 @@ class MovieService {
     if (currentActiveBtn) {
       currentActiveBtn.classList.remove('common-btn__request--active');
     }
-    if (this.inputRef.value) {
-      this.inputRef.value = '';
-    }
     event.target.classList.add('common-btn__request--active');
-
+    if (this.inputRef.children[0].value) {
+      this.inputRef.children[0].value = '';
+    }
     const requestName = event.target.getAttribute('id');
     this.renderMoviesForRequest(requestName);
   }
