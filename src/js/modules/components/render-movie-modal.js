@@ -1,6 +1,7 @@
 import * as basicLightbox from 'basiclightbox';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { modalMarkup } from '../templates/modal-markup';
+import { trailerMarkup } from '../templates/trailer-markup';
 import { queueStorage, watchedStorage } from './library-storage';
 import { movieService } from './movie-service';
 import { header } from './page-switch';
@@ -10,6 +11,7 @@ let spinner = new Loader();
 class RenderModal {
   constructor() {
     this.instance = null;
+    this.trailer = null;
     this.cardContainerRef = document.querySelector('.card-list');
     this.themoviedbApi = new ThemoviedbApi();
     this.cardContainerRef.addEventListener('click', async evt => {
@@ -80,6 +82,14 @@ class RenderModal {
     document.addEventListener('keydown', evt => this.onEscModalClose(evt), {
       once: true,
     });
+
+    this.trailerRef = document.querySelector('.trailer');
+    if (this.currentMovie.videos.results.length === 0) {
+      return;
+    }
+    this.trailerRef.addEventListener('click', async evt =>
+      this.openTrailer(evt),
+    );
   }
   onBtnWatchedClick() {
     this.btnWatched.classList.add('common-btn__movie-modal--active');
@@ -132,6 +142,25 @@ class RenderModal {
   onEscModalClose(evt) {
     if (evt.code === 'Escape') {
       this.instance.close();
+    }
+  }
+
+  openTrailer(evt) {
+    if (evt.target !== this.trailerRef) {
+      return;
+    }
+
+    this.trailer = basicLightbox.create(trailerMarkup(this.currentMovie));
+
+    this.trailer.show();
+    document.addEventListener('keydown', evt => this.onEscTrailerClose(evt), {
+      once: true,
+    });
+  }
+
+  onEscTrailerClose(evt) {
+    if (evt.code === 'Escape') {
+      this.trailer.close();
     }
   }
 }

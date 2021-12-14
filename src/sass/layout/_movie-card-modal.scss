@@ -147,15 +147,13 @@
 }
 
 .trailer{
-  display: flex;
   text-decoration:none;
   color: inherit;
+  margin-right: 7px;
   
   &__img{
     width: 25px;
-  }
-
-  &__YouTube{
-    margin-right: 5px;
+    display: inline-block;
+    vertical-align: text-bottom;
   }
 }
