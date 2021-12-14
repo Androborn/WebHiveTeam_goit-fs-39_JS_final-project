@@ -29,7 +29,7 @@ export class createCardsMarkup {
     }
     if (genresNames.length >= 3) {
       const CorrecТame = genresNames.slice(0, 2);
-      CorrecТame.push('Other...');
+      CorrecТame.push('прочие...');
       return CorrecТame.join(', ');
     }
     return genresNames.join(', ');
