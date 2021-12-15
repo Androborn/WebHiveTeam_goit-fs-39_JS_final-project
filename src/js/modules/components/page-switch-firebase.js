@@ -1,0 +1,111 @@
+import { movieService } from './movie-service-firebase';
+
+class Header {
+  constructor() {
+    this.headerRef = document.querySelector('.header');
+    this.centerDivRef = this.headerRef.querySelector('.header-center');
+    this.navRef = this.headerRef.querySelector('.header-nav');
+    this.navRef.addEventListener('click', event => this.onPageBtnClick(event));
+    this.centerDivRef.addEventListener('click', event =>
+      this.onLibraryTabClick(event),
+    );
+    this.currentPage = 'home';
+    this.currentLibraryTab = 'watched';
+  }
+
+  onPageBtnClick(event) {
+    event.preventDefault();
+
+    const page = event.target.getAttribute('data-page');
+
+    if (page && this.currentPage != page) {
+      const activePage = this.navRef.querySelector('.header-nav__link--active');
+      activePage.classList.remove('header-nav__link--active');
+      event.target.classList.add('header-nav__link--active');
+      this.currentPage = page;
+      this.updateHeader();
+    }
+  }
+
+  updateHeader() {
+    this.headerRef.classList.remove('header--library');
+    this.removeBtns();
+    if (this.currentPage === 'library') {
+      this.headerRef.classList.add('header--library');
+      this.renderBtns();
+    }
+
+    movieService.renderPage(this.currentPage, this.currentLibraryTab);
+  }
+
+  renderBtns() {
+    this.centerDivRef.insertAdjacentHTML(
+      'beforeend',
+      ` <div class="header-center__wrapper">
+            <button data-tab="watched" class="common-btn common-btn__header ${
+              this.currentLibraryTab === 'watched'
+                ? 'common-btn__header--active'
+                : ''
+            }">Watched</button>
+            <button data-tab="queue" class="common-btn common-btn__header ${
+              this.currentLibraryTab === 'queue'
+                ? 'common-btn__header--active'
+                : ''
+            }">Queue</button>
+        </div>`,
+    );
+    const currentLng = localStorage.getItem('currentLng');
+    const btnWatched = document.querySelector('[data-tab="watched"]');
+    switch (currentLng) {
+      case 'ru':
+        btnWatched.textContent = 'Просмотренные';
+        break;
+      case 'en':
+        btnWatched.textContent = 'watched';
+        break;
+      case 'ua':
+        btnWatched.textContent = 'переглянутi';
+        break;
+
+      default:
+        btnWatched.textContent = 'watched';
+        break;
+    }
+    const btnQueue = document.querySelector('[data-tab="queue"]');
+    switch (currentLng) {
+      case 'ru':
+        btnQueue.textContent = 'посмотреть';
+        break;
+      case 'en':
+        btnQueue.textContent = 'queue';
+        break;
+      case 'ua':
+        btnQueue.textContent = 'до перегляду';
+        break;
+
+      default:
+        btnQueue.textContent = 'queue';
+        break;
+    }
+  }
+
+  removeBtns() {
+    const btnWrapper = this.centerDivRef.querySelector(
+      '.header-center__wrapper',
+    );
+    if (btnWrapper) {
+      btnWrapper.remove();
+    }
+  }
+
+  onLibraryTabClick(event) {
+    event.preventDefault();
+    const tab = event.target.getAttribute('data-tab');
+    if (tab && this.currentLibraryTab != tab) {
+      this.currentLibraryTab = tab;
+      this.updateHeader();
+    }
+  }
+}
+
+export const header = new Header();

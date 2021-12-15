@@ -1,0 +1,75 @@
+<!-- <div class="backdrope-modal is-hidden" data-modal>
+  <div class="modal-sign">
+    <button class="modal-close" data-modal-close>Back to Home</button>
+    <form class="modal-sign-register">
+      <span></span>
+    </form>
+  </div>
+</div> -->
+<div class="backdrope-modal is-hidden" data-modal>
+  <div class="frame">
+    <div class="nav">
+      <ul class="links">
+        <li class="signin-active form__item"><a class="btn">Sign in</a></li>
+        <li class="signup-inactive form__item"><a class="btn">Sign up </a></li>
+        <li class="signup-inactive form__item margin-left">
+          <button class="modal-close" data-modal-close>BACK TO HOME</button>
+        </li>
+      </ul>
+    </div>
+    <div ng-app ng-init="checked = false">
+      <form class="form-signin" name="form">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          class="form-styling"
+          type="email"
+          name="email"
+          placeholder=""
+          required="required"
+        />
+        <label for="password">Password</label>
+        <input
+          id="password"
+          class="form-styling"
+          type="password"
+          name="password"
+          placeholder=""
+          required="required"
+          minlength="6"
+        />
+
+        <div class="btn-animate">
+          <button type="submit" class="btn-signin">Sign in</button>
+        </div>
+      </form>
+
+      <form class="form-signup" name="form">
+        <label for="signup-email">Email</label>
+        <input
+          id="signup-email"
+          class="form-styling"
+          type="email"
+          required="required"
+          name="signup__email"
+          placeholder=""
+        />
+        <label for="signup-password">Password</label>
+        <input
+          class="form-styling"
+          id="signup-password"
+          type="password"
+          name="signup__password"
+          placeholder=""
+          required="required"
+          minlength="6"
+        />
+
+        <button type="submit" class="btn-signup">Sign Up</button>
+      </form>
+
+      <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script> -->
+    </div>
+  </div>
+</div>

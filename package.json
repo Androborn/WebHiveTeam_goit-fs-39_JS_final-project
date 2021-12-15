@@ -33,5 +33,7 @@
     "sass": "^1.45.0",
     "tui-pagination": "^3.4.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "firebase": "^9.6.1"
+  }
 }

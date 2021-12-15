@@ -1,0 +1,77 @@
+<header class="header" id="header">
+  <div class="container">
+    <div class="header-wrapper">
+      <a href="" data-page="home" class="header-logo link">
+        <svg class="header-logo__img" width="24" height="24">
+          <use href="./images/sprite.svg#icon-film"></use>
+        </svg>
+        <p class="header-logo__text">Filmoteka</p>
+      </a>
+      <nav class="header-nav">
+        <ul class="header-nav__list list">
+          <li class="header-nav__item header-nav__item--margin">
+            <a
+              href=""
+              data-page="home"
+              class="
+                header-nav__link header-nav__link--active
+                link
+                lng-btn-home
+              "
+              >Home</a
+            >
+          </li>
+          <li class="header-nav__item">
+            <a
+              href="#"
+              data-page="library"
+              class="
+                header-nav__link
+                link
+                header-nav__link--library
+                lng-btn-lib
+              "
+              >my library</a
+            >
+          </li>
+          <li class="header-nav__item">
+            <button
+              href="./index.html"
+              data-page="home"
+              class="header-nav__button"
+              data-modal-open
+            >
+              <svg width="28 " height="26">
+                <path
+                  d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header-lang">
+      <svg class="header-lang__icon" width="20px" height="20px">
+        <use href="./images/sprite.svg#icon-earth"></use>
+      </svg>
+      <select name="" class="change-lang">
+        <option class="header-lang__option" value="en" selected>English</option>
+        <option class="header-lang__option" value="ua">Українська</option>
+        <option class="header-lang__option" value="ru">Русский</option>
+      </select>
+    </div>
+    <div class="header-serch header-center">
+      <form class="header-serch__wrapper">
+        <input
+          type="text"
+          class="header-serch__input"
+          placeholder="Поиск фильмов"
+        />
+        <svg class="header-serch__icon" width="12" height="12">
+          <use href="./images/sprite.svg#icon-search"></use>
+        </svg>
+      </form>
+    </div>
+  </div>
+</header>
