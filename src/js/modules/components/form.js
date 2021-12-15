@@ -19,7 +19,6 @@ const firebase = new Firebase();
     refs.body.classList.toggle('overflow');
   });
   refs.btns[0].addEventListener('click', e => {
-    console.log(document.querySelector('.form-signin'));
     document.querySelector('.form-signin').classList.toggle('form-signin-left');
     document.querySelector('.form-signup').classList.toggle('form-signup-left');
     document.querySelector('.frame').classList.toggle('frame-long');

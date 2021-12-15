@@ -3,15 +3,19 @@
 }
 .backdrope-modal {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: #f2f2f2;
-  opacity: 1;
-  transition: opacity;
-  overflow-y: scroll;
-  z-index: 100;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+  will-change: opacity;
+  overflow: hidden;
+  transition: all, 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .backdrope-modal.is-hidden {
   opacity: 0;
@@ -25,7 +29,6 @@
 }
 .modal-close {
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
   transition: all 0.25s ease;
 
@@ -43,8 +46,8 @@
   @media screen and (max-width: 500px) {
     width: 80%;
   }
-  background: linear-gradient(rgba(35, 43, 85, 0.75), rgba(35, 43, 85, 0.95)),
-    no-repeat center center;
+  //   background: #f2f2f2, no-repeat center center;
+  background-color: #fff;
   background-size: cover;
 
   border-top: solid 1px rgba(255, 255, 255, 0.5);
@@ -83,46 +86,44 @@
   text-align: left;
   text-transform: uppercase;
   padding-right: 10px;
-  color: #ffffff;
 }
 
 .signin-active a {
   padding-bottom: 10px;
-  color: #ffffff;
+  color: #ff6b08;
   text-decoration: none;
-  border-bottom: solid 2px #1059ff;
+  border-bottom: solid 2px #ff6b08;
   transition: all 0.25s ease;
   cursor: pointer;
 }
 
 .signin-inactive a {
   padding-bottom: 0;
-  color: rgba(255, 255, 255, 0.3);
+  color: black;
   text-decoration: none;
   border-bottom: none;
   cursor: pointer;
 }
 
-.signup-active a {
-  cursor: pointer;
-  color: #ffffff;
-  text-decoration: none;
-  border-bottom: solid 2px #1059ff;
-  padding-bottom: 10px;
-}
-
 .signup-inactive a {
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.3);
+  color: black;
   text-decoration: none;
   transition: all 0.25s ease;
 }
-
+.signup-active a {
+  cursor: pointer;
+  color: #ff6b08;
+  text-decoration: none;
+  border-bottom: solid 2px #ff6b08;
+  padding-bottom: 10px;
+}
 .form-signin {
   width: 430px;
   @media screen and (max-width: 500px) {
     width: 100%;
   }
+
   height: 375px;
   font-size: 16px;
   font-weight: 300;
@@ -167,7 +168,6 @@
 
 .form-signin input,
 .form-signup input {
-  color: #ffffff;
   font-size: 13px;
 }
 
@@ -178,7 +178,7 @@
   border: none;
   border-radius: 20px;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #ff6b08;
 }
 
 label {
@@ -187,7 +187,6 @@ label {
   font-size: 13px;
   padding-left: 15px;
   padding-bottom: 10px;
-  color: rgba(255, 255, 255, 0.7);
   display: block;
 }
 
@@ -199,8 +198,7 @@ label {
 textarea:focus,
 .form-signup input:focus,
 textarea:focus {
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
+  filter: drop-shadow(0px 4px 10px #ff9701);
   padding-right: 40px;
   transition: background 0.5s ease;
 }
@@ -212,13 +210,13 @@ textarea:focus {
   font-size: 13px;
   text-align: center;
   color: #ffffff;
-  padding-top: 8px;
+  padding-top: 5px;
   width: 100%;
   height: 35px;
   border: none;
   border-radius: 20px;
   margin-top: 23px;
-  background-color: #1059ff;
+  background-color: #ff6b08;
 }
 
 .btn-signin {
@@ -228,13 +226,13 @@ textarea:focus {
   font-size: 13px;
   text-align: center;
   color: #ffffff;
-  padding-top: 8px;
+  padding-top: 5px;
   width: 100%;
   height: 35px;
   border: none;
   border-radius: 20px;
   margin-top: 23px;
-  background-color: #1059ff;
+  background-color: #ff6b08;
 }
 
 .button:hover {
@@ -244,12 +242,12 @@ textarea:focus {
   font-size: 13px;
   text-align: center;
   color: rgba(255, 255, 255, 1);
-  padding-top: 8px;
+  padding-top: 5px;
   width: 100%;
   height: 35px;
   border: none;
   border-radius: 20px;
-  background-color: rgba(16, 89, 255, 1);
+  background-color: orange;
   left: 0px;
   top: 0px;
   transition: all 0.5s ease, top 0.5s ease 0.5s, height 0.5s ease 0.5s,
@@ -259,7 +257,7 @@ textarea:focus {
 button.btn-signup:hover,
 button.btn-signin:hover {
   cursor: pointer;
-  background-color: #0f4fe6;
+  background-color: orange;
   transition: background-color 0.5s;
 }
 
