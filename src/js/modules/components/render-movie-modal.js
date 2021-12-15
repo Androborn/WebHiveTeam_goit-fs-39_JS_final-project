@@ -153,14 +153,19 @@ class RenderModal {
     this.trailer = basicLightbox.create(trailerMarkup(this.currentMovie));
 
     this.trailer.show();
-    document.addEventListener('keydown', evt => this.onEscTrailerClose(evt), {
-      once: true,
-    });
+    document.body.addEventListener(
+      'keydown',
+      evt => this.onEscTrailerClose(evt),
+      {
+        once: true,
+      },
+    );
   }
 
   onEscTrailerClose(evt) {
     if (evt.code === 'Escape') {
       this.trailer.close();
+      evt.stopPropagation();
     }
   }
 }
