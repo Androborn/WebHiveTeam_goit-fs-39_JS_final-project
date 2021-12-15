@@ -188,6 +188,7 @@ class MovieService {
     this.mainRef.innerHTML = moviesCards;
   }
   getFilmsForRequestId(event) {
+    event.target.blur()
     const currentActiveBtn = document.querySelector(
       '.common-btn__request--active',
     );
