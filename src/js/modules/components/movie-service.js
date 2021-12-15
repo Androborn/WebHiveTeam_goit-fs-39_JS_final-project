@@ -22,6 +22,9 @@ class MovieService {
     });
     this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
     this.btnWrapperRef.addEventListener('click', event => {
+      if (event.target.type !== 'button') {
+        return;
+      }
       this.getFilmsForRequestId(event);
     });
     this.iconSearchRef = document.querySelector('.header-serch__icon');
