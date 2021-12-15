@@ -9,7 +9,12 @@ function setLngToLocalStor() {
 
 export function changeLanguage() {
     let hash = localStorage.getItem("currentLng");
-    select.value = hash;
+    if (hash === null) {
+        hash = 'en'
+    } else {
+        select.value = hash;
+    }
+    
     let lang;
     switch (select.value) {
         case 'ru': 
