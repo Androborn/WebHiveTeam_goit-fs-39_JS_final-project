@@ -69,7 +69,7 @@ class MovieService {
   }
 
   async renderMarkupAtHomePage() {
-    window.addEventListener('resize', debounce(this.paginationDisplay.bind(this), 150));
+    // window.addEventListener('resize', debounce(this.paginationDisplay.bind(this), 150));
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
@@ -206,15 +206,15 @@ class MovieService {
     this.movies.filmsOn = request;
     this.renderMarkupAtHomePage();
   }
-  paginationDisplay() {
-    if (window.innerWidth <= 767) {
-      this.options.visiblePages = 3;
-      this.pagin = new Pagination(this.container, this.options);
-    } else {
-      this.options.visiblePages = 5;
-      this.pagin = new Pagination(this.container, this.options);
-    }
-}
+//   paginationDisplay() {
+//     if (window.innerWidth <= 767) {
+//       this.options.visiblePages = 3;
+//       this.pagin = new Pagination(this.container, this.options);
+//     } else {
+//       this.options.visiblePages = 5;
+//       this.pagin = new Pagination(this.container, this.options);
+//     }
+// }
 }
 
 export const movieService = new MovieService();
