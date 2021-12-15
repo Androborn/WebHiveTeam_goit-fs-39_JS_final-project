@@ -4,7 +4,7 @@ import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 import { notiflix } from '../../vendors/notification';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 
 const spinner = new Loader();
 
@@ -34,7 +34,7 @@ class MovieService {
     this.currentLng = localStorage.getItem('currentLng');
     this.options = {
       itemsPerPage: 20,
-      visiblePages: 5,
+      visiblePages: 3,
       page: this.movies.currentPage,
       centerAlign: true,
       firstItemClassName: 'tui-first-child',
@@ -72,10 +72,10 @@ class MovieService {
   }
 
   async renderMarkupAtHomePage() {
-    window.addEventListener(
-      'resize',
-      debounce(this.paginationDisplay.bind(this), 150),
-    );
+    // window.addEventListener(
+    //   'resize',
+    //   debounce(this.paginationDisplay.bind(this), 150),
+    // );
     let placeholderText;
     switch (this.currentLng) {
       case 'ru':
@@ -229,15 +229,15 @@ class MovieService {
     this.movies.filmsOn = request;
     this.renderMarkupAtHomePage();
   }
-  paginationDisplay() {
-    if (window.innerWidth <= 767) {
-      this.options.visiblePages = 3;
-      this.pagin = new Pagination(this.container, this.options);
-    } else {
-      this.options.visiblePages = 5;
-      this.pagin = new Pagination(this.container, this.options);
-    }
-  }
+  // paginationDisplay() {
+  //   if (window.innerWidth <= 767) {
+  //     this.options.visiblePages = 3;
+  //     this.pagin = new Pagination(this.container, this.options);
+  //   } else {
+  //     this.options.visiblePages = 5;
+  //     this.pagin = new Pagination(this.container, this.options);
+  //   }
+  // }
 }
 
 export const movieService = new MovieService();
