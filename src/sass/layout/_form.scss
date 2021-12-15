@@ -72,7 +72,11 @@
   transition: all 0.5s ease;
 }
 
-li {
+.form__item {
+  @media screen and (max-width: 420px) {
+    font-size: 14px;
+    padding-left: 0px;
+  }
   padding-left: 10px;
   font-size: 18px;
   display: inline;
