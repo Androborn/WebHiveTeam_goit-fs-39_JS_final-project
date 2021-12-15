@@ -4,7 +4,7 @@ import { watchedStorage, queueStorage } from './library-storage';
 import Loader from '../../vendors/_icon8';
 import Pagination from 'tui-pagination';
 import { notiflix } from '../../vendors/notification';
-import  debounce  from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 
 const spinner = new Loader();
 
@@ -13,11 +13,11 @@ class MovieService {
     this.mainRef = document.querySelector('.card-list');
     this.movies = new ThemoviedbApi();
     this.container = document.getElementById('pagination');
-    this.inputRef = document.querySelector('.header-serch__wrapper');
-    this.inputRef.addEventListener('submit', event => {
+    this.formRef = document.querySelector('.header-serch__wrapper');
+    this.formRef.addEventListener('submit', event => {
       this.onInputSubmit(event);
     });
-    this.inputRef.addEventListener('input', event => {
+    this.formRef.addEventListener('input', event => {
       this.onInputChange(event);
     });
     this.btnWrapperRef = document.querySelector('.main-section__btn-wrapper');
@@ -26,9 +26,9 @@ class MovieService {
     });
     this.iconSearchRef = document.querySelector('.header-serch__icon');
     this.iconSearchRef.addEventListener('click', () =>
-      this.inputRef.requestSubmit(),
+      this.formRef.requestSubmit(),
     );
-
+    this.currentLng = localStorage.getItem('currentLng');
     this.options = {
       itemsPerPage: 20,
       visiblePages: 5,
@@ -69,7 +69,26 @@ class MovieService {
   }
 
   async renderMarkupAtHomePage() {
-    window.addEventListener('resize', debounce(this.paginationDisplay.bind(this), 150));
+    window.addEventListener(
+      'resize',
+      debounce(this.paginationDisplay.bind(this), 150),
+    );
+    let placeholderText;
+    switch (this.currentLng) {
+      case 'ru':
+        placeholderText = 'Найти фильм';
+        break;
+      case 'en':
+        placeholderText = 'Search movie';
+        break;
+      case 'ua':
+        placeholderText = 'Знайти фільм';
+        break;
+      default:
+        placeholderText = 'Search movie';
+        break;
+    }
+    this.formRef.elements.searchQuery.placeholder = placeholderText;
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
     }
@@ -133,7 +152,7 @@ class MovieService {
     });
     spinner.deleteHeaderspinner();
     spinner.showSearch();
-    this.inputRef.blur();
+    this.formRef.blur();
   }
 
   async onInputSubmit(event) {
@@ -188,7 +207,7 @@ class MovieService {
     this.mainRef.innerHTML = moviesCards;
   }
   getFilmsForRequestId(event) {
-    event.target.blur()
+    event.target.blur();
     const currentActiveBtn = document.querySelector(
       '.common-btn__request--active',
     );
@@ -197,8 +216,8 @@ class MovieService {
       currentActiveBtn.classList.remove('common-btn__request--active');
     }
     event.target.classList.add('common-btn__request--active');
-    if (this.inputRef.children[0].value) {
-      this.inputRef.children[0].value = '';
+    if (this.formRef.children[0].value) {
+      this.formRef.children[0].value = '';
     }
     const requestName = event.target.getAttribute('id');
     this.renderMoviesForRequest(requestName);
@@ -215,7 +234,7 @@ class MovieService {
       this.options.visiblePages = 5;
       this.pagin = new Pagination(this.container, this.options);
     }
-}
+  }
 }
 
 export const movieService = new MovieService();

@@ -19,6 +19,7 @@ class RenderModal {
       await this.onModalOpenClick(evt);
       spinner.deleteModalspinner();
     });
+    this.currentLng = localStorage.getItem('currentLng');
   }
 
   async onModalOpenClick(evt) {
@@ -98,12 +99,42 @@ class RenderModal {
         ...this.currentMovie,
         genre_ids: this.currentMovie.genres.map(x => x.id),
       });
-      this.btnWatched.textContent = 'Remove from watched';
+      let btnWatchedRemove;
+      switch (this.currentLng) {
+        case 'ru':
+          btnWatchedRemove = 'Удалить из просмотренных';
+          break;
+        case 'en':
+          btnWatchedRemove = 'Remove from Watched';
+          break;
+        case 'ua':
+          btnWatchedRemove = 'Видалити з переглянутих';
+          break;
+        default:
+          btnWatchedRemove = 'Remove from Watched';
+          break;
+      }
+      this.btnWatched.textContent = btnWatchedRemove;
       this.btnWatched.blur();
     } else {
       watchedStorage.removeFromStorageById(this.cardsListId);
       this.btnWatched.classList.remove('common-btn__movie-modal--active');
-      this.btnWatched.textContent = 'Add to watched';
+      let btnWatchedAdd;
+      switch (this.currentLng) {
+        case 'ru':
+          btnWatchedAdd = 'Добавить в просмотренные';
+          break;
+        case 'en':
+          btnWatchedAdd = 'Add to Watched';
+          break;
+        case 'ua':
+          btnWatchedAdd = 'Додати в переглянуті';
+          break;
+        default:
+          btnWatchedAdd = 'Add to Watched';
+          break;
+      }
+      this.btnWatched.textContent = btnWatchedAdd;
       this.btnWatched.blur();
     }
     this.movieAddedtoWatched = watchedStorage.hasId(this.cardsListId);
@@ -122,12 +153,43 @@ class RenderModal {
         ...this.currentMovie,
         genre_ids: this.currentMovie.genres.map(x => x.id),
       });
-      this.btnQueue.textContent = 'Remove from queue';
+      let btnQueueRemove;
+      switch (this.currentLng) {
+        case 'ru':
+          btnQueueRemove = 'Удалить из очереди';
+          break;
+        case 'en':
+          btnQueueRemove = 'Remove from Queue';
+          break;
+        case 'ua':
+          btnQueueRemove = 'Видалити з черги';
+          break;
+        default:
+          btnQueueRemove = 'Remove from Queue';
+          break;
+      }
+      this.btnQueue.textContent = btnQueueRemove;
+
       this.btnQueue.blur();
     } else {
       queueStorage.removeFromStorageById(this.cardsListId);
       this.btnQueue.classList.remove('common-btn__movie-modal--active');
-      this.btnQueue.textContent = 'Add to queue';
+      let btnQueueAdd = '';
+      switch (this.currentLng) {
+        case 'ru':
+          btnQueueAdd = 'Добавить в очередь';
+          break;
+        case 'en':
+          btnQueueAdd = 'Add to Queue';
+          break;
+        case 'ua':
+          btnQueueAdd = 'Додати в чергу';
+          break;
+        default:
+          btnQueueAdd = 'Add to Queue';
+          break;
+      }
+      this.btnQueue.textContent = btnQueueAdd;
       this.btnQueue.blur();
     }
     this.movieAddedtoQueue = queueStorage.hasId(this.cardsListId);
@@ -149,9 +211,7 @@ class RenderModal {
     if (evt.target !== this.trailerRef) {
       return;
     }
-
     this.trailer = basicLightbox.create(trailerMarkup(this.currentMovie));
-
     this.trailer.show();
     document.body.addEventListener(
       'keydown',

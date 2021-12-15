@@ -14,13 +14,12 @@
 
   @include min-width(tablet) {
     width: 618px;
-    height: 562px;
+    height: 570px;
     padding: 42px 30px 40px 28px;
   }
 
   @include min-width(desktop) {
     width: 806px;
-    height: 568px;
     padding: 50px 30px 40px 30px;
   }
 
@@ -136,22 +135,21 @@
 }
 
 .modal__background-img {
-  position:fixed;
+  position: fixed;
   z-index: -1;
-  top:0;
-  left:0; 
+  top: 0;
+  left: 0;
   pointer-events: none;
   height: 100%;
   object-fit: cover;
-  
 }
 
-.trailer{
-  text-decoration:none;
+.trailer {
+  text-decoration: none;
   color: inherit;
   margin-right: 7px;
-  cursor: pointer;  
-  &__img{
+  cursor: pointer;
+  &__img {
     width: 25px;
     display: inline-block;
     vertical-align: text-bottom;
