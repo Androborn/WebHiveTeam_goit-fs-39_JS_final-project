@@ -45,7 +45,7 @@ export class CreateCardsMarkup {
   slicedOriginalTitle(title) {
     if (title.length >= 35) {
       const slisedTitle = title.slice(0, 35);
-      return slisedTitle + ' ...';
+      return slisedTitle + '...';
     }
     return title;
   }
