@@ -54,6 +54,39 @@ class Header {
             }">Queue</button>
         </div>`,
     );
+    const currentLng = localStorage.getItem("currentLng");
+    const btnWatched = document.querySelector('[data-tab="watched"]');
+    switch (currentLng) {
+      case 'ru':
+        btnWatched.textContent = 'Просмотренные'
+        break;
+        case 'en': 
+            btnWatched.textContent = 'watched'
+            break;
+        case 'ua': 
+            btnWatched.textContent = 'переглянутi'
+            break;
+    
+        default:
+             btnWatched.textContent = 'watched'
+            break;
+    }
+    const btnQueue = document.querySelector('[data-tab="queue"]');
+    switch (currentLng) {
+      case 'ru':
+        btnQueue.textContent = 'посмотреть'
+        break;
+        case 'en': 
+            btnQueue.textContent = 'queue'
+            break;
+        case 'ua': 
+            btnQueue.textContent = 'до перегляду'
+            break;
+    
+        default:
+             btnQueue.textContent = 'queue'
+            break;
+    }
   }
 
   removeBtns() {
