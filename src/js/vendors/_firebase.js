@@ -32,7 +32,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// console.log(db);
 
 export default class Firebase {
   constructor() {
@@ -51,14 +50,8 @@ export default class Firebase {
         e.preventDefault();
         const email = e.currentTarget.elements.signup__email.value;
         const password = e.currentTarget.elements.signup__password.value;
-        console.log(email);
 
         this.createAccount(email, password);
-
-        setTimeout(() => {
-          this.uid = this.auth.currentUser.uid;
-          this.createDb();
-        }, 200);
       },
       { once: true },
     );
@@ -69,20 +62,14 @@ export default class Firebase {
         try {
           const email = e.currentTarget.elements.email.value;
           const password = e.currentTarget.elements.password.value;
-          console.log(email);
 
           this.signAccount(email, password);
-          console.log('Я зашел урааа');
           this.uid = this.auth.currentUser.uid;
-          console.log(this.uid);
           this.storageWatched = await this.getDbWatched();
           this.storageQueue = await this.getDbQueue();
-          console.log(this.storageWatched);
           document.querySelector('[data-modal]').classList.toggle('is-hidden');
           document.querySelector('body').classList.toggle('overflow');
-        } catch {
-          console.log(12345);
-        }
+        } catch {}
       },
       { once: true },
     );
@@ -102,6 +89,9 @@ export default class Firebase {
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
+        this.uid = user.uid;
+
+        this.createDb();
         notiflix.createAccount(
           'You have successfully registered, now sign in to your account',
         );
@@ -109,7 +99,6 @@ export default class Firebase {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
         if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
           notiflix.errorNotification(
             error,
@@ -198,7 +187,6 @@ export default class Firebase {
       return docSnap.data().watched;
     } else {
       // doc.data() will be undefined in this case
-      console.log('No such document!');
     }
   }
   async getDbQueue() {
@@ -209,7 +197,6 @@ export default class Firebase {
       return docSnap.data().queue;
     } else {
       // doc.data() will be undefined in this case
-      console.log('No such document!');
     }
   }
 }
