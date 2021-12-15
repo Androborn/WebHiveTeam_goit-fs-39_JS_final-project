@@ -94,6 +94,11 @@
     &--active {
       color: $secondary-text-color;
       background-color: $main-text-color;
+      cursor: auto;
+      &:hover,
+      &:focus {
+        filter: none;
+      }
     }
   }
 }
