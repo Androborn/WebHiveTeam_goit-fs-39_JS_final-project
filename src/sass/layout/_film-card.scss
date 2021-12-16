@@ -28,7 +28,7 @@
       width: 294px;
     }
     @media screen and (min-width: 1024px) {
-      width: 274px;
+      width: 282px; // Увеличина ширина карточки с 274рх на 282рх, тем самым устранен баг перелома отображения при рендере карточек фильмов
     }
   }
 
@@ -55,7 +55,11 @@
   &__description {
     display: flex;
     color: $accent-color;
-    @include font(12px, 500, 16px);
+    @include font(
+      11px,
+      500,
+      16px
+    ); // Уменьшен шрифт на 1рх, тем самым устранен баг перелома отображения при рендере карточек фильмов
   }
 
   &__genre {
@@ -69,6 +73,7 @@
   &__rating {
     width: 36px;
     height: 16px;
+    font-size: inherit;
     border-radius: $smooth-border;
     text-align: center;
     color: $main-text-color;
