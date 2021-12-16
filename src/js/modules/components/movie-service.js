@@ -77,20 +77,26 @@ class MovieService {
     //   debounce(this.paginationDisplay.bind(this), 150),
     // );
     let placeholderText;
+    let fireBaseText;
     switch (this.currentLng) {
       case 'ru':
+        fireBaseText = 'Собственный аккаунт';
         placeholderText = 'Найти фильм';
         break;
       case 'en':
+        fireBaseText = 'Own account';
         placeholderText = 'Search movie';
         break;
       case 'ua':
+        fireBaseText = 'Власний аккаунт';
         placeholderText = 'Знайти фільм';
         break;
       default:
+        fireBaseText = 'Own account';
         placeholderText = 'Search movie';
         break;
     }
+    document.querySelector('.header-firebase-link').textContent = fireBaseText;
     this.formRef.elements.searchQuery.placeholder = placeholderText;
     if (this.container.classList.contains('visually-hidden')) {
       this.container.classList.remove('visually-hidden');
