@@ -2,7 +2,7 @@ import * as basicLightbox from 'basiclightbox';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { modalMarkup } from '../templates/modal-markup';
 import { trailerMarkup } from '../templates/trailer-markup';
-import { movieService } from './movie-service';
+import { movieService } from './movie-service-firebase';
 import { header } from './page-switch';
 import Loader from '../../vendors/_icon8';
 import Firebase from '../../vendors/_firebase';
@@ -119,7 +119,7 @@ class RenderModal {
       header.currentPage === 'library' &&
       header.currentLibraryTab === 'watched'
     ) {
-      movieService.renderMarkupAtLibraryPage('watched');
+      await movieService.renderMarkupAtLibraryPage('watched');
     }
   }
 
