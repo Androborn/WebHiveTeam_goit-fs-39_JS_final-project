@@ -254,7 +254,7 @@
   }
 }
 
-.change-lang {
+.change-lang,.header-firebase {
   padding: 1px 1px;
   @include font(10px, 500, 16px);
   border: none;
@@ -273,4 +273,20 @@
   &:hover {
     box-shadow: 0 0 10px 5px rgba(170, 138, 138, 0.829);
   }
+}
+
+.header-firebase{
+  position: absolute;
+    top: 190px;
+    left: 15px;
+    padding: 1px 4px;
+
+    @media screen and (min-width: 1024px) {
+        left: 65px;
+        padding: 3px 4px;
+  }
+    
+    &-link{
+      color: $main-text-color;
+    }
 }
