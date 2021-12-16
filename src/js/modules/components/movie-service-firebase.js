@@ -140,7 +140,6 @@ class MovieService {
           this.container.classList.remove('visually-hidden');
         }
         this.options.totalItems = total_results;
-        notiflix.searchResult(total_results);
         this.renderMovies(results, 'main');
         this.iconSearchRef.classList.add('header-serch__icon--disabled');
         if (total_results < this.options.itemsPerPage) return;
