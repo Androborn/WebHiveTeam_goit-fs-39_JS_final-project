@@ -69,6 +69,8 @@
   }
 
   &__info-title {
+    color: $secondary-text-color;
+    text-align: start;
     @include font(20px, 500, 23px);
     margin-bottom: 20px;
   }
