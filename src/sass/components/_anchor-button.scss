@@ -1,10 +1,10 @@
 .anchor-btn {
   position: fixed;
   bottom: 15px;
-  right: 15px;
+  right: 7px;
   z-index: 99;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: none;
   outline: none;
   background-color: #fff;
@@ -18,12 +18,14 @@
   transition: all 0.5s;
 
   @media screen and (min-width: 375px) {
+    right: 12px;
     width: 27px;
     height: 27px;
     box-shadow: 0px 0px 4px 2px $accent-color inset;
   }
 
   @media screen and (min-width: 393px) {
+    right: 15px;
     width: 30px;
     height: 30px;
   }
@@ -36,8 +38,8 @@
   }
 
   @media screen and (min-width: 768px) {
-  bottom: 20px;
-  right: 20px;
+    bottom: 20px;
+    right: 20px;
     width: 40px;
     height: 40px;
   }
@@ -66,8 +68,8 @@
 }
 
 .anchor-btn__svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
 
   @media screen and (min-width: 375px) {
     width: 25px;
