@@ -31,6 +31,11 @@ export class LibraryStorage {
     storage.splice(indexOfId, 1);
     localStorage.setItem(this.key, JSON.stringify(storage));
   }
+  refreshLocalStorage() {
+    let storage = this.getStorageList();
+    storage = [];
+    localStorage.setItem(this.key, JSON.stringify(storage));
+  }
 
   hasId(id) {
     const storage = this.getStorageList();
