@@ -1,4 +1,5 @@
 import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
+
 export function modalMarkup(
   data,
   genreIds,
