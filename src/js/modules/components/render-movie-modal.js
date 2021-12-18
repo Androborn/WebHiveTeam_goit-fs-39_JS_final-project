@@ -85,9 +85,11 @@ class RenderModal {
     });
 
     this.trailerRef = document.querySelector('.trailer');
+
     if (this.currentMovie.videos.results.length === 0) {
       return;
     }
+
     this.trailerRef.addEventListener('click', async evt =>
       this.openTrailer(evt),
     );
@@ -208,7 +210,7 @@ class RenderModal {
   }
 
   openTrailer(evt) {
-    if (evt.target !== this.trailerRef) {
+    if (evt.currentTarget !== this.trailerRef) {
       return;
     }
     this.trailer = basicLightbox.create(trailerMarkup(this.currentMovie));

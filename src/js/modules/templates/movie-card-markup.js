@@ -1,3 +1,5 @@
+import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
+
 export function movieCardMarkup(cards) {
   return cards
     .map(
@@ -16,7 +18,7 @@ export function movieCardMarkup(cards) {
              <p class="card-list__genre">${
                this.createGenresList(genre_ids)
                  ? this.createGenresList(genre_ids)
-                 : noGenre
+                 : this.noGenre
              }</p>
             <p class="card-list__date">| ${this.correctedDate(release_date)}</p>
             <span class="card-list__rating">${vote_average}</span>

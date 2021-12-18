@@ -1,4 +1,3 @@
-import sorryPosterImage from '../../../images/home/sorry-poster.jpg';
 import { ThemoviedbApi } from '../http-services/themoviedb-api';
 import { movieCardMarkup } from '../templates/movie-card-markup';
 

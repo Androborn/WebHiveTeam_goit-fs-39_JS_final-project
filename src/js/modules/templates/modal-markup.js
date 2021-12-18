@@ -141,7 +141,7 @@ export function modalMarkup(
   ${
     data.videos.results.length === 0
       ? `<span class="modal__info-value"> ${noTrailer}</span>`
-      : `<span class="modal__info-value"><span class="trailer" >${watchTrailer}</span><img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></span>`
+      : `<span class="modal__info-value trailer"><span>${watchTrailer}</span><img class="trailer__img" src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></span>`
   }
 </div>
         </div>

@@ -149,11 +149,15 @@
 .trailer {
   text-decoration: none;
   color: inherit;
-  margin-right: 7px;
   cursor: pointer;
-  &__img {
-    width: 25px;
-    display: inline-block;
-    vertical-align: text-bottom;
+
+  & span {
+    margin-right: 7px;
   }
+}
+
+.trailer__img {
+  width: 25px;
+  display: inline-block;
+  vertical-align: text-bottom;
 }
